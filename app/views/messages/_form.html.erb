@@ -1,0 +1,61 @@
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :probe_id %><br />
+	<%= f.select :probe_id, Probe.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :message_type_id %><br />
+    <%= f.number_field :message_type_id %>
+  </div>
+  <div class="field">
+    <%= f.label :outgoing_message_count %><br />
+    <%= f.number_field :outgoing_message_count %>
+  </div>
+  <div class="field">
+    <%= f.label :restart_count %><br />
+    <%= f.number_field :restart_count %>
+  </div>
+  <div class="field">
+    <%= f.label :device_time %><br />
+    <%= f.datetime_select :device_time %>
+  </div>
+  <div class="field">
+    <%= f.label :server_time %><br />
+    <%= f.datetime_select :server_time %>
+  </div>
+  <div class="field">
+    <%= f.label :device_uptime %><br />
+    <%= f.text_field :device_uptime %>
+  </div>
+  <div class="field">
+    <%= f.label :value1 %><br />
+    <%= f.number_field :value1 %>
+  </div>
+  <div class="field">
+    <%= f.label :value2 %><br />
+    <%= f.number_field :value2 %>
+  </div>
+  <div class="field">
+    <%= f.label :value3 %><br />
+    <%= f.number_field :value3 %>
+  </div>
+  <div class="field">
+    <%= f.label :value4 %><br />
+    <%= f.number_field :value4 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

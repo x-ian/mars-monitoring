@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  parent_service_classification: 1
+
+two:
+  name: MyString
+  parent_service_classification: 1

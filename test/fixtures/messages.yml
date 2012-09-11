@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  probe_id: 1
+  message_type_id: 1
+  outgoing_message_count: 1
+  restart_count: 1
+  device_time: 2012-09-05 10:11:05
+  server_time: 2012-09-05 10:11:05
+  device_uptime: 
+  value1: 1
+  value2: 1
+  value3: 1
+  value4: 1
+
+two:
+  probe_id: 1
+  message_type_id: 1
+  outgoing_message_count: 1
+  restart_count: 1
+  device_time: 2012-09-05 10:11:05
+  server_time: 2012-09-05 10:11:05
+  device_uptime: 
+  value1: 1
+  value2: 1
+  value3: 1
+  value4: 1

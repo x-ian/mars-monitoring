@@ -1,0 +1,25 @@
+<%= form_for(@service_classification) do |f| %>
+  <% if @service_classification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@service_classification.errors.count, "error") %> prohibited this service_classification from being saved:</h2>
+
+      <ul>
+      <% @service_classification.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :parent_service_classification %><br />
+    <%= f.number_field :parent_service_classification %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

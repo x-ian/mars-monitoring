@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Probe:</b>
+  <%= @message.probe_id %>
+</p>
+
+<p>
+  <b>Message type:</b>
+  <%= @message.message_type_id %>
+</p>
+
+<p>
+  <b>Outgoing message count:</b>
+  <%= @message.outgoing_message_count %>
+</p>
+
+<p>
+  <b>Restart count:</b>
+  <%= @message.restart_count %>
+</p>
+
+<p>
+  <b>Device time:</b>
+  <%= @message.device_time %>
+</p>
+
+<p>
+  <b>Server time:</b>
+  <%= @message.server_time %>
+</p>
+
+<p>
+  <b>Device uptime:</b>
+  <%= @message.device_uptime %>
+</p>
+
+<p>
+  <b>Value1:</b>
+  <%= @message.value1 %>
+</p>
+
+<p>
+  <b>Value2:</b>
+  <%= @message.value2 %>
+</p>
+
+<p>
+  <b>Value3:</b>
+  <%= @message.value3 %>
+</p>
+
+<p>
+  <b>Value4:</b>
+  <%= @message.value4 %>
+</p>
+
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

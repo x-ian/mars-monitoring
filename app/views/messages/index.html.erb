@@ -1,0 +1,43 @@
+<h1>Listing messages</h1>
+
+<table>
+  <tr>
+    <th>Probe</th>
+    <th>Message type</th>
+    <th>Outgoing message count</th>
+    <th>Restart count</th>
+    <th>Device time</th>
+    <th>Server time</th>
+    <th>Device uptime</th>
+    <th>Value1</th>
+    <th>Value2</th>
+    <th>Value3</th>
+    <th>Value4</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @messages.each do |message| %>
+  <tr>
+    <td><%= message.probe_id %></td>
+    <td><%= message.message_type_id %></td>
+    <td><%= message.outgoing_message_count %></td>
+    <td><%= message.restart_count %></td>
+    <td><%= message.device_time %></td>
+    <td><%= message.server_time %></td>
+    <td><%= message.device_uptime %></td>
+    <td><%= message.value1 %></td>
+    <td><%= message.value2 %></td>
+    <td><%= message.value3 %></td>
+    <td><%= message.value4 %></td>
+    <td><%= link_to 'Show', message %></td>
+    <td><%= link_to 'Edit', edit_message_path(message) %></td>
+    <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Message', new_message_path %>

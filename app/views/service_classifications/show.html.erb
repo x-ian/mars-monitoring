@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @service_classification.name %>
+</p>
+
+<p>
+  <b>Parent service classification:</b>
+  <%= @service_classification.parent_service_classification %>
+</p>
+
+
+<%= link_to 'Edit', edit_service_classification_path(@service_classification) %> |
+<%= link_to 'Back', service_classifications_path %>

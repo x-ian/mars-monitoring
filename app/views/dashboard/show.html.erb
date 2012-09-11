@@ -1,0 +1,27 @@
+<h1>Dashboard#show</h1>
+
+<table>
+	<tr>
+		<th>&#160;</th>
+		<% @serviceClassifications.each do |sc| %> 
+			<th>
+				<%= %>
+				<%= sc.name %> 
+			</th>
+		<% end %>
+	</tr>
+	
+	<% @locations.each do |location| %>
+		<tr>
+			<th><%= location.name %> </th>
+			<% @serviceClassifications.each do |sc| %> 
+				<td class="hasTooltip">
+					<%= status(location, sc).to_text %>
+					<span>
+						<%= details_for_probes(location, sc) %>
+					</span>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
