@@ -12,48 +12,52 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :probe_id %><br />
-	<%= f.select :probe_id, Probe.all.collect{|p| [p.name, p.id]} %>
+    <%= f.label :probe_id %>
+	<%= f.select :probe_id, Probe.all.collect{|p| ["#{p.name} (#{p.location.name})", p.id]} %>
   </div>
   <div class="field">
-    <%= f.label :message_type_id %><br />
-    <%= f.number_field :message_type_id %>
+    <%= f.label :message_type_id %>
+	<%= f.select :message_type_id, MessageType.all.collect{|p| [p.name, p.id]} %>
   </div>
   <div class="field">
-    <%= f.label :outgoing_message_count %><br />
+    <%= f.label :outgoing_message_count %>
     <%= f.number_field :outgoing_message_count %>
   </div>
   <div class="field">
-    <%= f.label :restart_count %><br />
+    <%= f.label :restart_count %>
     <%= f.number_field :restart_count %>
   </div>
   <div class="field">
-    <%= f.label :device_time %><br />
+    <%= f.label :device_time %>
     <%= f.datetime_select :device_time %>
   </div>
   <div class="field">
-    <%= f.label :server_time %><br />
-    <%= f.datetime_select :server_time %>
-  </div>
-  <div class="field">
-    <%= f.label :device_uptime %><br />
+    <%= f.label :device_uptime %>
     <%= f.text_field :device_uptime %>
   </div>
   <div class="field">
-    <%= f.label :value1 %><br />
+    <%= f.label :value1 %>
     <%= f.number_field :value1 %>
   </div>
   <div class="field">
-    <%= f.label :value2 %><br />
+    <%= f.label :value2 %>
     <%= f.number_field :value2 %>
   </div>
   <div class="field">
-    <%= f.label :value3 %><br />
+    <%= f.label :value3 %>
     <%= f.number_field :value3 %>
   </div>
   <div class="field">
-    <%= f.label :value4 %><br />
+    <%= f.label :value4 %>
     <%= f.number_field :value4 %>
+  </div>
+  <div class="field">
+    <%= f.label :server_time %>
+    <%= f.datetime_select :server_time %>
+  </div>
+  <div class="field">
+    <%= f.label :probe_enabled %>
+    <%= f.check_box :probe_enabled %>
   </div>
   <div class="actions">
     <%= f.submit %>

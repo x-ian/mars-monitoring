@@ -2,12 +2,12 @@
 
 <p>
   <b>Probe:</b>
-  <%= @message.probe_id %>
+  <%= link_to "#{@message.probe.name} (#{@message.probe.location.name})", @message.probe %>
 </p>
 
 <p>
   <b>Message type:</b>
-  <%= @message.message_type_id %>
+  <%= @message.message_type.name %>
 </p>
 
 <p>
@@ -23,11 +23,6 @@
 <p>
   <b>Device time:</b>
   <%= @message.device_time %>
-</p>
-
-<p>
-  <b>Server time:</b>
-  <%= @message.server_time %>
 </p>
 
 <p>
@@ -53,6 +48,16 @@
 <p>
   <b>Value4:</b>
   <%= @message.value4 %>
+</p>
+
+<p>
+  <b>Server time:</b>
+  <%= @message.server_time %>
+</p>
+
+<p>
+  <b>Probe enabled:</b>
+  <%= @message.probe_enabled %>
 </p>
 
 

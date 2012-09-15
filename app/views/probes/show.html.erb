@@ -5,6 +5,31 @@
   <%= @probe.name %>
 </p>
 
+<p>
+  <b>Customer:</b>
+  <%= @probe.customer.name %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @probe.location.name %>
+</p>
+
+<p>
+  <b>Location coordinates:</b>
+  <%= @probe.location_coordinates %>
+</p>
+
+<p>
+  <b>Service Classification:</b>
+  <%= @probe.service_classification.name %>
+</p>
+
+<p>
+  <b>Enabled:</b>
+  <%= @probe.enabled %>
+</p>
+
 
 <%= link_to 'Edit', edit_probe_path(@probe) %> |
 <%= link_to 'Back', probes_path %>

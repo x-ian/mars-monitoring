@@ -3,6 +3,11 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Customer</th>
+    <th>Location</th>
+    <th>Location coordinates</th>
+    <th>Service classification</th>
+    <th>Enabled</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +16,11 @@
 <% @probes.each do |probe| %>
   <tr>
     <td><%= probe.name %></td>
+    <td><%= probe.customer.name %></td>
+    <td><%= probe.location.name %></td>
+    <td><%= probe.location_coordinates %></td>
+    <td><%= probe.service_classification.name %></td>
+    <td><%= probe.enabled %></td>
     <td><%= link_to 'Show', probe %></td>
     <td><%= link_to 'Edit', edit_probe_path(probe) %></td>
     <td><%= link_to 'Destroy', probe, method: :delete, data: { confirm: 'Are you sure?' } %></td>

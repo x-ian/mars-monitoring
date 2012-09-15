@@ -34,4 +34,10 @@ MarsMonitoring::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # stupid useless Webrick logging
+  #config.assets.logger = false
+  # turning on again through gem quiet_assets
+  #config.quiet_assets = false
+  
 end

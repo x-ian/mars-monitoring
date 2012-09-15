@@ -15,6 +15,26 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= f.label :customer_id %><br />
+	<%= f.select :customer_id, Customer.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :location_id %><br />
+	<%= f.select :location_id, Location.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :service_classification_id %><br />
+	<%= f.select :service_classification_id, ServiceClassification.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :location_coordinates %><br />
+    <%= f.text_field :location_coordinates %>
+  </div>
+  <div class="field">
+    <%= f.label :enabled %><br />
+    <%= f.check_box :enabled %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
