@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120911122624) do
+ActiveRecord::Schema.define(:version => 20120916195642) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(:version => 20120911122624) do
     t.boolean  "probe_enabled"
   end
 
+  create_table "probe_status_configurations", :force => true do |t|
+    t.string   "rule_ok"
+    t.string   "rule_warning"
+    t.string   "rule_error"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.boolean  "rule_assumed"
+  end
+
   create_table "probes", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",                :null => false
@@ -59,6 +68,13 @@ ActiveRecord::Schema.define(:version => 20120911122624) do
     t.string   "location_coordinates"
     t.integer  "service_classification_id"
     t.boolean  "enabled"
+  end
+
+  create_table "probes_probe_status_configrations", :force => true do |t|
+    t.integer  "probe_id"
+    t.integer  "probe_status_configuration_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "service_classifications", :force => true do |t|

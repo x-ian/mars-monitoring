@@ -1,7 +1,9 @@
 MarsMonitoring::Application.routes.draw do
-  get "dashboard/show"
+  resources :probes_probe_status_configrations
 
-  get "dash_board/show"
+  resources :probe_status_configurations
+
+  get "dashboard/show"
 
   resources :user_service_classifications
 
@@ -19,6 +21,8 @@ MarsMonitoring::Application.routes.draw do
 
   resources :messages
 
+  match "messages/create_from_probe", :via => [:post]
+  
   resources :probes
 
   # The priority is based upon order of creation:
