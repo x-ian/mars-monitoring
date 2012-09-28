@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Probe:</b>
+  <%= @probes_probe_status_configration.probe_id %>
+</p>
+
+<p>
+  <b>Probe status configuration:</b>
+  <%= @probes_probe_status_configration.probe_status_configuration_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_probes_probe_status_configration_path(@probes_probe_status_configration) %> |
+<%= link_to 'Back', probes_probe_status_configrations_path %>

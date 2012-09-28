@@ -1,0 +1,25 @@
+<%= form_for(@probes_probe_status_configration) do |f| %>
+  <% if @probes_probe_status_configration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@probes_probe_status_configration.errors.count, "error") %> prohibited this probes_probe_status_configration from being saved:</h2>
+
+      <ul>
+      <% @probes_probe_status_configration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :probe_id %><br />
+    <%= f.number_field :probe_id %>
+  </div>
+  <div class="field">
+    <%= f.label :probe_status_configuration_id %><br />
+    <%= f.number_field :probe_status_configuration_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

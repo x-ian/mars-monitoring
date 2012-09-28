@@ -1,0 +1,35 @@
+<h1>Listing probe_status_configurations</h1>
+
+<table>
+  <tr>
+    <th>Probe</th>
+    <th>User</th>
+    <th>Probe status template</th>
+    <th>Rule ok</th>
+    <th>Rule warning</th>
+    <th>Rule error</th>
+    <th>Assumed</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @probe_status_configurations.each do |probe_status_configuration| %>
+  <tr>
+    <td><%= probe_status_configuration.probe_id %></td>
+    <td><%= probe_status_configuration.user_id %></td>
+    <td><%= probe_status_configuration.probe_status_template_id %></td>
+    <td><%= probe_status_configuration.rule_ok %></td>
+    <td><%= probe_status_configuration.rule_warning %></td>
+    <td><%= probe_status_configuration.rule_error %></td>
+    <td><%= probe_status_configuration.assumed %></td>
+    <td><%= link_to 'Show', probe_status_configuration %></td>
+    <td><%= link_to 'Edit', edit_probe_status_configuration_path(probe_status_configuration) %></td>
+    <td><%= link_to 'Destroy', probe_status_configuration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Probe status configuration', new_probe_status_configuration_path %>
