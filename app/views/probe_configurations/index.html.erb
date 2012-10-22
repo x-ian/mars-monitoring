@@ -1,0 +1,43 @@
+<h1>Listing probe_configurations</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Rule ok</th>
+    <th>Rule warning</th>
+    <th>Rule error</th>
+    <th>Rule assumed</th>
+    <th>Heartbeat interval</th>
+    <th>Alarm interval</th>
+    <th>Value1 threshold</th>
+    <th>Value2 threshold</th>
+    <th>Value3 threshold</th>
+    <th>Value4 threshold</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @probe_configurations.each do |probe_configuration| %>
+  <tr>
+    <td><%= probe_configuration.name %></td>
+    <td><%= probe_configuration.rule_ok %></td>
+    <td><%= probe_configuration.rule_warning %></td>
+    <td><%= probe_configuration.rule_error %></td>
+    <td><%= probe_configuration.rule_assumed %></td>
+    <td><%= probe_configuration.heartbeat_interval %></td>
+    <td><%= probe_configuration.alarm_interval %></td>
+    <td><%= probe_configuration.value1_threshold %></td>
+    <td><%= probe_configuration.value2_threshold %></td>
+    <td><%= probe_configuration.value3_threshold %></td>
+    <td><%= probe_configuration.value4_threshold %></td>
+    <td><%= link_to 'Show', probe_configuration %></td>
+    <td><%= link_to 'Edit', edit_probe_configuration_path(probe_configuration) %></td>
+    <td><%= link_to 'Destroy', probe_configuration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Probe configuration', new_probe_configuration_path %>

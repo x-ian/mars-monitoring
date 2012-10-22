@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @value_type.name %>
+</p>
+
+<p>
+  <b>Cumulative:</b>
+  <%= @value_type.cumulative %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @value_type.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_value_type_path(@value_type) %> |
+<%= link_to 'Back', value_types_path %>

@@ -1,0 +1,45 @@
+<%= form_for(@probe_type) do |f| %>
+  <% if @probe_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@probe_type.errors.count, "error") %> prohibited this probe_type from being saved:</h2>
+
+      <ul>
+      <% @probe_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :communication_channel_id %><br />
+	<%= f.select :communication_channel_id, CommunicationChannel.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :value1_type_id %><br />
+	<%= f.select :value1_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :value2_type_id %><br />
+	<%= f.select :value2_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :value3_type_id %><br />
+	<%= f.select :value3_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :value4_type_id %><br />
+	<%= f.select :value4_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

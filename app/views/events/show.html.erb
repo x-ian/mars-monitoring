@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Value:</b>
+  <%= @event.value %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @event.message_id %>
+</p>
+
+<p>
+  <b>Probe status:</b>
+  <%= @event.probe_status.name unless @event.probe_status.nil? %>
+</p>
+
+<p>
+  <b>Value type:</b>
+  <%= @event.value_type.name unless @event.value_type.nil? %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

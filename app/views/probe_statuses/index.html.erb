@@ -1,0 +1,27 @@
+<h1>Listing probe_statuses</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Assumed</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @probe_statuses.each do |probe_status| %>
+  <tr>
+    <td><%= probe_status.name %></td>
+    <td><%= probe_status.status %></td>
+    <td><%= probe_status.assumed %></td>
+    <td><%= link_to 'Show', probe_status %></td>
+    <td><%= link_to 'Edit', edit_probe_status_path(probe_status) %></td>
+    <td><%= link_to 'Destroy', probe_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Probe status', new_probe_status_path %>

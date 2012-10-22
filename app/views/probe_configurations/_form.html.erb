@@ -1,0 +1,61 @@
+<%= form_for(@probe_configuration) do |f| %>
+  <% if @probe_configuration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@probe_configuration.errors.count, "error") %> prohibited this probe_configuration from being saved:</h2>
+
+      <ul>
+      <% @probe_configuration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :rule_ok %><br />
+    <%= f.text_area :rule_ok %>
+  </div>
+  <div class="field">
+    <%= f.label :rule_warning %><br />
+    <%= f.text_area :rule_warning %>
+  </div>
+  <div class="field">
+    <%= f.label :rule_error %><br />
+    <%= f.text_area :rule_error %>
+  </div>
+  <div class="field">
+    <%= f.label :rule_assumed %><br />
+    <%= f.text_area :rule_assumed %>
+  </div>
+  <div class="field">
+    <%= f.label :heartbeat_interval %><br />
+    <%= f.number_field :heartbeat_interval %>
+  </div>
+  <div class="field">
+    <%= f.label :alarm_interval %><br />
+    <%= f.number_field :alarm_interval %>
+  </div>
+  <div class="field">
+    <%= f.label :value1_threshold %><br />
+    <%= f.text_field :value1_threshold %>
+  </div>
+  <div class="field">
+    <%= f.label :value2_threshold %><br />
+    <%= f.text_field :value2_threshold %>
+  </div>
+  <div class="field">
+    <%= f.label :value3_threshold %><br />
+    <%= f.text_field :value3_threshold %>
+  </div>
+  <div class="field">
+    <%= f.label :value4_threshold %><br />
+    <%= f.text_field :value4_threshold %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

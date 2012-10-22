@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @probe_configuration.name %>
+</p>
+
+<p>
+  <b>Rule ok:</b>
+  <%= @probe_configuration.rule_ok %>
+</p>
+
+<p>
+  <b>Rule warning:</b>
+  <%= @probe_configuration.rule_warning %>
+</p>
+
+<p>
+  <b>Rule error:</b>
+  <%= @probe_configuration.rule_error %>
+</p>
+
+<p>
+  <b>Rule assumed:</b>
+  <%= @probe_configuration.rule_assumed %>
+</p>
+
+<p>
+  <b>Heartbeat interval:</b>
+  <%= @probe_configuration.heartbeat_interval %>
+</p>
+
+<p>
+  <b>Alarm interval:</b>
+  <%= @probe_configuration.alarm_interval %>
+</p>
+
+<p>
+  <b>Value1 threshold:</b>
+  <%= @probe_configuration.value1_threshold %>
+</p>
+
+<p>
+  <b>Value2 threshold:</b>
+  <%= @probe_configuration.value2_threshold %>
+</p>
+
+<p>
+  <b>Value3 threshold:</b>
+  <%= @probe_configuration.value3_threshold %>
+</p>
+
+<p>
+  <b>Value4 threshold:</b>
+  <%= @probe_configuration.value4_threshold %>
+</p>
+
+
+<%= link_to 'Edit', edit_probe_configuration_path(@probe_configuration) %> |
+<%= link_to 'Back', probe_configurations_path %>

@@ -1,0 +1,27 @@
+<h1>Listing invalid_messages</h1>
+
+<table>
+  <tr>
+    <th>Reason</th>
+    <th>Read</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @invalid_messages.each do |invalid_message| %>
+  <tr>
+    <td><%= invalid_message.reason %></td>
+    <td><%= invalid_message.read %></td>
+    <td><%= invalid_message.content %></td>
+    <td><%= link_to 'Show', invalid_message %></td>
+    <td><%= link_to 'Edit', edit_invalid_message_path(invalid_message) %></td>
+    <td><%= link_to 'Destroy', invalid_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Invalid message', new_invalid_message_path %>

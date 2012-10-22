@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ane: MyString
+  rule_ok: MyText
+  rule_warning: MyText
+  rule_error: MyText
+  rule_assumed: MyText
+  heartbeat_interval: 1
+  alarm_interval: 1
+  value1_type_id: 1
+  value2_type_id: 1
+  value3_type_id: 1
+  value4_type_id: 1
+  value1_threshold: 1.5
+  value2_threshold: 1.5
+  value3_threshold: 1.5
+  value4_threshold: 1.5
+
+two:
+  ane: MyString
+  rule_ok: MyText
+  rule_warning: MyText
+  rule_error: MyText
+  rule_assumed: MyText
+  heartbeat_interval: 1
+  alarm_interval: 1
+  value1_type_id: 1
+  value2_type_id: 1
+  value3_type_id: 1
+  value4_type_id: 1
+  value1_threshold: 1.5
+  value2_threshold: 1.5
+  value3_threshold: 1.5
+  value4_threshold: 1.5

@@ -1,0 +1,27 @@
+<h1>Listing value_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Cumulative</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @value_types.each do |value_type| %>
+  <tr>
+    <td><%= value_type.name %></td>
+    <td><%= value_type.cumulative %></td>
+    <td><%= value_type.description %></td>
+    <td><%= link_to 'Show', value_type %></td>
+    <td><%= link_to 'Edit', edit_value_type_path(value_type) %></td>
+    <td><%= link_to 'Destroy', value_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Value type', new_value_type_path %>

@@ -1,0 +1,35 @@
+<h1>Listing probe_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Communication channel</th>
+    <th>Value1 type</th>
+    <th>Value2 type</th>
+    <th>Value3 type</th>
+    <th>Value4 type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @probe_types.each do |probe_type| %>
+  <tr>
+    <td><%= probe_type.name %></td>
+    <td><%= probe_type.description %></td>
+    <td><%= probe_type.communication_channel.name unless probe_type.communication_channel.nil? %></td>
+    <td><%= probe_type.value1_type.name unless probe_type.value1_type.nil? %></td>
+    <td><%= probe_type.value2_type.name unless probe_type.value2_type.nil? %></td>
+    <td><%= probe_type.value3_type.name unless probe_type.value3_type.nil? %></td>
+    <td><%= probe_type.value4_type.name unless probe_type.value4_type.nil?%></td>
+    <td><%= link_to 'Show', probe_type %></td>
+    <td><%= link_to 'Edit', edit_probe_type_path(probe_type) %></td>
+    <td><%= link_to 'Destroy', probe_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Probe type', new_probe_type_path %>

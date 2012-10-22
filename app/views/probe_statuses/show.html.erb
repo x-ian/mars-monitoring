@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @probe_status.name %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @probe_status.status %>
+</p>
+
+<p>
+  <b>Assumed:</b>
+  <%= @probe_status.assumed %>
+</p>
+
+
+<%= link_to 'Edit', edit_probe_status_path(@probe_status) %> |
+<%= link_to 'Back', probe_statuses_path %>

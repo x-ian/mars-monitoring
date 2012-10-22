@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  value: 1.5
+  message_id: 1
+  probe_status_id: 1
+  value_type_id: 1
+
+two:
+  value: 1.5
+  message_id: 1
+  probe_status_id: 1
+  value_type_id: 1

@@ -1,0 +1,29 @@
+<%= form_for(@invalid_message) do |f| %>
+  <% if @invalid_message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invalid_message.errors.count, "error") %> prohibited this invalid_message from being saved:</h2>
+
+      <ul>
+      <% @invalid_message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :read %><br />
+    <%= f.check_box :read %>
+  </div>
+  <div class="field">
+    <%= f.label :reason %><br />
+    <%= f.text_area :reason %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

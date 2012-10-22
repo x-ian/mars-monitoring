@@ -1,0 +1,2 @@
+module ProbeConfigurationsHelper
+end

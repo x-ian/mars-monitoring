@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @probe_type.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @probe_type.description %>
+</p>
+
+<p>
+  <b>Communication channel:</b>
+  <%= @probe_type.communication_channel.name unless @probe_type.communication_channel.nil? %>
+</p>
+
+<p>
+  <b>Value1 type:</b>
+  <%= @probe_type.value1_type.name unless @probe_type.value1_type.nil? %>
+</p>
+
+<p>
+  <b>Value2 type:</b>
+  <%= @probe_type.value2_type.name unless @probe_type.value2_type.nil? %></p>
+
+<p>
+  <b>Value3 type:</b>
+  <%= @probe_type.value3_type.name unless @probe_type.value3_type.nil? %></p>
+
+<p>
+  <b>Value4 type:</b>
+  <%= @probe_type.value4_type.name unless @probe_type.value1_type.nil? %></p>
+
+
+<%= link_to 'Edit', edit_probe_type_path(@probe_type) %> |
+<%= link_to 'Back', probe_types_path %>

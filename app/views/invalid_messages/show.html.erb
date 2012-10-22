@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Reason:</b>
+  <%= @invalid_message.reason %>
+</p>
+
+<p>
+  <b>Read:</b>
+  <%= @invalid_message.read %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @invalid_message.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_invalid_message_path(@invalid_message) %> |
+<%= link_to 'Back', invalid_messages_path %>
