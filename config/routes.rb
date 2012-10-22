@@ -1,4 +1,18 @@
 MarsMonitoring::Application.routes.draw do
+  resources :probe_configurations
+
+  resources :value_types
+
+  resources :probe_statuses
+
+  resources :events
+
+  resources :communication_channels
+
+  resources :probe_types
+
+  resources :invalid_messages
+
   resources :probes_probe_status_configrations
 
   resources :probe_status_configurations

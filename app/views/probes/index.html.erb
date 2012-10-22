@@ -6,7 +6,9 @@
     <th>Customer</th>
     <th>Location</th>
     <th>Location coordinates</th>
-    <th>Service classification</th>
+    <th>Probe configuration</th>
+    <th>Probe type</th>
+    <th>Cell number</th>
     <th>Enabled</th>
     <th></th>
     <th></th>
@@ -16,10 +18,12 @@
 <% @probes.each do |probe| %>
   <tr>
     <td><%= probe.name %></td>
-    <td><%= probe.customer.name %></td>
-    <td><%= probe.location.name %></td>
+    <td><%= probe.customer.name unless probe.customer.nil? %></td>
+    <td><%= probe.location.name unless probe.location.nil? %></td>
     <td><%= probe.location_coordinates %></td>
-    <td><%= probe.service_classification.name %></td>
+    <td><%= probe.probe_configuration.name unless probe.probe_configuration.nil? %></td>
+    <td><%= probe.probe_type.name unless probe.probe_type.nil? %></td>
+    <td><%= probe.cell_number %></td>
     <td><%= probe.enabled %></td>
     <td><%= link_to 'Show', probe %></td>
     <td><%= link_to 'Edit', edit_probe_path(probe) %></td>

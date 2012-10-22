@@ -63,7 +63,7 @@ class MessagesController < ApplicationController
     tokens = data.split(",")
 
     @message = Message.new
-    @message.message_type_id = parseMessageTypeId(tokens[0])
+    @message.message_type_id = MessageType.idFor(tokens[0])
   #   m.customer_id = tokens[1]
     @message.probe_id = tokens[2]
 #    logger.debug tokens[5]
@@ -89,16 +89,6 @@ class MessagesController < ApplicationController
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
      end
-  end
-
-  def parseMessageTypeId(id)
-    if id == "PAYLOAD"
-      return MessageType::PAYLOAD
-    elsif id == "HEARTBEAT"
-      return MessageType::HEARTBEAT
-    elsif id == "RESTART"
-      return MessageType::RESTART
-    end
   end
 
   # PUT /messages/1

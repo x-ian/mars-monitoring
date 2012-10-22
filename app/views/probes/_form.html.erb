@@ -24,8 +24,12 @@
 	<%= f.select :location_id, Location.all.collect{|p| [p.name, p.id]} %>
   </div>
   <div class="field">
-    <%= f.label :service_classification_id %><br />
-	<%= f.select :service_classification_id, ServiceClassification.all.collect{|p| [p.name, p.id]} %>
+    <%= f.label :probe_type_id %><br />
+	<%= f.select :probe_type_id, ProbeType.all.collect{|p| [p.name, p.id]} %>
+  </div>
+  <div class="field">
+    <%= f.label :probe_configuration_id %><br />
+	<%= f.select :probe_configuration_id, ProbeConfiguration.all.collect{|p| [p.name, p.id]} %>
   </div>
   <div class="field">
     <%= f.label :location_coordinates %><br />
@@ -34,6 +38,10 @@
   <div class="field">
     <%= f.label :enabled %><br />
     <%= f.check_box :enabled %>
+  </div>
+  <div class="field">
+    <%= f.label :cell_number %><br />
+    <%= f.text_field :cell_number %>
   </div>
   <div class="actions">
     <%= f.submit %>

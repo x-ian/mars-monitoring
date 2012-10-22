@@ -7,12 +7,12 @@
 
 <p>
   <b>Customer:</b>
-  <%= @probe.customer.name %>
+  <%= @probe.customer.name unless @probe.customer.nil? %>
 </p>
 
 <p>
   <b>Location:</b>
-  <%= @probe.location.name %>
+  <%= @probe.location.name unless @probe.location.nil? %>
 </p>
 
 <p>
@@ -21,8 +21,18 @@
 </p>
 
 <p>
-  <b>Service Classification:</b>
-  <%= @probe.service_classification.name %>
+  <b>Probe configuration:</b>
+  <%= @probe.probe_configuration.name unless @probe.probe_configuration.nil? %>
+</p>
+
+<p>
+  <b>Probe type:</b>
+  <%= @probe.probe_type.name unless @probe.probe_type.nil? %>
+</p>
+
+<p>
+  <b>Cell number:</b>
+  <%= @probe.cell_number %>
 </p>
 
 <p>

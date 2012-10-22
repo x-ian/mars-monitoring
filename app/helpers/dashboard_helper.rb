@@ -31,6 +31,22 @@ module DashboardHelper
             ps.assumed = true
           end
         end
+      when 38
+          # mainz network monitor
+          # todo, simplified by only looking for last message
+          message = Message.find_last_by_probe_id_and_message_type_id(probe.id, MessageType::PAYLOAD)
+          if message.nil?
+            ps.status = ProbeStatus::NO_PROBE
+          else
+            if message.value1 == 1
+              ps.status = ProbeStatus::OK 
+            else
+              ps.status = ProbeStatus::ERROR
+            end
+            if (message.server_time < DateTime.now-2.days)
+              ps.assumed = true
+            end
+          end
     end
     ps
   end

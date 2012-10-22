@@ -1,3 +1,4 @@
 class User < ActiveRecord::Base
-  attr_accessible :customer_id, :name
+  belongs_to :customer
+  attr_accessible :name, :customer_id
 end

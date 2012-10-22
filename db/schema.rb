@@ -11,12 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120916195642) do
+ActiveRecord::Schema.define(:version => 20121022190539) do
+
+  create_table "communication_channels", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "customers", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.float    "value"
+    t.integer  "message_id"
+    t.integer  "probe_status_id"
+    t.integer  "value_type_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "invalid_messages", :force => true do |t|
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "reason"
+    t.boolean  "read"
   end
 
   create_table "locations", :force => true do |t|
@@ -50,52 +73,53 @@ ActiveRecord::Schema.define(:version => 20120916195642) do
     t.boolean  "probe_enabled"
   end
 
-  create_table "probe_status_configurations", :force => true do |t|
-    t.string   "rule_ok"
-    t.string   "rule_warning"
-    t.string   "rule_error"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.boolean  "rule_assumed"
+  create_table "probe_configurations", :force => true do |t|
+    t.text     "rule_ok"
+    t.text     "rule_warning"
+    t.text     "rule_error"
+    t.text     "rule_assumed"
+    t.integer  "heartbeat_interval"
+    t.integer  "alarm_interval"
+    t.float    "value1_threshold"
+    t.float    "value2_threshold"
+    t.float    "value3_threshold"
+    t.float    "value4_threshold"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "name"
+  end
+
+  create_table "probe_statuses", :force => true do |t|
+    t.string   "name"
+    t.string   "status"
+    t.boolean  "assumed"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "probe_types", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "communication_channel_id"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "value1_type_id"
+    t.integer  "value2_type_id"
+    t.integer  "value3_type_id"
+    t.integer  "value4_type_id"
   end
 
   create_table "probes", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.integer  "customer_id"
     t.integer  "location_id"
     t.string   "location_coordinates"
-    t.integer  "service_classification_id"
     t.boolean  "enabled"
-  end
-
-  create_table "probes_probe_status_configrations", :force => true do |t|
-    t.integer  "probe_id"
-    t.integer  "probe_status_configuration_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  create_table "service_classifications", :force => true do |t|
-    t.string   "name"
-    t.integer  "parent_service_classification_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-  end
-
-  create_table "user_locations", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "location_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "user_service_classifications", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "service_classification_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "probe_configuration_id"
+    t.integer  "probe_type_id"
+    t.string   "cell_number"
   end
 
   create_table "users", :force => true do |t|
@@ -103,6 +127,14 @@ ActiveRecord::Schema.define(:version => 20120916195642) do
     t.string   "name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "value_types", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.boolean  "cumulative"
   end
 
 end

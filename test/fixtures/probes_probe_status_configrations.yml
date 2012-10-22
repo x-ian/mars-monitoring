@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  probe_id: 1
-  probe_status_configuration_id: 1
-
-two:
-  probe_id: 1
-  probe_status_configuration_id: 1

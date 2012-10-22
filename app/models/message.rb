@@ -1,4 +1,5 @@
 class Message < ActiveRecord::Base
+  has_many :events
   belongs_to :message_type
   belongs_to :probe
   attr_accessible :device_time, :device_uptime, :message_type_id, :outgoing_message_count, :probe_id, :restart_count, :value1, :value2, :value3, :value4, :server_time, :probe_enabled

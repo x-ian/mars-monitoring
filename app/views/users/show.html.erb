@@ -2,7 +2,7 @@
 
 <p>
   <b>Customer:</b>
-  <%= @user.customer_id %>
+  <%= @user.customer.name unless @user.customer.nil? %>
 </p>
 
 <p>
