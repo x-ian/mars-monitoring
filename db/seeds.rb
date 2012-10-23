@@ -174,6 +174,16 @@ ProbeType.create! do |pt|
   pt.value3_type_id = 1
   pt.value4_type_id = 1
 end
+ProbeType.create! do |pt|
+  pt.id = 7
+  pt.name = "Mobile prototype"
+  pt.description = ""
+  pt.communication_channel_id = 1
+  pt.value1_type_id = 6
+  pt.value2_type_id = 8
+  pt.value3_type_id = 1
+  pt.value4_type_id = 1
+end
 
 # test data, remove at one point
 Customer.delete_all
@@ -315,6 +325,16 @@ Probe.create! do |p|
   p.enabled = true
   p.probe_configuration_id = 7
 end
+Probe.create! do |p|
+  p.id = 10
+  p.name = 'Xians mobile phone'
+  p.customer_id = 1
+  p.location_id = 2
+  p.location_coordinates = nil
+  p.probe_type_id = 7
+  p.enabled = true
+  p.probe_configuration_id = 8
+end
 
 ProbeConfiguration.delete_all
 ProbeConfiguration.create! do |pc|
@@ -404,6 +424,20 @@ end
 ProbeConfiguration.create! do |pc|
   pc.id = 7
   pc.name = "Default OpenMRS"
+  pc.rule_warning = ""
+  pc.rule_error = ""
+  pc.rule_ok = ""
+  pc.rule_assumed = ""
+  pc.heartbeat_interval = nil
+  pc.alarm_interval = nil
+  pc.value1_threshold = nil
+  pc.value2_threshold = nil
+  pc.value3_threshold = nil
+  pc.value4_threshold = nil
+end
+ProbeConfiguration.create! do |pc|
+  pc.id = 8
+  pc.name = "Default mobile phone"
   pc.rule_warning = ""
   pc.rule_error = ""
   pc.rule_ok = ""
