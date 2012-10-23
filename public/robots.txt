@@ -5,12 +5,16 @@
 # Disallow: /
 
 User-agent: *
+Disallow: /communication_channels/
 Disallow: /customers/
 Disallow: /dashboard/
+Disallow: /events/
+Disallow: /invalid_messages/
 Disallow: /locations/
 Disallow: /message_types/
 Disallow: /messages/
-Disallow: /probe_status_configurations/
+Disallow: /probe_configurations/
+Disallow: /probe_statuses/
 Disallow: /probes/
-Disallow: /user_locations/
 Disallow: /users/
+Disallow: /value_types/
