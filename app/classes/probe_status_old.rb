@@ -1,4 +1,4 @@
-class ProbeStatus
+class ProbeStatusOld
   
   UNKNOWN = -1
   NO_PROBE = 0
