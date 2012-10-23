@@ -13,8 +13,8 @@ private
   end
   
   def set_probe_enabled
-    # for now probe needs to be enabled, but why?
-    self.probe_enabled = probe.enabled?
+    self.probe_enabled = self.probe.enabled?
+    true # if only this would have been obvious...
   end
   
 end

@@ -22,7 +22,7 @@
 <% @messages.each do |message| %>
   <tr>
     <td><%= message.probe.name unless message.probe.nil? %> (<%= message.probe.location.name unless message.probe.nil? %>)</td>
-    <td><%= message.message_type.name %></td>
+    <td><%= message.message_type.name unless message.message_type.nil? %></td>
     <td><%= message.outgoing_message_count %></td>
     <td><%= message.restart_count %></td>
     <td><%= message.device_time %></td>

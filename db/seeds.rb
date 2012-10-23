@@ -254,6 +254,7 @@ Probe.create! do |p|
   p.probe_type_id = 1
   p.enabled = true
   p.probe_configuration_id = 2
+  p.cell_number = "+49 1522 5839733"
 end
 Probe.create! do |p|
   p.id = 3
