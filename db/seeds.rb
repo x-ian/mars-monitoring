@@ -344,10 +344,10 @@ ProbeConfiguration.create! do |pc|
   pc.rule_error = ""
   pc.rule_ok = ""
   pc.rule_assumed = ""
-  pc.heartbeat_interval = 180 
+  pc.heartbeat_interval = 300 
   pc.alarm_interval = 60
-  pc.value1_threshold = 20
-  pc.value2_threshold = nil
+  pc.value1_threshold = 17
+  pc.value2_threshold = 18000
   pc.value3_threshold = nil
   pc.value4_threshold = nil
 end
@@ -444,8 +444,8 @@ ProbeConfiguration.create! do |pc|
   pc.rule_assumed = ""
   pc.heartbeat_interval = nil
   pc.alarm_interval = nil
-  pc.value1_threshold = nil
-  pc.value2_threshold = nil
+  pc.value1_threshold = 20
+  pc.value2_threshold = 1
   pc.value3_threshold = nil
   pc.value4_threshold = nil
 end
