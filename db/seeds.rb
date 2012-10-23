@@ -334,6 +334,7 @@ Probe.create! do |p|
   p.probe_type_id = 7
   p.enabled = true
   p.probe_configuration_id = 8
+  p.cell_number = "+49 178 4049573"
 end
 
 ProbeConfiguration.delete_all
