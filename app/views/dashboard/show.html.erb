@@ -3,10 +3,10 @@
 <table>
 	<tr>
 		<th>&#160;</th>
-		<% @serviceClassifications.each do |sc| %> 
+		<% @probe_types.each do |pt| %> 
 			<th>
 				<%= %>
-				<%= sc.name %> 
+				<%= pt.name %> 
 			</th>
 		<% end %>
 	</tr>
@@ -14,11 +14,11 @@
 	<% @locations.each do |location| %>
 		<tr>
 			<th><%= location.name %> </th>
-			<% @serviceClassifications.each do |sc| %> 
+			<% @probe_types.each do |pt| %> 
 				<td class="hasTooltip">
-					<%= status(location, sc).to_text %>
+					<%= status(location, pt) %>
 					<span>
-						<%= details_for_probes(location, sc) %>
+						<%= details_for_probe(location, pt) %>
 					</span>
 				</td>
 			<% end %>
