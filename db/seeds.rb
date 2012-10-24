@@ -176,7 +176,7 @@ ProbeType.create! do |pt|
 end
 ProbeType.create! do |pt|
   pt.id = 7
-  pt.name = "Mobile prototype"
+  pt.name = "Mobile phone"
   pt.description = ""
   pt.communication_channel_id = 1
   pt.value1_type_id = 6
@@ -251,7 +251,7 @@ Probe.create! do |p|
   p.customer_id = 1
   p.location_id = 2
   p.location_coordinates = nil
-  p.probe_type_id = 1
+  p.probe_type_id = 2
   p.enabled = true
   p.probe_configuration_id = 2
   p.cell_number = "+49 1522 5839733"
@@ -335,7 +335,7 @@ Probe.create! do |p|
   p.probe_type_id = 7
   p.enabled = true
   p.probe_configuration_id = 8
-  p.cell_number = "+49 178 4049573"
+  p.cell_number = ""
 end
 
 ProbeConfiguration.delete_all
