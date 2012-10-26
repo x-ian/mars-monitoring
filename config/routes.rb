@@ -1,4 +1,7 @@
 MarsMonitoring::Application.routes.draw do
+  get "visualize/d3_example_lines"
+  get "visualize/d3_example_zoom"
+
   resources :probe_configurations
 
   resources :value_types

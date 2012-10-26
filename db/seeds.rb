@@ -56,6 +56,16 @@ ProbeStatus.create! do |ps|
   ps.status = "error"
   ps.assumed = true
 end
+ProbeStatus.create! do |ps|
+  ps.id = 7
+  ps.name = "no data"
+  ps.status = "no data"
+end
+ProbeStatus.create! do |ps|
+  ps.id = 8
+  ps.name = "unknown"
+  ps.status = "unknown"
+end
 
 ValueType.delete_all
 ValueType.create! do |sc|

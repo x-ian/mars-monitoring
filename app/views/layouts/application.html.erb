@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Monitoring</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <title>mars monitoring</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <!-- <label id="code.slt"/> -->
   <%= javascript_include_tag "application" %>
+  <!-- <label id="code.jlt"/> -->
   <%= csrf_meta_tags %>
+  <!-- <label id="code.csrf"/> -->
 </head>
-<body>
-
-<%= yield %>
-
+<body class="<%= controller.controller_name %>">
+  <div id="banner">
+    mars monitoring
+  </div>
+  <div id="columns">
+    <div id="side">
+      <ul id="ul1">
+        <li><%= link_to "Dashboard", :controller => "dashboard", :action => "show" %></li>
+        <li>Probes</li>
+        <li>Historical views</li>
+      	<ul id="ul2">
+	   		<li>Graphical view</li>
+       		<li>Textual view</li>
+		</ul>
+	    <li>Manage</li>
+      	<ul id="ul2">
+       		<li><%= link_to "Probes", probes_path %></li>
+       		<li><%= link_to "Locations",locations_path %></li>
+       		<li><%= link_to "Users", users_path %></li>
+       		<li><%= link_to "Probe Configurations", probe_configurations_path %></li>
+       		<li>Notifications</li>
+		</ul>
+        <li>Site administration</li>
+      	<ul id="ul2">
+       		<li><%= link_to "Probe Types", probe_types_path %></li>
+       		<li><%= link_to "Value Types", value_types_path %></li>
+       		<li><%= link_to "Customers", customers_path %></li>
+		</ul>
+      </ul>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>
