@@ -24,8 +24,8 @@
         <li>Probes</li>
         <li>Historical views</li>
       	<ul id="ul2">
-	   		<li>Graphical view</li>
-       		<li>Textual view</li>
+	   		<li><%= link_to "Graphical view", :controller => "visualize", :action => "d3_single_probe" %></li>
+       		<li>Textual view<!--% link_to "Textual view", :controller => "messages"%--></li>
 		</ul>
 	    <li>Manage</li>
       	<ul id="ul2">
