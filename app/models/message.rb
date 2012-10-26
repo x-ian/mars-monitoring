@@ -9,7 +9,8 @@ class Message < ActiveRecord::Base
   
 private
   def set_server_time_to_now
-    self.server_time = Time.now
+    logger.debug "set_server_time_to_now #{self.server_time}"
+    self.server_time = Time.now if self.server_time.nil?
   end
   
   def set_probe_enabled

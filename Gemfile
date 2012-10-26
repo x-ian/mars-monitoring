@@ -41,3 +41,4 @@ gem 'capistrano'
 
 gem 'quiet_assets', :group => :development
 
+gem 'jquery_datepicker'

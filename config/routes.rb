@@ -1,6 +1,8 @@
 MarsMonitoring::Application.routes.draw do
   get "visualize/d3_example_lines"
   get "visualize/d3_example_zoom"
+  get "visualize/d3_single_probe"
+  get "visualize/d3_data"
 
   resources :probe_configurations
 
@@ -39,6 +41,8 @@ MarsMonitoring::Application.routes.draw do
   resources :messages
 
   match "messages/create_from_probe", :via => [:post]
+  
+  match "messages/create_from_probe_with_server_time", :via => [:post]
   
   resources :probes
 

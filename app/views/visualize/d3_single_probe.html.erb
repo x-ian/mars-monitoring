@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.y.axis {
+  font: 10px sans-serif;
+}
+.x.axis {
+  font: 10px sans-serif;
+}
+.city {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+</style>
+<body>
+<%= form_tag("", :method => "get", :onsubmit => "return drawOnSubmit()") do %>
+  Probe: <%= select_tag 'probe_id', options_for_select(Probe.all.collect{|p| ["#{p.name} (#{p.location.name})", p.id]}, @probe.id) %>
+  Start date: <%= datepicker_input(:foo, :start_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
+  End date: <%= datepicker_input(:foo, :end_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
+  <%= submit_tag "Refresh" %>
+<% end %> 
+
+<script src="/assets/d3.v3.js"></script>
+<script>
+
+var margin = {top: 25, right: 130, bottom: 50, left: 70},
+    width = $(window).width() - margin.left - margin.right - 250,
+    height = $(window).height() - margin.top - margin.bottom - 100;
+
+var parseDate = d3.time.format("%Y%m%d-%H%M%S").parse;
+
+var x = d3.time.scale()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var color = d3.scale.category10();
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var line = d3.svg.line()
+ //   .interpolate("basis")
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.value1); });
+
+function draw() {
+
+	d3.select("svg").remove();
+
+    var svg = d3.select("body").append("svg")
+  		.attr("width", width + margin.left + margin.right)  
+		.attr("height", height + margin.top + margin.bottom)  
+		.append("g")
+		.attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+	var probe_id = document.getElementById('probe_id').value;
+	var start_date = document.getElementById('foo_start_date').value;
+	var end_date = document.getElementById('foo_end_date').value;
+
+	d3.tsv("d3_data.tsv?probe_id=" + probe_id + "&start_date=" + start_date + "&end_date=" + end_date, function(error, data) {
+  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
+
+  data.forEach(function(d) {
+    d.date = parseDate(d.date);
+  });
+
+  var cities = color.domain().map(function(name) {
+    return {
+      name: name,
+      values: data.map(function(d) {
+        return {date: d.date, value1: +d[name]};
+      })
+    };
+  });
+
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+
+  y.domain([
+    d3.min(cities, function(c) { return d3.min(c.values, function(v) { return v.value1; }); }),
+    d3.max(cities, function(c) { return d3.max(c.values, function(v) { return v.value1; }); })
+  ]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  var city = svg.selectAll(".city")
+      .data(cities)
+      .enter().append("g")
+      .attr("class", "city");
+
+  city.append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { return line(d.values); })
+      .style("stroke", function(d) { return color(d.name); });
+
+  city.append("text")
+      .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.value1) + ")"; })
+      .attr("x", 3)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name; });
+});
+}
+
+function drawOnSubmit() { 
+	draw(); 
+	return false; // make sure submit is not submitted...
+} 
+
+drawOnSubmit();
+
+$(window).bind('resize', function() {
+     location.reload();
+});
+</script>
+</body>

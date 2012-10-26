@@ -108,6 +108,58 @@ class MessagesController < ApplicationController
     end    
   end
 
+    def create_from_probe_with_server_time
+    #$MESSAGE_TYPE_ID,$CUSTOMER_ID,$PROBE_ID,$MESSAGE_COUNT,$RESTART_COUNT,$DEVICE_TIME,$VALUE1,$VALUE2,$VALUE3,$VALUE4,$SERVER_TIME
+      saved = false
+      error_message = ""
+
+      begin
+        data = params[:message][:data]
+        tokens = data.split(",")
+
+        # message checks
+        raise "wrong number of commas" unless data.count(",") == 10
+        raise "invalid message_type" unless (MessageType.idFor(tokens[0]) > 0 && MessageType.idFor(tokens[0]) < 4)
+        raise "probe not found" if Probe.find(tokens[2]).nil?
+        raise "invalid date" if DateTime.strptime(tokens[5], '%Y%m%d-%H%M%S').nil?
+        raise "invalid date" if DateTime.strptime(tokens[10], '%Y%m%d-%H%M%S').nil?
+
+        @message = Message.new
+        @message.message_type_id = MessageType.idFor(tokens[0])
+        #   m.customer_id = tokens[1]
+        @message.probe_id = tokens[2]
+        #    logger.debug tokens[5]
+        @message.device_time = DateTime.strptime(tokens[5], '%Y%m%d-%H%M%S')
+        # m.device_uptime(tokens[])
+        @message.outgoing_message_count = tokens[3]
+        @message.restart_count = tokens[4]
+        @message.value1 = tokens[6]
+        @message.value2 = tokens[7]
+        @message.value3 = tokens[8]
+        @message.value4 = tokens[9]
+        @message.server_time = DateTime.strptime(tokens[10], '%Y%m%d-%H%M%S')
+        #   m.probe_enabled(tokens[])
+        saved = @message.save
+        error_message = @message.errors unless saved
+      rescue => e
+        error_message += e.to_s
+      end
+
+      respond_to do |format|
+        if saved
+          format.json { render json: @message, status: :created, location: @message }
+        else
+          m = InvalidMessage.new
+          m.read = false
+          m.reason = error_message
+          m.content = params.to_s
+          m.save
+  #        format.json { render json: @message.errors, status: :unprocessable_entity }
+          format.json { render json: @message, status: :created, location: @message }
+        end
+      end    
+    end
+
   # PUT /messages/1
   # PUT /messages/1.json
   def update
