@@ -108,6 +108,26 @@ ValueType.create! do |sc|
   sc.name = 'Encounters created'
   sc.cumulative = true
 end
+ValueType.create! do |sc|
+  sc.id = 9
+  sc.name = 'Scale working'
+  sc.cumulative = false
+end
+ValueType.create! do |sc|
+  sc.id = 10
+  sc.name = 'Drug stockout'
+  sc.cumulative = false
+end
+ValueType.create! do |sc|
+  sc.id = 11
+  sc.name = '# goats in clinic'
+  sc.cumulative = false
+end
+ValueType.create! do |sc|
+  sc.id = 12
+  sc.name = '# patient visits'
+  sc.cumulative = false
+end
 
 CommunicationChannel.delete_all
 CommunicationChannel.create! do |p|
@@ -186,13 +206,13 @@ ProbeType.create! do |pt|
 end
 ProbeType.create! do |pt|
   pt.id = 7
-  pt.name = "Mobile phone"
+  pt.name = "Mobile phone HC survey"
   pt.description = ""
   pt.communication_channel_id = 1
-  pt.value1_type_id = 6
-  pt.value2_type_id = 8
-  pt.value3_type_id = 1
-  pt.value4_type_id = 1
+  pt.value1_type_id = 9
+  pt.value2_type_id = 10
+  pt.value3_type_id = 11
+  pt.value4_type_id = 12
 end
 
 # test data, remove at one point
@@ -262,7 +282,7 @@ Probe.create! do |p|
   p.location_id = 2
   p.location_coordinates = nil
   p.probe_type_id = 2
-  p.enabled = true
+  p.enabled = false
   p.probe_configuration_id = 2
   p.cell_number = "+49 1522 5839733"
 end
@@ -283,7 +303,7 @@ Probe.create! do |p|
   p.location_id = 4
   p.location_coordinates = nil
   p.probe_type_id = 1
-  p.enabled = true
+  p.enabled = false
   p.probe_configuration_id = 1
 end
 Probe.create! do |p|
@@ -313,7 +333,7 @@ Probe.create! do |p|
   p.location_id = 6
   p.location_coordinates = nil
   p.probe_type_id = 3
-  p.enabled = true
+  p.enabled = false
   p.probe_configuration_id = 3
 end
 Probe.create! do |p|
@@ -338,7 +358,7 @@ Probe.create! do |p|
 end
 Probe.create! do |p|
   p.id = 10
-  p.name = 'Xians mobile phone'
+  p.name = 'Xians mobile phone HC survey'
   p.customer_id = 1
   p.location_id = 2
   p.location_coordinates = nil
@@ -449,7 +469,7 @@ ProbeConfiguration.create! do |pc|
 end
 ProbeConfiguration.create! do |pc|
   pc.id = 8
-  pc.name = "Default mobile phone"
+  pc.name = "Mobile phone survey"
   pc.rule_warning = ""
   pc.rule_error = ""
   pc.rule_ok = ""
@@ -458,6 +478,6 @@ ProbeConfiguration.create! do |pc|
   pc.alarm_interval = nil
   pc.value1_threshold = 20
   pc.value2_threshold = 1
-  pc.value3_threshold = nil
-  pc.value4_threshold = nil
+  pc.value3_threshold = 1
+  pc.value4_threshold = 1
 end

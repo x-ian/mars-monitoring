@@ -109,10 +109,10 @@ class MessagesController < ApplicationController
   end
 
     def create_from_probe_with_server_time
-    #$MESSAGE_TYPE_ID,$CUSTOMER_ID,$PROBE_ID,$MESSAGE_COUNT,$RESTART_COUNT,$DEVICE_TIME,$VALUE1,$VALUE2,$VALUE3,$VALUE4,$SERVER_TIME
+    #$MESSAGE_TYPE_ID,$CUSTOMER_ID,$PROBE_ID,$MESSAGE_COUNT,$RESTART_COUNT,$DEVICE_TIME,$SERVER_TIME,$VALUE1,$VALUE2,$VALUE3,$VALUE4
       saved = false
       error_message = ""
-
+logger.error "0"
       begin
         data = params[:message][:data]
         tokens = data.split(",")
@@ -122,7 +122,7 @@ class MessagesController < ApplicationController
         raise "invalid message_type" unless (MessageType.idFor(tokens[0]) > 0 && MessageType.idFor(tokens[0]) < 4)
         raise "probe not found" if Probe.find(tokens[2]).nil?
         raise "invalid date" if DateTime.strptime(tokens[5], '%Y%m%d-%H%M%S').nil?
-        raise "invalid date" if DateTime.strptime(tokens[10], '%Y%m%d-%H%M%S').nil?
+        raise "invalid date" if DateTime.strptime(tokens[6], '%Y%m%d-%H%M%S').nil?
 
         @message = Message.new
         @message.message_type_id = MessageType.idFor(tokens[0])
@@ -133,11 +133,11 @@ class MessagesController < ApplicationController
         # m.device_uptime(tokens[])
         @message.outgoing_message_count = tokens[3]
         @message.restart_count = tokens[4]
-        @message.value1 = tokens[6]
-        @message.value2 = tokens[7]
-        @message.value3 = tokens[8]
-        @message.value4 = tokens[9]
-        @message.server_time = DateTime.strptime(tokens[10], '%Y%m%d-%H%M%S')
+        @message.value1 = tokens[7]
+        @message.value2 = tokens[8]
+        @message.value3 = tokens[9]
+        @message.value4 = tokens[10]
+        @message.server_time = DateTime.strptime(tokens[6], '%Y%m%d-%H%M%S')
         #   m.probe_enabled(tokens[])
         saved = @message.save
         error_message = @message.errors unless saved
