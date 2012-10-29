@@ -1,0 +1,37 @@
+<span class="main">
+<h1>Current status</h1>
+
+<table>
+	<tr>
+		<th>&#160;</th>
+		<% @probe_types.each do |pt| %> 
+			<th>
+				<%= %>
+				<%= pt.name %> 
+			</th>
+		<% end %>
+		<td><%= link_to "(shrink)", :controller => "current_status", :action => "by_location" %></td>
+	</tr>
+	
+	<% @locations.each do |location| %>
+		<tr>
+			<th><%= location.name %> </th>
+			<% @probe_types.each do |pt| %> 
+				<td class="hasTooltip" style="background:red">
+					<%= status(location, pt) %>
+					<span>
+						<%= details_for_probe(location, pt) %>
+					</span>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+	<tr>
+	<td><%= link_to "(shrink)", :controller => "current_status", :action => "by_probe_type" %></td>
+	<% @probe_types.each do |s| %>
+	<td/>
+	<% end %>
+	<td><%= link_to "(shrink)", :controller => "current_status", :action => "aggregation" %></td>
+	</tr>
+</table>
+</span>

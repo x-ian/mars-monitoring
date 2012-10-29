@@ -1,0 +1,39 @@
+<span class="main">
+	<h1>CurrentStatus#by_location</h1>
+
+<table>
+	<tr>
+		<th>&#160;</th>
+		<th>All probes</th>
+		<td><%= link_to "(expand)", :controller => "current_status", :action => "by_location_probe_type" %></td>
+	</tr>
+	
+	<% @statuses.each do |s| %>
+		<tr>
+			<th><%= s[0].name %> </th>
+			<td class="hasTooltip">
+				<% if s[1].id == ProbeStatus::ERROR.id || s[1].id == ProbeStatus::ASSUMED_ERROR.id %>
+					<div style="background: red"><%= s[1].name %></div>
+				<% else %>	
+					<% if s[1].id == ProbeStatus::WARNING.id || s[1].id == ProbeStatus::ASSUMED_WARNING.id %>
+						<div style="background: yellow"><%= s[1].name %></div>
+					<% else %>
+						<% if s[1].id == ProbeStatus::OK.id || s[1].id == ProbeStatus::ASSUMED_OK.id %>
+							<div style="background: green"><%= s[1].name %></div>
+						<% else %>
+							<div style="background: gray"><%= s[1].name %></div>
+						<% end %>
+					<% end %>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+	<tr>
+		<td><%= link_to "(shrink)", :controller => "current_status", :action => "aggregation" %></td>
+		<% @statuses.each do |s| %>
+		<td/>
+		<% end %>
+		</tr>
+
+</table>
+</span>

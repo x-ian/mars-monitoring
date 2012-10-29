@@ -1,0 +1,39 @@
+<span class="main">
+	<h1>CurrentStatus#aggregation</h1>
+	
+	
+	<table>
+		<tr>
+			<th>&#160;</th>
+			<th>All probes</th>
+			<td><%= link_to "(expand)", :controller => "current_status", :action => "by_probe_type" %></td>
+		</tr>
+
+			<tr>
+				<th>All locations</th>
+					<td class="hasTooltip">
+						<% if @probe_status.id == ProbeStatus::ERROR.id || @probe_status.id == ProbeStatus::ASSUMED_ERROR.id %>
+							<div style="background: red; padding:3px;width: 20em;height: 6em;text-align:center">Maximum severity of <%= @number_probes %> probes: <br/><%= @probe_status.name %></div>
+						<% else %>	
+							<% if @probe_status.id == ProbeStatus::WARNING.id || @probe_status.id == ProbeStatus::ASSUMED_WARNING.id %>
+								<div style="background: yellow; padding:3px;width: 20em;height: 6em;text-align:center">Maximum severity of <%= @number_probes %> probes: <br/><%= @probe_status.name %></div>
+							<% else %>
+								<% if @probe_status.id == ProbeStatus::OK.id || @probe_status.id == ProbeStatus::ASSUMED_OK.id %>
+									<div style="background: green; padding:3px;width: 20em;height: 6em;text-align:center">Maximum severity of <%= @number_probes %> probes: <br/><%= @probe_status.name %></div>
+								<% else %>
+									<div style="background: gray; padding:3px;width: 20em;height: 6em;text-align:center">Maximum severity of <%= @number_probes %> probes: <br/><%= @probe_status.name %></div>
+								<% end %>
+							<% end %>
+						<% end %>
+					</td>
+			</tr>
+			<tr>
+				<td><%= link_to "(expand)", :controller => "current_status", :action => "by_location" %></td>
+				<td/>
+				<td style="text-align:right"><%= link_to "(expand)", :controller => "current_status", :action => "by_location_probe_type" %></td>
+				</tr>
+	</table>
+
+
+
+</span>
