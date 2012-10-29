@@ -1,29 +1,4 @@
 <span class="main">
-<h1>Dashboard</h1>
+<h1>My Dashboard</h1>
 
-<table>
-	<tr>
-		<th>&#160;</th>
-		<% @probe_types.each do |pt| %> 
-			<th>
-				<%= %>
-				<%= pt.name %> 
-			</th>
-		<% end %>
-	</tr>
-	
-	<% @locations.each do |location| %>
-		<tr>
-			<th><%= location.name %> </th>
-			<% @probe_types.each do |pt| %> 
-				<td class="hasTooltip">
-					<%= status(location, pt) %>
-					<span>
-						<%= details_for_probe(location, pt) %>
-					</span>
-				</td>
-			<% end %>
-		</tr>
-	<% end %>
-</table>
-</span>
+todo

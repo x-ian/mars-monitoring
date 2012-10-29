@@ -25,46 +25,60 @@ ProbeStatus.create! do |ps|
   ps.name = "ok"
   ps.status = "ok"
   ps.assumed = false
+  ps.severity_order = 2
 end
 ProbeStatus.create! do |ps|
   ps.id = 2
   ps.name = "warning"
   ps.status = "warning"
   ps.assumed = false
+  ps.severity_order = 7
 end
 ProbeStatus.create! do |ps|
   ps.id = 3
   ps.name = "error"
   ps.status = "error"
   ps.assumed = false
+  ps.severity_order = 9
 end
 ProbeStatus.create! do |ps|
   ps.id = 4
   ps.name = "assumed ok"
   ps.status = "ok"
   ps.assumed = true
+  ps.severity_order = 3
 end
 ProbeStatus.create! do |ps|
   ps.id = 5
   ps.name = "assumed warning"
   ps.status = "warning"
   ps.assumed = true
+  ps.severity_order = 6
 end
 ProbeStatus.create! do |ps|
   ps.id = 6
   ps.name = "assumed error"
   ps.status = "error"
   ps.assumed = true
+  ps.severity_order = 8
 end
 ProbeStatus.create! do |ps|
   ps.id = 7
   ps.name = "no data"
   ps.status = "no data"
+  ps.severity_order = 4
 end
 ProbeStatus.create! do |ps|
   ps.id = 8
   ps.name = "unknown"
   ps.status = "unknown"
+  ps.severity_order = 5
+end
+ProbeStatus.create! do |ps|
+  ps.id = 9
+  ps.name = "disabled"
+  ps.status = "disabled"
+  ps.severity_order = 1
 end
 
 ValueType.delete_all

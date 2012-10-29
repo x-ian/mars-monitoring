@@ -15,6 +15,11 @@
   <%= @probe_status.assumed %>
 </p>
 
+<p>
+  <b>Severity order:</b>
+  <%= @probe_status.severity_order %>
+</p>
+
 
 <%= link_to 'Edit', edit_probe_status_path(@probe_status) %> |
 <%= link_to 'Back', probe_statuses_path %>

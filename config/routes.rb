@@ -1,4 +1,12 @@
 MarsMonitoring::Application.routes.draw do
+  get "current_status/aggregation"
+
+  get "current_status/by_location"
+
+  get "current_status/by_probe_type"
+
+  get "current_status/by_location_probe_type"
+
   get "visualize/d3_example_lines"
   get "visualize/d3_example_zoom"
   get "visualize/d3_single_probe"

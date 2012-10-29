@@ -20,13 +20,14 @@
   <div id="columns">
     <div id="side">
       <ul id="ul1">
-        <li><%= link_to "Dashboard", :controller => "dashboard", :action => "show" %></li>
-        <li>Probes</li>
+        <li>Dashboard</li>
+        <li><%= link_to "Current status", :controller => "current_status", :action => "by_location_probe_type" %></li>
         <li>Historical views</li>
       	<ul id="ul2">
 	   		<li><%= link_to "Graphical view", :controller => "visualize", :action => "d3_single_probe" %></li>
        		<li>Textual view<!--% link_to "Textual view", :controller => "messages"%--></li>
 		</ul>
+        <li>Probes</li>
 	    <li>Manage</li>
       	<ul id="ul2">
        		<li><%= link_to "Probes", probes_path %></li>
