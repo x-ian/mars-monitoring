@@ -13,6 +13,7 @@ class ProbeStatus < ActiveRecord::Base
   ERROR = ProbeStatus.find(3)
   
   def add(probe_status)
+    return self if probe_status.nil?
     return probe_status if self.severity_order < probe_status.severity_order
     self
   end

@@ -6,32 +6,49 @@
 		<th>&#160;</th>
 		<% @probe_types.each do |pt| %> 
 			<th>
-				<%= %>
 				<%= pt.name %> 
 			</th>
 		<% end %>
 		<td><%= link_to "(shrink)", :controller => "current_status", :action => "by_location" %></td>
 	</tr>
 	
-	<% @locations.each do |location| %>
+	<% @locations.each do |l| %>
 		<tr>
-			<th><%= location.name %> </th>
-			<% @probe_types.each do |pt| %> 
-				<td class="hasTooltip" style="background:red">
-					<%= status(location, pt) %>
-					<span>
-						<%= details_for_probe(location, pt) %>
-					</span>
-				</td>
+			<th><%= l.name %> </th>
+			<% @probe_types.each do |pt| %>
+			<td class="hasTooltip">
+				<% s = status_for_probes(l, pt) %>
+				<% if s.nil? %>
+					
+				<% else %>	
+					<% if s.id == ProbeStatus::ERROR.id || s.id == ProbeStatus::ASSUMED_ERROR.id %>
+						<div style="background: red"><%= s.name %></div>
+					<% else %>	
+						<% if s.id == ProbeStatus::WARNING.id || s.id == ProbeStatus::ASSUMED_WARNING.id %>
+							<div style="background: yellow"><%= s.name %></div>
+						<% else %>
+							<% if s.id == ProbeStatus::OK.id || s.id == ProbeStatus::ASSUMED_OK.id %>
+								<div style="background: green"><%= s.name %></div>
+							<% else %>
+								<div style="background: gray"><%= s.name %></div>
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
+                <span>
+                        <%= details_for_probe(l, pt) %> 
+                </span>
+			</td>
 			<% end %>
 		</tr>
 	<% end %>
+
 	<tr>
-	<td><%= link_to "(shrink)", :controller => "current_status", :action => "by_probe_type" %></td>
-	<% @probe_types.each do |s| %>
-	<td/>
-	<% end %>
-	<td><%= link_to "(shrink)", :controller => "current_status", :action => "aggregation" %></td>
+		<td><%= link_to "(shrink)", :controller => "current_status", :action => "by_probe_type" %></td>
+		<% @probe_types.each do |l| %>
+			<td/>
+		<% end %>
+		<td><%= link_to "(shrink)", :controller => "current_status", :action => "aggregation" %></td>
 	</tr>
 </table>
 </span>

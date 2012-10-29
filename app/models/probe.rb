@@ -30,10 +30,9 @@ class Probe < ActiveRecord::Base
     return ProbeStatus::DISABLED unless self.enabled?
     # todo, simplified by only looking for last message
     m = Message.find_last_by_probe_id(self.id)
-    return ProbeStatus.find(ProbeStatus::NO_CONTACT) if m.nil?
+    return ProbeStatus.find(ProbeStatus::NO_DATA) if m.nil?
     assumed = (m.server_time < DateTime.now-2.days)
     above_threshold = false
-    logger.error "#{m.id}"
     
     above_threshold = above_threshold || (m.value1 >= m.probe.probe_configuration.value1_threshold) unless m.probe.probe_configuration.value1_threshold.nil? || m.value1.nil? ||  m.probe.probe_type.nil? || m.probe.probe_type.value1_type_id  == ValueType::NOT_CONFIGURED
     

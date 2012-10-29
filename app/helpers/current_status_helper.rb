@@ -25,4 +25,14 @@ module CurrentStatusHelper
     tooltip += "<br/>"
     tooltip.html_safe
   end
+  
+  def status_for_probes(location, probe_type)
+    probes = probe_type.probes.find_all{|p| p.location == location}
+    probe_status = nil
+    probes.each do |p|
+      probe_status = p.current_status.add(probe_status)
+    end
+    return probe_status
+  end
+    
 end
