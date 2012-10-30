@@ -6,6 +6,7 @@
 
 User-agent: *
 Disallow: /communication_channels/
+Disallow: /current_status/
 Disallow: /customers/
 Disallow: /dashboard/
 Disallow: /events/
@@ -15,6 +16,8 @@ Disallow: /message_types/
 Disallow: /messages/
 Disallow: /probe_configurations/
 Disallow: /probe_statuses/
+Disallow: /probe_types/
 Disallow: /probes/
 Disallow: /users/
 Disallow: /value_types/
+Disallow: /visualize/
