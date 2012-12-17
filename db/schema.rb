@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027202223) do
+ActiveRecord::Schema.define(:version => 20121217141416) do
 
   create_table "communication_channels", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20121027202223) do
     t.datetime "updated_at", :null => false
     t.text     "reason"
     t.boolean  "read"
+    t.string   "source"
   end
 
   create_table "locations", :force => true do |t|
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20121027202223) do
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
     t.boolean  "probe_enabled"
+    t.boolean  "archived"
   end
 
   create_table "probe_configurations", :force => true do |t|
@@ -126,8 +128,10 @@ ActiveRecord::Schema.define(:version => 20121027202223) do
   create_table "users", :force => true do |t|
     t.integer  "customer_id"
     t.string   "name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "email"
+    t.string   "mobile_number"
   end
 
   create_table "value_types", :force => true do |t|

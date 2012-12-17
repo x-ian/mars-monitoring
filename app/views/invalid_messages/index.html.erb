@@ -5,6 +5,7 @@
     <th>Reason</th>
     <th>Read</th>
     <th>Content</th>
+    <th>Source</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,6 +16,7 @@
     <td><%= invalid_message.reason %></td>
     <td><%= invalid_message.read %></td>
     <td><%= invalid_message.content %></td>
+    <td><%= invalid_message.source %></td>
     <td><%= link_to 'Show', invalid_message %></td>
     <td><%= link_to 'Edit', edit_invalid_message_path(invalid_message) %></td>
     <td><%= link_to 'Destroy', invalid_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>

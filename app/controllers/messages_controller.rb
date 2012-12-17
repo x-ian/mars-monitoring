@@ -6,7 +6,18 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @messages = Message.where("archived is null or archived = :archived", archived: false)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @messages }
+    end
+  end
+
+  # GET /messages
+  # GET /messages.json
+  def index_archived
+    @messages = Message.where("archived = :archived", archived: true)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -112,7 +123,7 @@ class MessagesController < ApplicationController
     #$MESSAGE_TYPE_ID,$CUSTOMER_ID,$PROBE_ID,$MESSAGE_COUNT,$RESTART_COUNT,$DEVICE_TIME,$SERVER_TIME,$VALUE1,$VALUE2,$VALUE3,$VALUE4
       saved = false
       error_message = ""
-logger.error "0"
+
       begin
         data = params[:message][:data]
         tokens = data.split(",")
@@ -123,7 +134,8 @@ logger.error "0"
         raise "probe not found" if Probe.find(tokens[2]).nil?
         raise "invalid date" if DateTime.strptime(tokens[5], '%Y%m%d-%H%M%S').nil?
         raise "invalid date" if DateTime.strptime(tokens[6], '%Y%m%d-%H%M%S').nil?
-
+        # todo, check if source mobile number matches the probe config. if not, reject the message
+        
         @message = Message.new
         @message.message_type_id = MessageType.idFor(tokens[0])
         #   m.customer_id = tokens[1]
@@ -138,7 +150,7 @@ logger.error "0"
         @message.value3 = tokens[9]
         @message.value4 = tokens[10]
         @message.server_time = DateTime.strptime(tokens[6], '%Y%m%d-%H%M%S')
-        #   m.probe_enabled(tokens[])
+        @message.archived = false
         saved = @message.save
         error_message = @message.errors unless saved
       rescue => e
@@ -153,6 +165,8 @@ logger.error "0"
           m.read = false
           m.reason = error_message
           m.content = params.to_s
+          # todo: find a way to get the source mobile number through our sms gateway
+          m.source = request.remote_ip
           m.save
   #        format.json { render json: @message.errors, status: :unprocessable_entity }
           format.json { render json: @message, status: :created, location: @message }

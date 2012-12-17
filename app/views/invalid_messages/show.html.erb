@@ -15,6 +15,11 @@
   <%= @invalid_message.content %>
 </p>
 
+<p>
+  <b>Source:</b>
+  <%= @invalid_message.source %>
+</p>
+
 
 <%= link_to 'Edit', edit_invalid_message_path(@invalid_message) %> |
 <%= link_to 'Back', invalid_messages_path %>

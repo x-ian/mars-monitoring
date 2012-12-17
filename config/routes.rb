@@ -46,6 +46,8 @@ MarsMonitoring::Application.routes.draw do
 
   resources :customers
 
+  match "messages/index_archived", :via => [:get]
+
   resources :messages
 
   match "messages/create_from_probe", :via => [:post]
