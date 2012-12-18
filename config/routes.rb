@@ -1,4 +1,6 @@
 MarsMonitoring::Application.routes.draw do
+  resources :subscriptions
+
   get "current_status/aggregation"
 
   get "current_status/by_location"

@@ -32,6 +32,10 @@
 	<%= f.select :probe_configuration_id, ProbeConfiguration.all.collect{|p| [p.name, p.id]} %>
   </div>
   <div class="field">
+    <%= f.label :forward_subscription_id %><br />
+	<%= f.select :forward_subscription_id, Subscription.all.collect{|p| [p.name, p.id]}, :include_blank => true %>
+  </div>
+  <div class="field">
     <%= f.label :location_coordinates %><br />
     <%= f.text_field :location_coordinates %>
   </div>

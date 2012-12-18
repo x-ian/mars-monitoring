@@ -8,6 +8,7 @@
     <th>Location coordinates</th>
     <th>Probe configuration</th>
     <th>Probe type</th>
+    <th>Forward subscription</th>
     <th>Cell number</th>
     <th>Enabled</th>
     <th></th>
@@ -23,6 +24,7 @@
     <td><%= probe.location_coordinates %></td>
     <td><%= probe.probe_configuration.name unless probe.probe_configuration.nil? %></td>
     <td><%= probe.probe_type.name unless probe.probe_type.nil? %></td>
+    <td><%= probe.forward_subscription.name unless probe.forward_subscription.nil? %></td>
     <td><%= probe.cell_number %></td>
     <td><%= probe.enabled %></td>
     <td><%= link_to 'Show', probe %></td>
