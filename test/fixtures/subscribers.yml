@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  subscriber1_id: 1
+  subscriber2_id: 1
+  subscriber3_id: 1
+  subscriber4_id: 1
+  subscriber5_id: 1
+
+two:
+  name: MyString
+  subscriber1_id: 1
+  subscriber2_id: 1
+  subscriber3_id: 1
+  subscriber4_id: 1
+  subscriber5_id: 1

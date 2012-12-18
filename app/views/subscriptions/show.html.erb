@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @subscription.name %>
+</p>
+
+<p>
+  <b>Subscriber 1:</b>
+  <%= @subscription.subscriber1.name unless @subscription.subscriber1.nil? %>
+</p>
+
+<p>
+  <b>Subscriber 2:</b>
+  <%= @subscription.subscriber2.name unless @subscription.subscriber2.nil? %>
+</p>
+
+<p>
+  <b>Subscriber 3:</b>
+  <%= @subscription.subscriber3.name unless @subscription.subscriber3.nil? %>
+</p>
+
+<p>
+  <b>Subscriber 4:</b>
+  <%= @subscription.subscriber4.name unless @subscription.subscriber4.nil? %>
+</p>
+
+<p>
+  <b>Subscriber 5:</b>
+  <%= @subscription.subscriber5.name unless @subscription.subscriber5.nil? %>
+</p>
+
+
+<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
+<%= link_to 'Back', subscriptions_path %>
