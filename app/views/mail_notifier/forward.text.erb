@@ -1,6 +1,6 @@
-Muli bo <%= @username %>
+Muli bo <%= @user.name %>
 
-This is an automatic forward of the message the probe <%= @message.probe.name %> at <%= @message.probe.location.name %> sent at <%= @message.server_time %>
+This is an automatic message forward from the probe '<%= @message.probe.name %>' located at '<%= @message.probe.location.name %>' sent at '<%= @message.server_time %>'.
 
 --- snip
 <%= @message.to_yaml %>
@@ -9,4 +9,6 @@ This is an automatic forward of the message the probe <%= @message.probe.name %>
 Zikomo,
 Your marsmonitoring.com team.
 
-Note: Your email is configured to receive notifications from marsmonitoring.com. Check with your marsmonitoring.com project lead if you need to unsubscribe.
+--
+
+Note: Your email is configured to receive notifications from marsmonitoring.com. Check with your marsmonitoring.com project administrator if you need to unsubscribe.

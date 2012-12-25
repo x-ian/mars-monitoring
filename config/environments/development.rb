@@ -40,4 +40,15 @@ MarsMonitoring::Application.configure do
   # turning on again through gem quiet_assets
   #config.quiet_assets = false
   
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587, 
+    domain: "gmail.com",
+    authentication: "plain",
+    user_name: YAML.load_file("/Users/xian/projects/mars-monitoring/environment_gmail_credentials.yml")['user_name'],
+    password: YAML.load_file("/Users/xian/projects/mars-monitoring/environment_gmail_credentials.yml")['password'],
+    enable_starttls_auto: true
+  }  
 end

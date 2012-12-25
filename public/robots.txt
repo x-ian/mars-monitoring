@@ -18,6 +18,7 @@ Disallow: /probe_configurations/
 Disallow: /probe_statuses/
 Disallow: /probe_types/
 Disallow: /probes/
+Disallow: /subscriptions/
 Disallow: /users/
 Disallow: /value_types/
 Disallow: /visualize/

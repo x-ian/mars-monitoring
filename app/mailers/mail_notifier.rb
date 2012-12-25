@@ -7,15 +7,14 @@ class MailNotifier < ActionMailer::Base
   #   en.mail_notifier.notify.subject
   #
   def notify
-    @greeting = "Hi"
-
-    mail to: "christian.neumann@gmx.de"
+    @greeting = "Just a test"
+    mail to: "cneumann@marsmonitoring.com"
   end
 
   def forward(message, user)
     @message = message
     @user = user
-    mail to: "christian.neumann@gmx.de"
+    mail to: user.email, subject: "SMS forward from ${@message.probe.name} located at ${@message.probe.location.name}"
   end
 
 end
