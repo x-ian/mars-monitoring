@@ -106,6 +106,7 @@ class MessagesController < ApplicationController
     
     respond_to do |format|
       if saved
+        MailNotifier.forward(@message).deliver
         format.json { render json: @message, status: :created, location: @message }
       else
         m = InvalidMessage.new
