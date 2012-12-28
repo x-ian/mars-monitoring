@@ -11,12 +11,16 @@ class MailNotifier < ActionMailer::Base
     mail to: "cneumann@marsmonitoring.com"
   end
 
-  def forward(message)
-    @message = message
+  def forward_to_all(message)
     message.probe.forward_subscription.subscribers.each do |user|
-      @user = user
-      mail to: user.email, subject: "SMS forward from \'#{message.probe.name}\' located at \'#{message.probe.location.name}\'"
+      forward(message, user).deliver
     end
+  end
+  
+  def forward(message, user)
+    @message = message
+    @user = user
+    mail to: user.email, subject: "SMS forward from \'#{message.probe.name}\' located at \'#{message.probe.location.name}\'"
   end
 
 end
