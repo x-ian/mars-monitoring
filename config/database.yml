@@ -32,7 +32,7 @@ marswatching_production:
   adapter: mysql2 
   encoding: utf8 
   reconnect: false 
-  database: marswatchring_production 
+  database: marswatching_production 
   pool: 5 
   username: neumann 
   password:  
