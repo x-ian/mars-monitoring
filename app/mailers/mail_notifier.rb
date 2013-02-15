@@ -20,7 +20,7 @@ class MailNotifier < ActionMailer::Base
   def forward(message, user)
     @message = message
     @user = user
-    mail to: user.email, subject: "SMS forward from \'#{message.probe.name}\' located at \'#{message.probe.location.name}\'", :template_name => 'forward'
+    mail to: user.email, subject: "#{MessageType.textFor(message.message_type.id)} message from \'#{message.probe.name}\' located at \'#{message.probe.location.name}\'", :template_name => 'forward'
   end
 
 end
