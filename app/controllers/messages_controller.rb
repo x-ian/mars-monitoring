@@ -115,7 +115,7 @@ class MessagesController < ApplicationController
         m.content = params.to_s
         m.save
 #        format.json { render json: @message.errors, status: :unprocessable_entity }
-        MailNotifier.invalid_message(@message, User.find(1))
+        MailNotifier.invalid_message(m, User.find(1))
         format.json { render json: @message, status: :created, location: @message }
       end
     end    
