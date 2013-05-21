@@ -12,8 +12,12 @@ class MailNotifier < ActionMailer::Base
   end
 
   def forward_to_all(message)
-    message.probe.forward_subscription.subscribers.each do |user|
-      forward(message, user).deliver
+    begin
+      message.probe.forward_subscription.subscribers.each do |user|
+        forward(message, user).deliver
+      end
+    rescue => e
+      logger.warn "Problem forwarding notification: #{e}"
     end
   end
   
