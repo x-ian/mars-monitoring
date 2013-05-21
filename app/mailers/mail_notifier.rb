@@ -26,5 +26,11 @@ class MailNotifier < ActionMailer::Base
     @user = user
     mail to: user.email, subject: "#{MessageType.textFor(message.message_type.id)} message from \'#{message.probe.name}\' located at \'#{message.probe.location.name}\'", :template_name => 'forward'
   end
+  
+  def invalid_message(message, user)
+    @message = message
+    @user = user
+    mail to: user.email, subject: "Invalid message arrived", :template_name => 'invalid_message'
+  end
 
 end
