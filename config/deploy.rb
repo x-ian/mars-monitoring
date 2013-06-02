@@ -20,7 +20,7 @@ set :application, 'x-ian/mars-monitoring'
 # file paths
 set :repository,  "git@github.com:x-ian/mars-monitoring.git" 
 #set :deploy_to, "/home/#{user}/#{domain}" 
-set :deploy_to, "/home/neumann/capistrano/mars-monitoring"
+###set :deploy_to, "/home/neumann/capistrano/mars-monitoring"
 
 # distribute your applications across servers (the instructions below put them
 # all on the same server, defined above as 'domain', adjust as necessary)
@@ -46,6 +46,22 @@ set :scm_verbose, true
 set :use_sudo, false
 set :rails_env, :production
 set :scm_passphrase, "neumann"
+
+task :prod do
+  set :deploy_to, "/home/neumann/capistrano/mars-monitoring"
+end
+
+desc "Tweak index.html for marswatching.com"
+task :marswatching_index do 
+end
+
+desc "Deploy as marswatching.com"
+task :watching do
+  set :deploy_to, "/home/neumann/capistrano/mars-watching"
+  after "deploy" do
+    run "cp /home/neumann/capistrano/mars-watching/current/public/index-marswatching.html /home/neumann/capistrano/mars-watching/current/public/index.html"
+  end
+end
 
 namespace :deploy do
   desc "cause Passenger to initiate a restart"

@@ -142,6 +142,21 @@ ValueType.create! do |sc|
   sc.name = '# patient visits'
   sc.cumulative = false
 end
+ValueType.create! do |sc|
+  sc.id = 13
+  sc.name = 'Tank half empty'
+  sc.cumulative = false
+end
+ValueType.create! do |sc|
+  sc.id = 14
+  sc.name = 'Litres'
+  sc.cumulative = false
+end
+ValueType.create! do |sc|
+  sc.id = 15
+  sc.name = 'Guard checked-in'
+  sc.cumulative = false
+end
 
 CommunicationChannel.delete_all
 CommunicationChannel.create! do |p|
@@ -228,6 +243,16 @@ ProbeType.create! do |pt|
   pt.value3_type_id = 11
   pt.value4_type_id = 12
 end
+ProbeType.create! do |pt|
+  pt.id = 8
+  pt.name = "Guard checkin"
+  pt.description = "Simple push button system to monitor availability of guards."
+  pt.communication_channel_id = 1
+  pt.value1_type_id = 13
+  pt.value2_type_id = 1
+  pt.value3_type_id = 1
+  pt.value4_type_id = 1
+end
 
 # test data, remove at one point
 Customer.delete_all
@@ -276,6 +301,18 @@ Location.create! do |l|
   l.name = 'Matope'
   l.customer_id = 2
   l.parent_location_id = 3
+end
+Location.create! do |l|
+  l.id = 7
+  l.name = 'Lilongwe'
+  l.customer_id = 3
+  l.parent_location_id = nil
+end
+Location.create! do |l|
+  l.id = 8
+  l.name = 'Lilongwe property #4'
+  l.customer_id = 3
+  l.parent_location_id = 7
 end
 
 Probe.delete_all
