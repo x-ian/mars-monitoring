@@ -154,7 +154,22 @@ ValueType.create! do |sc|
 end
 ValueType.create! do |sc|
   sc.id = 15
-  sc.name = 'Guard checked-in'
+  sc.name = 'HTTP throughput'
+  sc.cumulative = false
+end
+ValueType.create! do |sc|
+  sc.id = 16
+  sc.name = 'Humidity'
+  sc.cumulative = false
+end
+ValueType.create! do |sc|
+  sc.id = 17
+  sc.name = 'Pending messages'
+  sc.cumulative = false
+end
+ValueType.create! do |sc|
+  sc.id = 18
+  sc.name = '# incoming messages'
   sc.cumulative = false
 end
 
@@ -253,6 +268,26 @@ ProbeType.create! do |pt|
   pt.value3_type_id = 1
   pt.value4_type_id = 1
 end
+ProbeType.create! do |pt|
+  pt.id = 9
+  pt.name = "GSM Ethernet Gateway"
+  pt.description = ""
+  pt.communication_channel_id = 1
+  pt.value1_type_id = 18
+  pt.value2_type_id = 17
+  pt.value3_type_id = 1
+  pt.value4_type_id = 1
+end
+ProbeType.create! do |pt|
+  pt.id = 10
+  pt.name = "Intener speed"
+  pt.description = ""
+  pt.communication_channel_id = 1
+  pt.value1_type_id = 18
+  pt.value2_type_id = 17
+  pt.value3_type_id = 1
+  pt.value4_type_id = 1
+end
 
 # test data, remove at one point
 Customer.delete_all
@@ -274,7 +309,7 @@ Location.create! do |l|
 end
 Location.create! do |l|
   l.id = 2
-  l.name = 'Mainz'
+  l.name = 'Nierstein'
   l.customer_id = 1
   l.parent_location_id = 1
 end
@@ -376,6 +411,7 @@ Probe.create! do |p|
   p.probe_type_id = 2
   p.enabled = true
   p.probe_configuration_id = 5
+  p.forward_subscription_id = 2
 end
 Probe.create! do |p|
   p.id = 7
@@ -417,6 +453,66 @@ Probe.create! do |p|
   p.enabled = true
   p.probe_configuration_id = 8
   p.cell_number = ""
+  p.forward_subscription_id = 1
+end
+Probe.create! do |p|
+  p.id = 11
+  p.name = 'Internet speed'
+  p.customer_id = 1
+  p.location_id = 2
+  p.location_coordinates = nil
+  p.probe_type_id = 8
+  p.enabled = true
+  p.probe_configuration_id = 9
+  p.cell_number = ""
+end
+Probe.create! do |p|
+  p.id = 12
+  p.name = 'GSM Ethernet Gateway'
+  p.customer_id = 1
+  p.location_id = 2
+  p.location_coordinates = nil
+  p.probe_type_id = 9
+  p.enabled = true
+  p.probe_configuration_id = 10
+  p.cell_number = "+4915225839733"
+  p.forward_subscription_id = 1
+end
+Probe.create! do |p|
+  p.id = 13
+  p.name = 'GSM Ethernet Gateway'
+  p.customer_id = 1
+  p.location_id = 4
+  p.location_coordinates = nil
+  p.probe_type_id = 9
+  p.enabled = true
+  p.probe_configuration_id = 10
+  p.cell_number = "+265881007201"
+  p.forward_subscription_id = 2
+end
+Probe.create! do |p|
+  p.id = 14
+  p.name = 'Boi chemistry regents Fridge'
+  p.customer_id = 2
+  p.location_id = 4
+  p.location_coordinates = nil
+  p.probe_type_id = 11
+  p.enabled = true
+  p.probe_configuration_id = 12
+  p.cell_number = "+265881007201"
+  p.forward_subscription_id = 2
+end
+Probe.create! do |p|
+  p.id = 15
+  p.name = 'Lisungwi Hospital Female ward temperature monitor'
+  p.customer_id = 2
+  p.location_id = 5
+  p.location_coordinates = nil
+  p.probe_type_id = 2
+  p.enabled = true
+  p.probe_configuration_id = 13
+  p.cell_number = "+265881007201"
+  p.forward_subscription_id = 2
 end
 
 ProbeConfiguration.delete_all
@@ -531,4 +627,108 @@ ProbeConfiguration.create! do |pc|
   pc.value2_threshold = 1
   pc.value3_threshold = 1
   pc.value4_threshold = 1
+end
+ProbeConfiguration.create! do |pc|
+  pc.id = 9
+  pc.name = " Default Internet Speed"
+  pc.rule_warning = ""
+  pc.rule_error = ""
+  pc.rule_ok = ""
+  pc.rule_assumed = ""
+  pc.heartbeat_interval = 3600
+  pc.alarm_interval = 60
+  pc.value1_threshold = 20
+  pc.value2_threshold = 1
+  pc.value3_threshold = 1
+  pc.value4_threshold = 1
+end
+ProbeConfiguration.create! do |pc|
+  pc.id = 10
+  pc.name = "GSM Ethernet Gateway"
+  pc.rule_warning = ""
+  pc.rule_error = ""
+  pc.rule_ok = ""
+  pc.rule_assumed = ""
+  pc.heartbeat_interval = nil
+  pc.alarm_interval = nil
+  pc.value1_threshold = 20
+  pc.value2_threshold = 1
+  pc.value3_threshold = 1
+  pc.value4_threshold = 1
+end
+ProbeConfiguration.create! do |pc|
+  pc.id = 11
+  pc.name = "Environmental"
+  pc.rule_warning = ""
+  pc.rule_error = ""
+  pc.rule_ok = ""
+  pc.rule_assumed = ""
+  pc.heartbeat_interval = nil
+  pc.alarm_interval = nil
+  pc.value1_threshold = 2
+  pc.value2_threshold = 8
+  pc.value3_threshold = nil
+  pc.value4_threshold = nil
+end
+ProbeConfiguration.create! do |pc|
+  pc.id = 12
+  pc.name = "???"
+  pc.rule_warning = ""
+  pc.rule_error = ""
+  pc.rule_ok = ""
+  pc.rule_assumed = ""
+  pc.heartbeat_interval = 28800
+  pc.alarm_interval = nil
+  pc.value1_threshold = 8
+  pc.value2_threshold = nil
+  pc.value3_threshold = nil
+  pc.value4_threshold = nil
+end
+ProbeConfiguration.create! do |pc|
+  pc.id = 13
+  pc.name = "Lisungwi hospital female ward temp monitor"
+  pc.rule_warning = ""
+  pc.rule_error = ""
+  pc.rule_ok = ""
+  pc.rule_assumed = ""
+  pc.heartbeat_interval = nil
+  pc.alarm_interval = nil
+  pc.value1_threshold = 25
+  pc.value2_threshold = 20
+  pc.value3_threshold = 18
+  pc.value4_threshold = nil
+end
+
+Subscription.delete_all
+Subscription.create! do |s|
+  s.id = 1
+  s.name = "marsmonitoring development"
+  s.subscriber1_id = 1
+  s.subscriber2_id = nil
+  s.subscriber3_id = nil
+  s.subscriber4_id = nil
+  s.subscriber5_id = nil
+end
+Subscription.create! do |s|
+  s.id = 2
+  s.name = "marsmonitoring"
+  s.subscriber1_id = 1
+  s.subscriber2_id = 2
+  s.subscriber3_id = nil
+  s.subscriber4_id = nil
+  s.subscriber5_id = nil
+end
+
+User.delete_all
+User.create! do |s|
+  s.id = 1
+  s.customer_id = 1
+  s.name = "xian"
+  s.email = "cneumann@marsmonitoring.com"
+end
+User.create! do |s|
+  s.id = 2
+  s.customer_id = 1
+  s.name = "stevovo"
+  s.email = "smtewa@marsmonitoring.com"
 end
