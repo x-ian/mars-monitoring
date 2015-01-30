@@ -51,4 +51,5 @@ MarsMonitoring::Application.configure do
     password: YAML.load_file("/Users/xian/projects/mars-monitoring/environment_gmail_credentials.yml")['password'],
     enable_starttls_auto: true
   }  
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

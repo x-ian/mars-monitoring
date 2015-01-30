@@ -1,5 +1,5 @@
 MarsMonitoring::Application.routes.draw do
-  resources :subscriptions
+  devise_for :users
 
   get "current_status/aggregation"
 
@@ -13,6 +13,8 @@ MarsMonitoring::Application.routes.draw do
   get "visualize/d3_example_zoom"
   get "visualize/d3_single_probe"
   get "visualize/d3_data"
+
+  resources :subscriptions
 
   resources :probe_configurations
 
@@ -107,7 +109,7 @@ MarsMonitoring::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  #root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 

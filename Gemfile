@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.21'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -48,3 +48,5 @@ end
 gem 'quiet_assets', :group => :development
 
 gem 'jquery_datepicker'
+
+gem 'devise'

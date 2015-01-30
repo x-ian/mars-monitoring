@@ -16,15 +16,17 @@
 <body class="<%= controller.controller_name %>">
   <div id="banner">
   	<a href="/">mars monitoring</a>
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
   </div>
   <div id="columns">
     <div id="side">
       <ul id="ul1">
         <li>Dashboard</li>
-        <li><%= link_to "Current status", :controller => "current_status", :action => "by_location_probe_type" %></li>
+        <li><%= link_to "Current status", current_status_by_location_probe_type_path %></li>
         <li>Historical views</li>
       	<ul id="ul2">
-	   		<li><%= link_to "Graphical view", :controller => "visualize", :action => "d3_single_probe" %></li>
+	   		<li><%= link_to "Graphical view", visualize_d3_single_probe_path %></li>
        		<li>Textual view<!--% link_to "Textual view", :controller => "messages"%--></li>
 		</ul>
         <li>Probes</li>
@@ -41,7 +43,7 @@
       	<ul id="ul2">
        		<li><%= link_to "Invalid messages", invalid_messages_path %></li>
        		<li><%= link_to "Messages", messages_path %></li>
-       		<li><%= link_to "Messages (archived)", :controller => "messages", :action => "index_archived" %></li>
+       		<li><%= link_to "Messages (archived)", messages_index_archived_path %></li>
        		<li><%= link_to "Probe Types", probe_types_path %></li>
        		<li><%= link_to "Value Types", value_types_path %></li>
        		<li><%= link_to "Customers", customers_path %></li>
