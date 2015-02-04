@@ -1,4 +1,6 @@
 class MessageTypesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /message_types
   # GET /message_types.json
   def index

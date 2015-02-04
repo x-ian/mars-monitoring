@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_filter :authenticate_user!
 
   protect_from_forgery :except => :create
   protect_from_forgery :except => :create_from_probe

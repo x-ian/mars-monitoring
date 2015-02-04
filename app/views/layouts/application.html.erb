@@ -15,9 +15,11 @@
 </head>
 <body class="<%= controller.controller_name %>">
   <div id="banner">
-  	<a href="/">mars monitoring</a>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+  	<a href="/">mars monitoring</a> <%= notice %> <%= alert %> 
+	<% if user_signed_in? %>
+		<%= link_to('Edit account', edit_user_registration_path) %>
+		<%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+	<% end %>
   </div>
   <div id="columns">
     <div id="side">

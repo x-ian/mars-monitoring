@@ -1,4 +1,6 @@
 class InvalidMessagesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /invalid_messages
   # GET /invalid_messages.json
   def index

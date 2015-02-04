@@ -1,4 +1,6 @@
 class ValueTypesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /value_types
   # GET /value_types.json
   def index

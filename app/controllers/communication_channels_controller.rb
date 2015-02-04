@@ -1,4 +1,6 @@
 class CommunicationChannelsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /communication_channels
   # GET /communication_channels.json
   def index

@@ -1,4 +1,6 @@
 class ProbesController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /probes
   # GET /probes.json
   def index

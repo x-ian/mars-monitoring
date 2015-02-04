@@ -1,4 +1,6 @@
 class CurrentStatusController < ApplicationController
+  before_filter :authenticate_user!
+
   def aggregation
     @probe_status = ProbeStatus::DISABLED
     @number_probes = Probe.all.size
