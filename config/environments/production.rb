@@ -76,5 +76,5 @@ MarsMonitoring::Application.configure do
     password: YAML.load_file("/home/neumann/capistrano/mars-monitoring/shared/config/environment_gmail_credentials.yml")['password'],
     enable_starttls_auto: true
   }  
-  config.action_mailer.default_url_options = { host: 'marsmonitoring.com', port: 80 }
+  config.action_mailer.default_url_options = { host: 'www.marsmonitoring.com' }
 end
