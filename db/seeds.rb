@@ -280,11 +280,21 @@ ProbeType.create! do |pt|
 end
 ProbeType.create! do |pt|
   pt.id = 10
-  pt.name = "Intener speed"
+  pt.name = "Internet speed"
   pt.description = ""
   pt.communication_channel_id = 1
   pt.value1_type_id = 18
   pt.value2_type_id = 17
+  pt.value3_type_id = 1
+  pt.value4_type_id = 1
+end
+ProbeType.create! do |pt|
+  pt.id = 11
+  pt.name = "DC power availability"
+  pt.description = ""
+  pt.communication_channel_id = 1
+  pt.value1_type_id = 6
+  pt.value2_type_id = 1
   pt.value3_type_id = 1
   pt.value4_type_id = 1
 end
@@ -298,6 +308,10 @@ end
 Customer.create! do |c|
   c.id = 2
   c.name = 'APZU'
+end
+Customer.create! do |c|
+  c.id = 3
+  c.name = 'Douglas'
 end
 
 Location.delete_all
@@ -514,6 +528,18 @@ Probe.create! do |p|
   p.cell_number = "+265881007201"
   p.forward_subscription_id = 2
 end
+Probe.create! do |p|
+  p.id = 16
+  p.name = 'Solar power DC available'
+  p.customer_id = 3
+  p.location_id = 7
+  p.location_coordinates = nil
+  p.probe_type_id = 11
+  p.enabled = true
+  p.probe_configuration_id = 14
+  p.cell_number = ""
+  p.forward_subscription_id = 3
+end
 
 ProbeConfiguration.delete_all
 ProbeConfiguration.create! do |pc|
@@ -698,6 +724,20 @@ ProbeConfiguration.create! do |pc|
   pc.value3_threshold = 18
   pc.value4_threshold = nil
 end
+ProbeConfiguration.create! do |pc|
+  pc.id = 14
+  pc.name = "DC power available"
+  pc.rule_warning = ""
+  pc.rule_error = ""
+  pc.rule_ok = ""
+  pc.rule_assumed = ""
+  pc.heartbeat_interval = nil
+  pc.alarm_interval = nil
+  pc.value1_threshold = 1
+  pc.value2_threshold = nil
+  pc.value3_threshold = nil
+  pc.value4_threshold = nil
+end
 
 Subscription.delete_all
 Subscription.create! do |s|
@@ -718,17 +758,77 @@ Subscription.create! do |s|
   s.subscriber4_id = nil
   s.subscriber5_id = nil
 end
-
+Subscription.create! do |s|
+  s.id = 3
+  s.name = "Douglas"
+  s.subscriber1_id = 1
+  s.subscriber2_id = 9
+  s.subscriber3_id = nil
+  s.subscriber4_id = nil
+  s.subscriber5_id = nil
+end
 User.delete_all
-User.create! do |s|
+
+#=begin
+# my test env
+sql = <<-SQL
+      insert into users (id, customer_id, name, created_at, updated_at, email, mobile_number, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, confirmation_token, confirmed_at, confirmation_sent_at, unconfirmed_email) values (1,1,"xian", "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", "cneumann@marsmonitoring.com", "", "$2a$10$5YxGXV84mjVWh90YS6Nen.6SKJl9h/KKN8DEyMB2kMDq7FJEj4rIG", NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", NULL);
+    SQL
+    # used to connect active record to the database
+    ActiveRecord::Base.establish_connection
+    ActiveRecord::Base.connection.execute(sql)
+#=end    
+
+=begin
+# production env
+sql = <<-SQL
+      insert into users (id, customer_id, name, created_at, updated_at, email, mobile_number, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, confirmation_token, confirmed_at, confirmation_sent_at, unconfirmed_email) values (1,1,"xian", "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", "cneumann@marsmonitoring.com", "", "$2a$10$ITPVcPwh7XFE91gijP2BWO6k7KHBsLCZqkWF6RAJ.iCOe1csRzpRi", NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", NULL), (2,1,"stevovo", "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", "stevemtewa@gmail.com", "", "$2a$10$B.2SY553u3e5fkCPIMu4bud06hElvMqaLlrGBv6KnCglEox/52fWe", NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", NULL), (3,3,"Gerry Douglas", "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", "christian.neumann@gmail.com", "", "e6e9832057cdc3b114efa779cdc01e9c216039b3834df017e825e7f175dd39c1", NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", NULL);
+      SQL
+      # used to connect active record to the database
+      ActiveRecord::Base.establish_connection
+      ActiveRecord::Base.connection.execute(sql)
+=end
+
+=begin        
+User.create(validation : false) do |s|
   s.id = 1
   s.customer_id = 1
   s.name = "xian"
   s.email = "cneumann@marsmonitoring.com"
+  s.encrypted_password = "$2a$10$ITPVcPwh7XFE91gijP2BWO6k7KHBsLCZqkWF6RAJ.iCOe1csRzpRi"
+#  s.password = "neumann"
+#  s.password_confirmation = "neumann"
+  s.mobile_number = ""
 end
 User.create! do |s|
   s.id = 2
   s.customer_id = 1
   s.name = "stevovo"
   s.email = "smtewa@marsmonitoring.com"
+  s.encrypted_password = "$2a$10$B.2SY553u3e5fkCPIMu4bud06hElvMqaLlrGBv6KnCglEox/52fWe"
 end
+User.create! do |s|
+  s.id = 7
+  s.customer_id = 1
+  s.name = "xian"
+  s.email = "christian.neumann@gmail.com"
+  s.mobile_number = ""
+  s.encrypted_password = "$2a$10$ITPVcPwh7XFE91gijP2BWO6k7KHBsLCZqkWF6RAJ.iCOe1csRzpRi"
+end
+User.create! do |s|
+  s.id = 8
+  s.customer_id = 1
+  s.name = ""
+  s.email = "stevemtewa@gmail.com"
+  s.mobile_number = ""
+  s.encrypted_password = "$2a$10$B.2SY553u3e5fkCPIMu4bud06hElvMqaLlrGBv6KnCglEox/52fWe"
+end
+User.create! do |s|
+  s.id = 9
+  s.customer_id = 3
+  s.name = "Gerry Douglas"
+  s.email = "christian.neumann@gmx.de"
+  s.mobile_number = ""
+  s.encrypted_password = "e6e9832057cdc3b114efa779cdc01e9c216039b3834df017e825e7f175dd39c1"
+end
+=end
