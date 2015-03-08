@@ -50,12 +50,17 @@
        		<li><%= link_to "Value Types", value_types_path %></li>
        		<li><%= link_to "Customers", customers_path %></li>
 		</ul>
+        <li>Support</li>
+      	<ul id="ul2">
+       		<li><a href="mailto:sales@marsgeneral.com">Contact us</a></li>
+       		<li>Help</li>
+		</ul>
       </ul>
     </div>
     <div id="main">
       <%= yield %>
     </div>
   </div>
-<%= render :partial => 'layouts/google_analytics' if Rails.env == 'production' %>
+<!-- %= render :partial => 'layouts/google_analytics' if Rails.env == 'production' % -->
 </body>
 </html>
