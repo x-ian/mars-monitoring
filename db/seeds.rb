@@ -186,6 +186,10 @@ CommunicationChannel.create! do |p|
   p.id = 3
   p.name = "WiFi"
 end
+CommunicationChannel.create! do |p|
+  p.id = 4
+  p.name = "GPRS"
+end
 
 ProbeType.delete_all
 ProbeType.create! do |pt|
@@ -292,7 +296,7 @@ ProbeType.create! do |pt|
   pt.id = 11
   pt.name = "DC power availability"
   pt.description = ""
-  pt.communication_channel_id = 1
+  pt.communication_channel_id = 4
   pt.value1_type_id = 6
   pt.value2_type_id = 1
   pt.value3_type_id = 1
@@ -760,7 +764,7 @@ Subscription.create! do |s|
 end
 Subscription.create! do |s|
   s.id = 3
-  s.name = "Douglas"
+  s.name = "Douglas & Co"
   s.subscriber1_id = 1
   s.subscriber2_id = 9
   s.subscriber3_id = nil
