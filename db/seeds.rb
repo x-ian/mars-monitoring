@@ -311,7 +311,7 @@ Customer.create! do |c|
 end
 Customer.create! do |c|
   c.id = 3
-  c.name = 'Douglas'
+  c.name = 'Douglas Enterprises'
 end
 
 Location.delete_all
@@ -359,9 +359,9 @@ Location.create! do |l|
 end
 Location.create! do |l|
   l.id = 8
-  l.name = 'Lilongwe property #4'
+  l.name = 'Somewhere else'
   l.customer_id = 3
-  l.parent_location_id = 7
+  l.parent_location_id = nil
 end
 
 Probe.delete_all
