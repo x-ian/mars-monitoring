@@ -534,9 +534,21 @@ Probe.create! do |p|
 end
 Probe.create! do |p|
   p.id = 16
-  p.name = 'Solar power DC available'
+  p.name = 'Solar power DC available #1'
   p.customer_id = 3
   p.location_id = 7
+  p.location_coordinates = nil
+  p.probe_type_id = 11
+  p.enabled = true
+  p.probe_configuration_id = 14
+  p.cell_number = ""
+  p.forward_subscription_id = 3
+end
+Probe.create! do |p|
+  p.id = 17
+  p.name = 'Solar power DC available #2'
+  p.customer_id = 3
+  p.location_id = 8
   p.location_coordinates = nil
   p.probe_type_id = 11
   p.enabled = true
