@@ -25,11 +25,11 @@ server 'marsgeneral.com', user: 'neumann', roles: %w{web app}, my_property: :my_
 #
 # Global options
 # --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
+  set :ssh_options, {
+    keys: %w(/Users/xian/.ssh/id_dsa.neumann@marsgeneral.com),
+    forward_agent: false,
+    auth_methods: %w(publickey password)
+  }
 #
 # And/or per server (overrides global)
 # ------------------------------------
