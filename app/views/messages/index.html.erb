@@ -1,5 +1,9 @@
 <h1>Listing messages</h1>
 
+<br/>
+<%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)
+<br/><br/>
+
 <table>
   <tr>
     <th>Probe</th>
@@ -41,6 +45,10 @@
   </tr>
 <% end %>
 </table>
+
+<br/>
+<%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)
+<br/><br/>
 
 <br />
 

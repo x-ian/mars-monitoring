@@ -7,7 +7,8 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.where("archived is null or archived = :archived", archived: false)
+#    @messages = Message.where("archived is null or archived = :archived", archived: false)
+    @messages = Message.where("archived is null or archived = :archived", archived: false).order('server_time DESC').paginate(:page => params[:page], per_page: 100)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +19,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index_archived
-    @messages = Message.where("archived = :archived", archived: true)
+    @messages = Message.where("archived = :archived", archived: true).order('server_time DESC').paginate(:page => params[:page], per_page: 100)
 
     respond_to do |format|
       format.html # index.html.erb

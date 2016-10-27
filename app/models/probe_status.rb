@@ -1,7 +1,7 @@
 class ProbeStatus < ActiveRecord::Base
   has_many :events
   attr_accessible :assumed, :name, :status, :severity_order
-  
+  #=begin
   DISABLED = ProbeStatus.find(9)
   OK = ProbeStatus.find(1)
   ASSUMED_OK = ProbeStatus.find(4)
@@ -11,6 +11,7 @@ class ProbeStatus < ActiveRecord::Base
   WARNING = ProbeStatus.find(2)
   ASSUMED_ERROR = ProbeStatus.find(6)
   ERROR = ProbeStatus.find(3)
+  #=end
   
   def add(probe_status)
     return self if probe_status.nil?

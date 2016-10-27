@@ -50,3 +50,5 @@ gem 'quiet_assets', :group => :development
 gem 'jquery_datepicker'
 
 gem 'devise'
+
+gem 'will_paginate', '~> 3.1.1'
