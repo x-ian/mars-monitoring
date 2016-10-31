@@ -1,0 +1,42 @@
+<%= form_tag("/visualize_text/index", :method => "get") do %>
+  Probe: <%= select_tag 'probe_id', options_for_select(Probe.all.select{|p| p.enabled?}.collect{|p| ["#{p.name} (#{p.location.name})", p.id] }, @probe.id), :onchange => "" %>
+  Start date: <%= datepicker_input(:foo, :start_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
+  End date: <%= datepicker_input(:foo, :end_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
+  <%= submit_tag "Refresh" %>
+<% end %> 
+
+<br/>
+
+<table>
+  <tr>
+    <th>Message type</th>
+    <th>Outgoing message count</th>
+    <th>Restart count</th>
+    <th>Value1</th>
+    <th>Value2</th>
+    <th>Value3</th>
+    <th>Value4</th>
+    <th>Server time</th>
+    <th>Probe enabled</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @messages.each do |message| %>
+  <tr>
+    <td><%= message.message_type.name unless message.message_type.nil? %></td>
+    <td><%= message.outgoing_message_count %></td>
+    <td><%= message.restart_count %></td>
+    <td><%= message.value1 %></td>
+    <td><%= message.value2 %></td>
+    <td><%= message.value3 %></td>
+    <td><%= message.value4 %></td>
+    <td><%= message.server_time %></td>
+    <td><%= message.probe_enabled %></td>
+    <td><%= link_to 'Show', message %></td>
+    <td><%= link_to 'Edit', edit_message_path(message) %></td>
+    <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>

@@ -17,6 +17,9 @@ MarsMonitoring::Application.routes.draw do
   get "visualize/d3_single_probe"
   get "visualize/d3_data"
 
+  get "visualize_text/index"
+  get "visualize_text/messages"
+
   resources :subscriptions
 
   resources :probe_configurations
