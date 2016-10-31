@@ -6,37 +6,41 @@
 <% end %> 
 
 <br/>
+<%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)
+<br/><br/>
 
 <table>
   <tr>
     <th>Message type</th>
-    <th>Outgoing message count</th>
-    <th>Restart count</th>
-    <th>Value1</th>
-    <th>Value2</th>
-    <th>Value3</th>
-    <th>Value4</th>
+    <th><%=@value_type1%></th>
+    <th><%=@value_type2%></th>
+    <th><%=@value_type3%></th>
+    <th><%=@value_type4%></th>
     <th>Server time</th>
-    <th>Probe enabled</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th># Outgoing msgs</th>
+    <th># Restarts</th>
   </tr>
 
 <% @messages.each do |message| %>
   <tr>
     <td><%= message.message_type.name unless message.message_type.nil? %></td>
-    <td><%= message.outgoing_message_count %></td>
-    <td><%= message.restart_count %></td>
     <td><%= message.value1 %></td>
     <td><%= message.value2 %></td>
     <td><%= message.value3 %></td>
     <td><%= message.value4 %></td>
     <td><%= message.server_time %></td>
-    <td><%= message.probe_enabled %></td>
+    <td><%= message.outgoing_message_count %></td>
+    <td><%= message.restart_count %></td>
+	<!--
     <td><%= link_to 'Show', message %></td>
     <td><%= link_to 'Edit', edit_message_path(message) %></td>
     <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	-->
   </tr>
 <% end %>
 </table>
+
+<br/>
+<%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)
+<br/><br/>
+

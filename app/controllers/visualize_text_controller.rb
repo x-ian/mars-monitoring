@@ -8,7 +8,7 @@ class VisualizeTextController < ApplicationController
     @start_date = (params[:foo].blank? || params[:foo][:start_date].blank? ? DateTime.new(2012-10-01) : DateTime.strptime(params[:foo][:start_date], "%Y-%m-%d"))
     @end_date  = (params[:foo].blank? || params[:foo][:end_date].blank? ? Time.now : DateTime.strptime(params[:foo][:end_date], "%Y-%m-%d") + 1.day)
     # stupid workaround to make datepicker use a preset value without a proper rails model
-    @foo = OpenStruct.new(:start_date => params[:foo][:start_date], :end_date => params[:foo][:end_date])
+    @foo = OpenStruct.new(:start_date => (params[:foo].blank? || params[:foo][:start_date].blank? ? '' : params[:foo][:start_date]), :end_date => (params[:foo].blank? || params[:foo][:end_date].blank? ? '' : params[:foo][:end_date]))
     
     value1_type = false
     value2_type = false
@@ -19,6 +19,11 @@ class VisualizeTextController < ApplicationController
     value3_threshold = @probe.probe_configuration.value3_threshold
     value4_threshold = @probe.probe_configuration.value4_threshold
 
+    @value_type1 = @probe.probe_type.value1_type.name
+    @value_type2 = @probe.probe_type.value2_type.name
+    @value_type3 = @probe.probe_type.value3_type.name
+    @value_type4 = @probe.probe_type.value4_type.name
+    
     tsv = "date";
     
     pt = @probe.probe_type
@@ -40,7 +45,7 @@ class VisualizeTextController < ApplicationController
     end
     tsv += "\n"
 
-    @messages = Message.find :all, :order => 'server_time ASC', :conditions => ['probe_id = ? AND server_time >= ? AND server_time <= ?', @probe.id, @start_date, @end_date]
+    @messages = Message.where('probe_id = :probe_id AND server_time >= :start_date AND server_time <= :end_date', probe_id: @probe.id, start_date: @start_date, end_date: @end_date).order('server_time DESC').paginate(:page => params[:page], per_page: 100)
 
   end
 end
