@@ -13,6 +13,7 @@ module CurrentStatusHelper
     return "" if probe.nil?
     tooltip = ""
     tooltip += "Probe: <a href='../probes/#{probe.id}'>#{probe.name} (#{probe.id})</a><br/>"
+    tooltip += "Data: <a href='../visualize_text/index?probe_id=#{probe.id}'>Textual</a>&nbsp;<a href='../visualize/d3_single_probe?probe_id=#{probe.id}'>Graphical</a><br/>"
     tooltip += "Last contact: "
     message = Message.find_last_by_probe_id(probe.id)
     if message.nil?

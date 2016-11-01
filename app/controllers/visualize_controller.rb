@@ -6,12 +6,14 @@ class VisualizeController < ApplicationController
   
   def d3_single_probe
     @probe = (params[:probe_id].blank? ? Probe.find(1) : Probe.find(params[:probe_id]))
+    @probe_id = params[:probe_id]
     @start_date = DateTime.new(2012-01-01)
     @end_date  = Time.now
   end
   
   def d3_data
     @probe = (params[:probe_id].blank? ? Probe.find(1) : Probe.find(params[:probe_id]))
+    @probe_id = params[:probe_id]
     @start_date  = params[:start_date].blank? ? DateTime.new(2012-10-01) : DateTime.strptime(params[:start_date], "%Y-%m-%d")
     @end_date  = (params[:end_date].blank? ? Time.now : DateTime.strptime(params[:end_date], "%Y-%m-%d") + 1.day)
     
