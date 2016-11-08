@@ -1,4 +1,44 @@
-<span class="main">
-<h1>My Dashboard</h1>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
 
-todo
+.y.axis {
+  font: 10px sans-serif;
+}
+.x.axis {
+  font: 10px sans-serif;
+}
+.city {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+</style>
+<body>
+
+<!-- load the d3.js library -->	
+<script src="/assets/d3.v3.js"></script>
+
+<table>
+<% @probes.each do |probe| %>
+	<%=render partial: 'probe', locals: { probe: probe } %>
+<% end %>
+</table>
+
+</body>

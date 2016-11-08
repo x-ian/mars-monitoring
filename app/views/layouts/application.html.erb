@@ -25,7 +25,7 @@
     <div id="side">
       <ul id="ul1">
 		<% if (!current_user.nil?) %>
-			<li>Dashboard</li>
+			<li><%= link_to "Dashboard", dashboard_show_path %></li>
 			<li><%= link_to "Current status", current_status_by_location_probe_type_path %></li>
 			<li>Data views</li>
 			<ul id="ul2">

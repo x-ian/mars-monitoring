@@ -20,6 +20,9 @@ MarsMonitoring::Application.routes.draw do
   get "visualize_text/index"
   get "visualize_text/messages"
 
+  get "dashboard/show"
+  get "dashboard/d3_data"
+
   resources :subscriptions
 
   resources :probe_configurations

@@ -1,0 +1,106 @@
+		<tr>
+			<td>
+				<%=probe.name%> <br/>(@ <%= probe.location.name %>)
+			</td>
+			<td>
+				<%@probe_messages[probe.id].each do |m| %>
+					<%=m.server_time%> <%=m.value1%> <%=m.value2%> <%=m.value3%> <%=m.value4%> <br/>
+				<% end %>
+			</td>
+			<td id="probe-<%=probe.id%>">
+<script>
+var margin = {top: 25, right: 130, bottom: 50, left: 70},
+    width = 50,
+    height = 50;
+
+var parseDate = d3.time.format("%Y%m%d-%H%M%S").parse;
+
+var x = d3.time.scale()
+    .range([0, width]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var color = d3.scale.category10();
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var line = d3.svg.line()
+ //   .interpolate("basis")
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.value1); });
+
+// Define the line
+var	valueline = d3.svg.line()
+	.x(function(d) { return x(d.date); })
+	.y(function(d) { return y(d.close); });
+    
+// Adds the svg canvas
+//	d3.select("svg").remove();
+
+    var chart_<%=probe.id%> = d3.select("#probe-<%=probe.id%>").append("span").append("svg")
+  		.attr("width", width + margin.left + margin.right)  
+		.attr("height", height + margin.top + margin.bottom)  
+		.append("g")
+		.attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+// Get the data
+d3.tsv("d3_data.tsv?probe_id=<%=probe.id%>", function(error, data) {
+	  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
+
+	  data.forEach(function(d) {
+	    d.date = parseDate(d.date);
+	  });
+
+	  var cities = color.domain().map(function(name) {
+	    return {
+	      name: name,
+	      values: data.map(function(d) {
+	        return {date: d.date, value1: +d[name]};
+	      })
+	    };
+	  });
+
+	  x.domain(d3.extent(data, function(d) { return d.date; }));
+
+	  y.domain([
+	    d3.min(cities, function(c) { return d3.min(c.values, function(v) { return v.value1; }); }),
+	    d3.max(cities, function(c) { return d3.max(c.values, function(v) { return v.value1; }); })
+	  ]);
+
+	  chart_<%=probe.id%>.append("g")
+	      .attr("class", "x axis")
+	      .attr("transform", "translate(0," + height + ")")
+	      .call(xAxis);
+
+	  chart_<%=probe.id%>.append("g")
+	      .attr("class", "y axis")
+	      .call(yAxis);
+
+	  var city = chart_<%=probe.id%>.selectAll(".city")
+	      .data(cities)
+	      .enter().append("g")
+	      .attr("class", "city");
+
+	  city.append("path")
+	      .attr("class", "line")
+	      .attr("d", function(d) { return line(d.values); })
+	      .style("stroke", function(d) { return color(d.name); });
+
+	  city.append("text")
+	      .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+	      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.value1) + ")"; })
+	      .attr("x", 3)
+	      .attr("dy", ".35em")
+	      .text(function(d) { return d.name; });
+	});
+
+</script>
+</td>
+</tr>
