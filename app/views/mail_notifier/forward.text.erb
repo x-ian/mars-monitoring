@@ -2,6 +2,9 @@ Muli bo <%= @user.name %>
 
 This is an automatic message forward from the probe '<%= @message.probe.name %>' located at '<%= @message.probe.location.name %>' sent at '<%= @message.server_time %>'.
 
+Check out the whole <a href="http://www.marsmonitoring.com/visualize_text/index?probe_id=<%= @message.probe.id %>">Textual history</a> or 
+<a href="http://www.marsmonitoring.com/visualize_text/index?probe_id=<%= @message.probe.id %>">Graphical hisotry</a>.
+
 --- snip
 <%= @message.to_yaml %>
 --- snap
