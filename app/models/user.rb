@@ -15,4 +15,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   belongs_to :customer
   attr_accessible :name, :customer_id, :email, :mobile_number, :role
+  
+  after_initialize :set_default_values
+  
+  def set_default_values
+    self.role ||= :user
+  end
+  
 end

@@ -24,14 +24,16 @@
   <div id="columns">
     <div id="side">
       <ul id="ul1">
-        <li>Dashboard</li>
-        <li><%= link_to "Current status", current_status_by_location_probe_type_path %></li>
-        <li>Data views</li>
-      	<ul id="ul2">
-	   		<li><%= link_to "Graphical view", visualize_d3_single_probe_path %></li>
-	   		<li><%= link_to "Textual view", visualize_text_index_path %></li>
-		</ul>
-		<% if current_user.role? :manager %>
+		<% if (!current_user.nil?) %>
+			<li>Dashboard</li>
+			<li><%= link_to "Current status", current_status_by_location_probe_type_path %></li>
+			<li>Data views</li>
+			<ul id="ul2">
+	   			<li><%= link_to "Graphical view", visualize_d3_single_probe_path %></li>
+				<li><%= link_to "Textual view", visualize_text_index_path %></li>
+			</ul>
+		<% end %>
+		<% if (!current_user.nil?) && (current_user.role? :manager) %>
 		    <li>Manage</li>
 	      	<ul id="ul2">
 	       		<li><%= link_to "Probes", probes_path %></li>
@@ -40,7 +42,7 @@
 	       		<li>Notifications</li>
 			</ul>
 		<% end %>
-		<% if current_user.role? :superadmin %>
+		<% if (!current_user.nil?) && (current_user.role? :superadmin) %>
 	        <li>Site administration</li>
 	      	<ul id="ul2">
 	       		<li><%= link_to "Probe Configurations", probe_configurations_path %></li>
