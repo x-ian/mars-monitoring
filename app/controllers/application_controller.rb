@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  include CanCan::ControllerAdditions
+
   def after_sign_in_path_for(resource)
     logger.debug 'YES'
     url_for(:action => 'by_location_probe_type', :controller => '/current_status', :only_path => false, :protocol => 'http')

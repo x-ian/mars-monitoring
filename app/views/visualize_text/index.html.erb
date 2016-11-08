@@ -1,5 +1,5 @@
 <%= form_tag("/visualize_text/index", :method => "get", :html=>{:id=>'visualize_form'}) do %>
-  Probe: <%= select_tag 'probe_id', options_for_select(Probe.all.select{|p| p.enabled?}.collect{|p| ["#{p.name} (#{p.location.name})", p.id] }, @probe.id), :onchange => "this.form.submit();" %>
+  Probe: <%= select_tag 'probe_id', options_for_select(Probe.accessible_by(current_ability).select{|p| p.enabled?}.collect{|p| ["#{p.customer.name}: #{p.name} (#{p.location.name})", p.id] }, @probe.id), :onchange => "this.form.submit();" %>
   Start date: <%= datepicker_input(:foo, :start_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
   End date: <%= datepicker_input(:foo, :end_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
   <%= submit_tag "Refresh" %>

@@ -28,8 +28,12 @@
     <td><%= probe.cell_number %></td>
     <td><%= probe.enabled %></td>
     <td><%= link_to 'Show', probe %></td>
-    <td><%= link_to 'Edit', edit_probe_path(probe) %></td>
-    <td><%= link_to 'Destroy', probe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if can? :update, probe %>
+		<td><%= link_to 'Edit', edit_probe_path(probe) %></td>
+	<% end %>
+    <% if can? :update, probe %>
+		<td><%= link_to 'Destroy', probe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>

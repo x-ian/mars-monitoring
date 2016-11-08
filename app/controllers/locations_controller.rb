@@ -1,10 +1,13 @@
 class LocationsController < ApplicationController
   before_filter :authenticate_user!
 
+  load_resource
+  
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.all
+#    @locations = Location.all
+#    @locations = Location.accessible_by(current_ability)
 
     respond_to do |format|
       format.html # index.html.erb

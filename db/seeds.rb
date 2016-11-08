@@ -788,7 +788,7 @@ User.delete_all
 #=begin
 # my test env
 sql = <<-SQL
-      insert into users (id, customer_id, name, created_at, updated_at, email, mobile_number, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, confirmation_token, confirmed_at, confirmation_sent_at, unconfirmed_email) values (1,1,"xian", "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", "cneumann@marsmonitoring.com", "", "$2a$10$5YxGXV84mjVWh90YS6Nen.6SKJl9h/KKN8DEyMB2kMDq7FJEj4rIG", NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", NULL);
+      insert into users (id, customer_id, name, created_at, updated_at, email, mobile_number, role, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, confirmation_token, confirmed_at, confirmation_sent_at, unconfirmed_email) values (1,1,"xian", "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", "cneumann@marsmonitoring.com", "", "Superadmin", "$2a$10$5YxGXV84mjVWh90YS6Nen.6SKJl9h/KKN8DEyMB2kMDq7FJEj4rIG", NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, "2015-02-19 04:48:50.946006", "2015-02-19 04:48:50.946006", NULL);
     SQL
     # used to connect active record to the database
     ActiveRecord::Base.establish_connection

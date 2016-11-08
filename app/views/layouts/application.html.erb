@@ -31,25 +31,28 @@
 	   		<li><%= link_to "Graphical view", visualize_d3_single_probe_path %></li>
 	   		<li><%= link_to "Textual view", visualize_text_index_path %></li>
 		</ul>
-        <li>Probes</li>
-	    <li>Manage</li>
-      	<ul id="ul2">
-       		<li><%= link_to "Probes", probes_path %></li>
-       		<li><%= link_to "Locations",locations_path %></li>
-       		<li><%= link_to "Users", users_path %></li>
-       		<li><%= link_to "Probe Configurations", probe_configurations_path %></li>
-       		<li><%= link_to "Subscriptions", subscriptions_path %></li>
-       		<li>Notifications</li>
-		</ul>
-        <li>Site administration</li>
-      	<ul id="ul2">
-       		<li><%= link_to "Invalid messages", invalid_messages_path %></li>
-       		<li><%= link_to "Messages", messages_path %></li>
-       		<li><%= link_to "Messages (archived)", messages_index_archived_path %></li>
-       		<li><%= link_to "Probe Types", probe_types_path %></li>
-       		<li><%= link_to "Value Types", value_types_path %></li>
-       		<li><%= link_to "Customers", customers_path %></li>
-		</ul>
+		<% if current_user.role? :manager %>
+		    <li>Manage</li>
+	      	<ul id="ul2">
+	       		<li><%= link_to "Probes", probes_path %></li>
+	       		<li><%= link_to "Locations",locations_path %></li>
+	       		<li><%= link_to "Users", users_path %></li>
+	       		<li>Notifications</li>
+			</ul>
+		<% end %>
+		<% if current_user.role? :superadmin %>
+	        <li>Site administration</li>
+	      	<ul id="ul2">
+	       		<li><%= link_to "Probe Configurations", probe_configurations_path %></li>
+	       		<li><%= link_to "Subscriptions", subscriptions_path %></li>
+	       		<li><%= link_to "Invalid messages", invalid_messages_path %></li>
+	       		<li><%= link_to "Messages", messages_path %></li>
+	       		<li><%= link_to "Messages (archived)", messages_index_archived_path %></li>
+	       		<li><%= link_to "Probe Types", probe_types_path %></li>
+	       		<li><%= link_to "Value Types", value_types_path %></li>
+	       		<li><%= link_to "Customers", customers_path %></li>
+			</ul>
+		<% end %>
         <li>Support</li>
       	<ul id="ul2">
        		<li><a href="mailto:sales@marsgeneral.com">Contact us</a></li>

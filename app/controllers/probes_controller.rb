@@ -4,7 +4,7 @@ class ProbesController < ApplicationController
   # GET /probes
   # GET /probes.json
   def index
-    @probes = Probe.all
+    @probes = Probe.accessible_by(current_ability)
 
     respond_to do |format|
       format.html # index.html.erb

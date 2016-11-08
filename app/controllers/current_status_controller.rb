@@ -34,7 +34,7 @@ class CurrentStatusController < ApplicationController
   end
 
   def by_location_probe_type
-    @probe_types = ProbeType.all.find_all
-    @locations = Location.all.find_all{|l| l.isLeaf?}
+    @probe_types = ProbeType.where(true).includes(:probes).where("probes.customer_id" => current_user.customer_id)
+    @locations = Location.all.find_all{|l| l.isLeaf? && l.customer_id == current_user.customer_id}
   end
 end
