@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :customer_id %><br />
-	<%= f.select :customer_id, Customer.all.collect{|p| [p.name, p.id]} %>
+	<%= f.select :customer_id, Customer.accessible_by(current_ability).collect{|p| [p.name, p.id]} %>
   </div>
   <div class="field">
     <%= f.label :name %><br />

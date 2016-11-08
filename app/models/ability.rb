@@ -36,10 +36,16 @@ class Ability
     if user.role? :user
       can :read, Location, :customer_id => user.customer_id
       can :read, Probe, :customer_id => user.customer_id
+      can :read, Customer, :id => user.customer_id
+      can :read, User, :customer_id => user.customer_id
+      can :read, ProbeType do |pt|
+        pt.probes.any? { |p| p.customer_id == user.customer_id }
+      end
     end
     if user.role? :manager
       can :modify, Location, :customer_id => user.customer_id
       can :modify, Probe, :customer_id => user.customer_id
+      can :modify, User, :customer_id => user.customer_id
     end
     if user.role? :superadmin
       can :read, :all

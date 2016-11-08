@@ -31,6 +31,7 @@ GEM
     arel (3.0.3)
     bcrypt (3.1.10)
     builder (3.0.4)
+    cancancan (1.15.0)
     capistrano (3.3.5)
       capistrano-stats (~> 1.1.0)
       i18n
@@ -143,6 +144,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancancan (~> 1.10)
   capistrano (~> 3.0)
   capistrano-bundler (~> 1.1)
   capistrano-rails (~> 1.1)
