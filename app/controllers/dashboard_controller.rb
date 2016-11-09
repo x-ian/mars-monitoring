@@ -56,7 +56,7 @@ class DashboardController < ApplicationController
     line += "\n"
     tsv << line
     
-    messages = Message.find :all, :order => 'server_time ASC', :conditions => ['probe_id = ? AND server_time >= ? AND server_time <= ?', @probe.id, @start_date, @end_date], :limit => 10
+    messages = (Message.find :all, :order => 'server_time DESC', :conditions => ['probe_id = ? AND server_time >= ? AND server_time <= ?', @probe.id, @start_date, @end_date], :limit => 10).reverse
     for m in messages
       line = "#{m.server_time.strftime("%Y%m%d-%H%M%S")}"
       line += "\t#{m.value1}\t#{value1_threshold}" if value1_type
