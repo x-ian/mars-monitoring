@@ -1,7 +1,13 @@
 		<tr>
 			<td>
-				<%=probe.name%> <br/>(@ <%= probe.location.name %>) <br/> <a href="http://www.marsmonitoring.com/visualize_text/index?probe_id=<%= probe.id %>">Textual</a> <a href="http://www.marsmonitoring.com/visualize/d3_single_probe?probe_id=<%= probe.id %>">Graphical</a>
-
+				<%=probe.name%> <br/>
+				@ <%= probe.location.name %> <br/> 
+				Last contact: 
+				<% message = Message.find_last_by_probe_id(probe.id) %>
+				<%= "never" if message.nil? %>
+				<%= message.server_time unless message.nil? %>
+				<br/>
+				<a href="../visualize_text/index?probe_id=<%= probe.id %>">Textual</a> <a href="../visualize/d3_single_probe?probe_id=<%= probe.id %>">Graphical</a>
 			</td>
 			<td>
 				<%@probe_messages[probe.id].each do |m| %>
