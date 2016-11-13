@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   belongs_to :customer
-  attr_accessible :name, :customer_id, :email, :mobile_number, :role
+  attr_accessible :name, :customer_id, :email, :mobile_number, :role, :time_zone
   
   after_initialize :set_default_values
   

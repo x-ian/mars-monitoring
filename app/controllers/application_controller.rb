@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  around_filter :user_time_zone, if: :current_user
+
+
   include CanCan::ControllerAdditions
 
   def after_sign_in_path_for(resource)
@@ -21,4 +24,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def user_time_zone(&block)
+    Time.use_zone(current_user.time_zone, &block)
+  end
 end

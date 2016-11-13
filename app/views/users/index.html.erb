@@ -7,6 +7,7 @@
     <th>Email</th>
     <th>Mobile number</th>
     <th>Role</th>
+    <th>Time zone</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +20,7 @@
     <td><%= user.email %></td>
     <td><%= user.mobile_number %></td>
     <td><%= user.role %></td>
+    <td><%= user.time_zone %></td>
     <td><%= link_to 'Show', user %></td>
     <% if can? :update, user %>
 		<td><%= link_to 'Edit', edit_user_path(user) %></td>
