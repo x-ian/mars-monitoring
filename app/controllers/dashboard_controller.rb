@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   before_filter :authenticate_user!
 
   def show
-    @probes = Probe.accessible_by(current_ability)
+    @probes = Probe.accessible_by(current_ability).where('enabled = :enabled', enabled: true)
     @probe_messages = {}
     @probes.each do |p|
       @probe_messages[p.id] = Message.where('probe_id = :probe_id ', probe_id: p.id).order('server_time DESC').limit(5)
