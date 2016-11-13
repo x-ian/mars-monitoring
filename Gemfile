@@ -54,3 +54,5 @@ gem 'devise'
 gem 'will_paginate', '~> 3.1.1'
 
 gem 'cancancan', '~> 1.10'
+
+gem 'd3_rails'
