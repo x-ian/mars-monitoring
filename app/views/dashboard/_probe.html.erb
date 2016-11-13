@@ -1,7 +1,7 @@
 		<tr>
 			<td>
 				<%=probe.name%> <br/>
-				@ <%= probe.location.name %> <br/> 
+				Location: <%= probe.location.name %> <br/> 
 				Last contact: 
 				<% message = Message.find_last_by_probe_id(probe.id) %>
 				<%= "never" if message.nil? %>
@@ -10,9 +10,19 @@
 				<a href="../visualize_text/index?probe_id=<%= probe.id %>">Textual</a> <a href="../visualize/d3_single_probe?probe_id=<%= probe.id %>">Graphical</a>
 			</td>
 			<td>
+				<table>
+					<tr>
+						<td><%= probe.probe_type.value1_type.name if !probe.probe_type.value1_type.nil? && probe.probe_type.value1_type_id != ValueType::NOT_CONFIGURED %></td>
+						<td><%= probe.probe_type.value2_type.name if !probe.probe_type.value2_type.nil? && probe.probe_type.value2_type_id != ValueType::NOT_CONFIGURED %></td>
+						<td><%= probe.probe_type.value3_type.name if !probe.probe_type.value3_type.nil? && probe.probe_type.value3_type_id != ValueType::NOT_CONFIGURED %></td>
+						<td><%= probe.probe_type.value4_type.name if !probe.probe_type.value4_type.nil? && probe.probe_type.value4_type_id != ValueType::NOT_CONFIGURED %></td>
+					</tr>
 				<%@probe_messages[probe.id].each do |m| %>
-					<%=m.server_time.strftime '%Y-%m-%d %H:%M:%S'%> <%=m.value1%> <%=m.value2%> <%=m.value3%> <%=m.value4%> <br/>
+					<tr>
+					<!--<%=m.server_time.strftime '%Y-%m-%d %H:%M:%S'%>--> <td><%=m.value1%></td><td><%=m.value2%></td><td><%=m.value3%></td><td><%=m.value4%></td>
+					</tr>
 				<% end %>
+			</table>
 			</td>
 			<td id="probe-<%=probe.id%>">
 <script>
