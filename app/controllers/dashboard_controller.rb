@@ -46,8 +46,8 @@ class DashboardController < ApplicationController
     tsv += "\n"
 
     # fool d3 as i can't bring the y axis down to 0
-#    m = Message.find :first, :order => 'server_time ASC', :conditions => ['probe_id = ? AND server_time >= ? AND server_time <= ?', @probe.id, @start_date, @end_date]
-#    unless m.nil?
+    m = Message.find :first, :order => 'server_time ASC', :conditions => ['probe_id = ? AND server_time >= ? AND server_time <= ?', @probe.id, @start_date, @end_date]
+    unless m.nil?
 #    line = "#{m.server_time.strftime("%Y%m%d-%H%M%S")}"
 #    line += "\t0\t#{value1_threshold}" if value1_type
 #    line += "\t0\t#{value2_threshold}" if value2_type
