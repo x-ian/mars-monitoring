@@ -18,9 +18,16 @@
 						<td><%= probe.probe_type.value3_type.name if !probe.probe_type.value3_type.nil? && probe.probe_type.value3_type_id != ValueType::NOT_CONFIGURED %></td>
 						<td><%= probe.probe_type.value4_type.name if !probe.probe_type.value4_type.nil? && probe.probe_type.value4_type_id != ValueType::NOT_CONFIGURED %></td>
 					</tr>
+					<% last_time_ago = '' %>
 				<%@probe_messages[probe.id].each do |m| %>
 					<tr>
-					<td><%=time_ago_in_words(m.server_time)%> ago</td> <td><%=m.value1%></td><td><%=m.value2%></td><td><%=m.value3%></td><td><%=m.value4%></td>
+						<% time_ago = time_ago_in_words(m.server_time) %>
+						<td><%= time_ago + ' ago' unless time_ago == last_time_ago %></td>
+						<td><%=m.value1%></td>
+						<td><%=m.value2%></td>
+						<td><%=m.value3%></td>
+						<td><%=m.value4%></td>
+						<% last_time_ago = time_ago %>
 					</tr>
 				<% end %>
 			</table>
