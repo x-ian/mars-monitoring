@@ -30,13 +30,13 @@
     <td><%= message.message_type.name unless message.message_type.nil? %></td>
     <td><%= message.outgoing_message_count %></td>
     <td><%= message.restart_count %></td>
-    <td><%= message.device_time %></td>
+    <td><%= message.device_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
     <td><%= message.device_uptime %></td>
     <td><%= message.value1 %></td>
     <td><%= message.value2 %></td>
     <td><%= message.value3 %></td>
     <td><%= message.value4 %></td>
-    <td><%= message.server_time %></td>
+    <td><%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
     <td><%= message.probe_enabled %></td>
     <td><%= message.archived %></td>
     <td><%= link_to 'Show', message %></td>
@@ -50,6 +50,6 @@
 <%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)
 <br/><br/>
 
-<br />
+<%= current_time_zone.html_safe %>
 
 <%= link_to 'New Message', new_message_path %>

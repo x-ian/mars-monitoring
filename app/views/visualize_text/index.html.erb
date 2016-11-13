@@ -28,7 +28,7 @@
     <td><%= message.value2 %></td>
     <td><%= message.value3 %></td>
     <td><%= message.value4 %></td>
-    <td><%= message.server_time %></td>
+    <td><%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
     <td><%= message.outgoing_message_count %></td>
     <td><%= message.restart_count %></td>
 	<!--
@@ -44,3 +44,4 @@
 <%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)
 <br/><br/>
 
+<%= current_time_zone.html_safe %>

@@ -19,7 +19,7 @@ module CurrentStatusHelper
     if message.nil?
       tooltip += "never<br/>"
     else
-      tooltip += "<a href='../messages/#{message.id}'>#{message.server_time}</a><br/>"
+      tooltip += "<a href='../messages/#{message.id}'>#{message.server_time.strftime '%Y-%m-%d %H:%M:%S'}</a><br/>"
       tooltip += "Last values: #{message.value1} #{message.value2} #{message.value3} #{message.value4}<br/>"
       tooltip += "Restart count: #{message.restart_count}, Message count: #{message.outgoing_message_count}<br/>"
     end

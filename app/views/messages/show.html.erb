@@ -22,7 +22,7 @@
 
 <p>
   <b>Device time:</b>
-  <%= @message.device_time %>
+  <%= @message.device_time.strftime '%Y-%m-%d %H:%M:%S' %>
 </p>
 
 <p>
@@ -52,7 +52,7 @@
 
 <p>
   <b>Server time:</b>
-  <%= @message.server_time %>
+  <%= @message.server_time.strftime '%Y-%m-%d %H:%M:%S' %>
 </p>
 
 <p>
@@ -65,6 +65,7 @@
   <%= @message.archived %>
 </p>
 
+<%= current_time_zone.html_safe %>
 
 <%= link_to 'Edit', edit_message_path(@message) %> |
 <%= link_to 'Back', messages_path %>
