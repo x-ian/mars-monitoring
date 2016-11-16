@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161113042122) do
+ActiveRecord::Schema.define(:version => 20161116082014) do
 
   create_table "communication_channels", :force => true do |t|
     t.string   "name"
@@ -133,8 +133,11 @@ ActiveRecord::Schema.define(:version => 20161113042122) do
     t.integer  "subscriber3_id"
     t.integer  "subscriber4_id"
     t.integer  "subscriber5_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.boolean  "include_heartbeat"
+    t.boolean  "include_alarm"
+    t.boolean  "include_restart"
   end
 
   create_table "users", :force => true do |t|

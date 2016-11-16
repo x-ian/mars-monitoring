@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Messages (HB A R)</th>
     <th>Subscriber 1</th>
     <th>Subscriber 2</th>
     <th>Subscriber 3</th>
@@ -16,6 +17,7 @@
 <% @subscriptions.each do |subscription| %>
   <tr>
     <td><%= subscription.name %></td>
+    <td><%= subscription.include_heartbeat %> <%= subscription.include_alarm %> <%= subscription.include_restart %></td>
     <td><%= subscription.subscriber1.name unless subscription.subscriber1.nil? %></td>
     <td><%= subscription.subscriber2.name unless subscription.subscriber2.nil? %></td>
     <td><%= subscription.subscriber3.name unless subscription.subscriber3.nil? %></td>

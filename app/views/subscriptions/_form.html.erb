@@ -35,6 +35,18 @@
     <%= f.label :subscriber5_id %><br />
 	<%= f.select :subscriber5_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true %>
   </div>
+  <div class="field">
+    <%= f.label :include_heartbeat %><br />
+    <%= f.check_box :include_heartbeat %>
+  </div>
+  <div class="field">
+    <%= f.label :include_alarm %><br />
+    <%= f.check_box :include_alarm %>
+  </div>
+  <div class="field">
+    <%= f.label :include_restart %><br />
+    <%= f.check_box :include_restart %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

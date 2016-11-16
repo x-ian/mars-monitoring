@@ -6,6 +6,18 @@ class MessageType < ActiveRecord::Base
   RESTART = 2 #EventType.exists?(1) ? EventType.find(1).id : nil
   HEARTBEAT = 3 #EventType.exists?(1) ? EventType.find(1).id : nil
 
+  def isAlarm?
+    id == ALARM
+  end
+  
+  def isHeartbeat?
+    id == HEARTBEAT
+  end
+  
+  def isRestart?
+    id == RESTART
+  end
+  
   def self.textFor(id)
     return "ALARM" if id == ALARM
     return "RESTART" if id == RESTART

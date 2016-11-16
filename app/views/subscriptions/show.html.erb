@@ -30,6 +30,21 @@
   <%= @subscription.subscriber5.name unless @subscription.subscriber5.nil? %>
 </p>
 
+<p>
+  <b>Include Heartbeat:</b>
+  <%= @subscription.include_heartbeat %>
+</p>
+
+<p>
+  <b>Include Alarm:</b>
+  <%= @subscription.include_alarm %>
+</p>
+
+<p>
+  <b>Include Restart:</b>
+  <%= @subscription.include_restart %>
+</p>
+
 
 <%= link_to 'Edit', edit_subscription_path(@subscription) %> |
 <%= link_to 'Back', subscriptions_path %>
