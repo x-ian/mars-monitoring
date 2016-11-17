@@ -47,5 +47,14 @@ class VisualizeTextController < ApplicationController
 
     @messages = Message.where('probe_id = :probe_id AND server_time >= :start_date AND server_time <= :end_date', probe_id: @probe.id, start_date: @start_date, end_date: @end_date).order('server_time DESC').paginate(:page => params[:page], per_page: 100)
 
+    @messages_xls = Message.where('probe_id = :probe_id AND server_time >= :start_date AND server_time <= :end_date', probe_id: @probe.id, start_date: @start_date, end_date: @end_date).order('server_time DESC').limit(5000)
+    respond_to do |format|
+      format.html
+      format.xls do
+        render :xls => @messages_xls,
+                       :columns => [ :probe_id, :message_type_id, :value1, :value2, :value3, :value4, :server_time, :outgoing_message_count, :restart_count ],
+                       :headers => %w[ probe_id message_type value1 value2 value3 value4 server_time outgoing_message_count restart_count ]
+      end
+    end
   end
 end

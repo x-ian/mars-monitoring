@@ -6,7 +6,8 @@
 <% end %> 
 
 <br/>
-<%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)
+<%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>) <%= link_to 'Export to Excel', url_for(:format => 'xls', :params => {:probe_id => @probe.id}) %>
+
 <br/><br/>
 
 <table>
