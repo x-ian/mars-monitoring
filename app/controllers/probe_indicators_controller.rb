@@ -51,7 +51,7 @@ class ProbeIndicatorsController < ApplicationController
       value1_accumulated += m.value1 unless m.value1.nil?
     end
 
-    value1_ratio = (1 - (value1_above_threshold / (value1_above_threshold + value1_below_threshold))) * 100 unless value1_below_threshold == 0
+    value1_ratio = ((1 - (value1_above_threshold / (value1_above_threshold + value1_below_threshold))) * 100) unless value1_below_threshold == 0
     value1_average = value1_accumulated / (alarms + restarts + heartbeats) unless (alarms + restarts + heartbeats) == 0
     
     stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio, :value1_average => value1_average }
