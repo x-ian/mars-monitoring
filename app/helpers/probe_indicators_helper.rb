@@ -1,0 +1,2 @@
+module ProbeIndicatorsHelper
+end

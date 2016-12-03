@@ -23,6 +23,8 @@ MarsMonitoring::Application.routes.draw do
   get "dashboard/show"
   get "dashboard/d3_data"
 
+  get "probe_indicators/index"
+
   resources :subscriptions
 
   resources :probe_configurations

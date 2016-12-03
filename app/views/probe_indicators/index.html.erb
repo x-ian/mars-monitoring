@@ -1,0 +1,121 @@
+<%= form_tag("/probe_indicators/index", :method => "get", :html=>{:id=>'probe_indicators_form'}) do %>
+  Probe: <%= select_tag 'probe_id', options_for_select(Probe.accessible_by(current_ability).select{|p| p.enabled?}.collect{|p| ["#{p.customer.name}: #{p.name} (#{p.location.name})", p.id] }, @probe.id), :onchange => "this.form.submit();" %>
+  <%= submit_tag "Refresh" %>
+<% end %> 
+
+<br/><br/>
+
+<table>
+  <tr>
+    <th>Probe details</th><td/>
+  </tr>
+  <tr>
+	<td>Name</td>
+	<td><%=@probe.name%></td>
+  </tr>
+  <tr> 
+	<td>Customer</td>
+	<td><%=@probe.customer.name%></td>
+  </tr>
+  <tr>
+	<td>Location</td>
+	<td><%=@probe.location.name%></td>
+  </tr>
+  <tr>
+	<td>Probe type</td>
+	<td><%=@probe.probe_type.name%></td>
+  </tr>
+  <tr>
+	<td>Last contact</td>
+	<td>
+		<% message = Message.find_last_by_probe_id(@probe.id) %>
+		<%="never" if message.nil? %> <%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' unless message.nil? %>
+	</td>
+  </tr>
+  <tr>
+	<td>Current date / time</td>
+	<td><%=Date.today%> / <%=Time.now%></td>
+  </tr>
+</table>
+
+<br/><br/>
+
+<table>
+	<tr>
+		<th>Message stats</th><td/>
+	</tr>
+	<tr>
+		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
+	</tr>
+	<tr>
+		<td># restarts</td><td><%= @stats_today[:restarts]%></td><td><%= @stats_yesterday[:restarts]%></td><td><%= @stats_daysago7[:restarts]%></td><td><%= @stats_daysago30[:restarts]%></td><td><%= @stats_ever[:restarts]%></td>
+	</tr>
+	<tr>
+		<td># heartbeats</td><td><%= @stats_today[:heartbeats]%></td><td><%= @stats_yesterday[:heartbeats]%></td><td><%= @stats_daysago7[:heartbeats]%></td><td><%= @stats_daysago30[:heartbeats]%></td><td><%= @stats_ever[:heartbeats]%></td>
+	</tr>
+	<tr>
+		<td># alarms</td><td><%= @stats_today[:alarms]%></td><td><%= @stats_yesterday[:alarms]%></td><td><%= @stats_daysago7[:alarms]%></td><td><%= @stats_daysago30[:alarms]%></td><td><%= @stats_ever[:alarms]%></td>
+	</tr>
+	<tr>
+		<td># missing messages</td><td></td><td></td><td></td><td></td>
+	</tr>
+	<tr>
+		<td># expected heartbeats</td><td></td><td></td><td></td><td></td>
+	</tr>
+	<tr>
+		<td># received heartbeats</td><td></td><td></td><td></td><td></td>
+	</tr>
+	<tr>
+		<td># inconsistent messages</td><td></td><td></td><td></td><td></td>
+	</tr>
+</table>
+<br/><br/>
+
+<table>
+	<tr>
+		<th>Service quality (only value1)</th><td/>
+	</tr>
+	<tr>
+		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
+	</tr>
+	<tr>
+		<td># messages above threshold</td><td><%= @stats_today[:value1_above_threshold]%></td><td><%= @stats_yesterday[:value1_above_threshold]%></td><td><%= @stats_daysago7[:value1_above_threshold]%></td><td><%= @stats_daysago30[:value1_above_threshold]%></td><td><%= @stats_ever[:value1_above_threshold]%></td>
+	</tr>
+	<tr>
+		<td># messages below threshold</td><td><%= @stats_today[:value1_below_threshold]%></td><td><%= @stats_yesterday[:value1_below_threshold]%></td><td><%= @stats_daysago7[:value1_below_threshold]%></td><td><%= @stats_daysago30[:value1_below_threshold]%></td><td><%= @stats_ever[:value1_below_threshold]%></td>
+	</tr>
+	<tr>
+		<td>Service quality indicator</td><td><%= @stats_today[:value1_ratio]%></td><td><%= @stats_yesterday[:value1_ratio]%></td><td><%= @stats_daysago7[:value1_ratio]%></td><td><%= @stats_daysago30[:value1_ratio]%></td><td><%= @stats_ever[:value1_ratio]%></td>
+	</tr>
+	<tr>
+		<td>Average value</td><td></td><td></td><td></td><td></td>
+	</tr>
+</table>
+
+<br/><br/>
+
+<table>
+	<tr>
+		<th>Availability</th><td/>
+	</tr>
+	<tr>
+		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th>
+	</tr>
+	<tr>
+		<td>Approximated minutes without contact</td><td></td><td></td><td></td><td></td>
+	</tr>
+	<tr>
+		<td>Total minutes in time frame</td><td></td><td></td><td></td><td></td>
+	</tr>
+	<tr>
+		<td>Approximated availability ratio</td><td></td><td></td><td></td><td></td>
+	</tr>
+</table>
+
+<br/>
+<br/><br/>
+
+<%= current_time_zone.html_safe %>
+
+<br/>
+ (*): Excluding today

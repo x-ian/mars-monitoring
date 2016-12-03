@@ -7,6 +7,14 @@ class Message < ActiveRecord::Base
   before_create :set_server_time_to_now
   before_create :set_probe_enabled
   
+  def value1_above_threshold?
+    probe.probe_configuration.value1_threshold > value1
+  end
+
+  def value1_below_threshold?
+    probe.probe_configuration.value1_threshold <= value1
+  end
+  
 private
   def set_server_time_to_now
     self.server_time = Time.now if self.server_time.nil?
