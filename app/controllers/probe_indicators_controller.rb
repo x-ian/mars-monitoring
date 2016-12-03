@@ -31,6 +31,9 @@ class ProbeIndicatorsController < ApplicationController
     alarms = 0
     restarts = 0
     heartbeats = 0
+    missing_messages = 0
+    
+    previous_outgoing_message_count = 0
     
     value1_above_threshold = 0
     value1_below_threshold = 0
@@ -49,12 +52,17 @@ class ProbeIndicatorsController < ApplicationController
       value1_above_threshold = value1_above_threshold+1 if m.value1_above_threshold?
       value1_below_threshold = value1_below_threshold+1 if m.value1_below_threshold?
       value1_accumulated += m.value1 unless m.value1.nil?
+      
+      if (previous_outgoing_message_count != 0 && previous_message_count != m.outgoing_message_count + 1)
+        missing_messages = missing_messages + (previous_message_count - m.outgoing_message_count)
+      end
+      previous_message_count = m.outgoing_message_count
     end
 
     value1_ratio = ((1 - (value1_above_threshold.to_f / (value1_above_threshold + value1_below_threshold))) * 100) unless value1_below_threshold == 0
     value1_average = value1_accumulated.to_f / (alarms + restarts + heartbeats) unless (alarms + restarts + heartbeats) == 0
     
-    stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio, :value1_average => value1_average }
+    stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio, :value1_average => value1_average, :missing_messages => missing_messages, :minutes_in_timeframe => (max_date - min_date) * 60 * 60}
   end
   
 end

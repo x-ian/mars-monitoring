@@ -76,13 +76,13 @@
 		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
 	</tr>
 	<tr>
-		<td>Threshold</td><td colspan="5"><%=@probe.probe_configuration.value1_threshold%></td>
+		<td>Threshold</td><td colspan="5" align="center"><%=@probe.probe_configuration.value1_threshold%></td>
 	</tr>
 	<tr>
 		<td>Average value</td><%= table_row_for(:value1_average)%>
 	</tr>
 	<tr>
-		<td>Service quality indicator</td><%= table_row_for(:value1_ratio)%>
+		<td>Service quality indicator (in %)</td><%= table_row_for(:value1_ratio)%>
 	</tr>
 	<tr>
 		<td># messages above threshold</td><%= table_row_for(:value1_above_threshold)%>
