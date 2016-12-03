@@ -11,7 +11,7 @@ class Message < ActiveRecord::Base
     if value1.nil?
       false
     else
-      probe.probe_configuration.value1_threshold > value1
+      probe.probe_configuration.value1_threshold < value1
     end
   end
 
@@ -19,7 +19,7 @@ class Message < ActiveRecord::Base
     if value1.nil?
       true
     else
-      probe.probe_configuration.value1_threshold <= value1
+      probe.probe_configuration.value1_threshold >= value1
     end
   end
   
