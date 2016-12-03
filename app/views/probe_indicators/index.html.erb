@@ -48,25 +48,22 @@
 		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
 	</tr>
 	<tr>
-		<td># restarts</td><td><%= @stats_today[:restarts]%></td><td><%= @stats_yesterday[:restarts]%></td><td><%= @stats_daysago7[:restarts]%></td><td><%= @stats_daysago30[:restarts]%></td><td><%= @stats_ever[:restarts]%></td>
+		<td># restarts</td><%= table_row_for(:restarts)%>
 	</tr>
 	<tr>
-		<td># heartbeats</td><td><%= @stats_today[:heartbeats]%></td><td><%= @stats_yesterday[:heartbeats]%></td><td><%= @stats_daysago7[:heartbeats]%></td><td><%= @stats_daysago30[:heartbeats]%></td><td><%= @stats_ever[:heartbeats]%></td>
+		<td># heartbeats</td><%= table_row_for(:heartbeats)%>
 	</tr>
 	<tr>
-		<td># alarms</td><td><%= @stats_today[:alarms]%></td><td><%= @stats_yesterday[:alarms]%></td><td><%= @stats_daysago7[:alarms]%></td><td><%= @stats_daysago30[:alarms]%></td><td><%= @stats_ever[:alarms]%></td>
+		<td># alarms</td><%= table_row_for(:alarms)%>
 	</tr>
 	<tr>
-		<td># missing messages</td><td></td><td></td><td></td><td></td>
+		<td># missing messages</td><%= table_row_for(:missing_messages)%>
 	</tr>
 	<tr>
-		<td># expected heartbeats</td><td></td><td></td><td></td><td></td>
+		<td># expected heartbeats</td><%= table_row_for(:expected_heartbeats)%>
 	</tr>
 	<tr>
-		<td># received heartbeats</td><td></td><td></td><td></td><td></td>
-	</tr>
-	<tr>
-		<td># inconsistent messages</td><td></td><td></td><td></td><td></td>
+		<td># inconsistent messages</td><%= table_row_for(:inconsistent_messages)%>
 	</tr>
 </table>
 <br/><br/>
@@ -79,16 +76,16 @@
 		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
 	</tr>
 	<tr>
-		<td># messages above threshold</td><td><%= @stats_today[:value1_above_threshold]%></td><td><%= @stats_yesterday[:value1_above_threshold]%></td><td><%= @stats_daysago7[:value1_above_threshold]%></td><td><%= @stats_daysago30[:value1_above_threshold]%></td><td><%= @stats_ever[:value1_above_threshold]%></td>
+		<td># messages above threshold</td><%= table_row_for(:value1_above_threshold)%>
 	</tr>
 	<tr>
-		<td># messages below threshold</td><td><%= @stats_today[:value1_below_threshold]%></td><td><%= @stats_yesterday[:value1_below_threshold]%></td><td><%= @stats_daysago7[:value1_below_threshold]%></td><td><%= @stats_daysago30[:value1_below_threshold]%></td><td><%= @stats_ever[:value1_below_threshold]%></td>
+		<td># messages below threshold</td><%= table_row_for(:value1_below_threshold)%>
 	</tr>
 	<tr>
-		<td>Service quality indicator</td><td><%= @stats_today[:value1_ratio]%></td><td><%= @stats_yesterday[:value1_ratio]%></td><td><%= @stats_daysago7[:value1_ratio]%></td><td><%= @stats_daysago30[:value1_ratio]%></td><td><%= @stats_ever[:value1_ratio]%></td>
+		<td>Service quality indicator</td><%= table_row_for(:value1_ratio)%>
 	</tr>
 	<tr>
-		<td>Average value</td><td></td><td></td><td></td><td></td>
+		<td>Average value</td><%= table_row_for(:value1_average)%>
 	</tr>
 </table>
 
@@ -102,13 +99,13 @@
 		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th>
 	</tr>
 	<tr>
-		<td>Approximated minutes without contact</td><td></td><td></td><td></td><td></td>
+		<td>Approximated minutes without contact</td><%= table_row_for(:minutes_without_contact)%>
 	</tr>
 	<tr>
-		<td>Total minutes in time frame</td><td></td><td></td><td></td><td></td>
+		<td>Total minutes in time frame</td><%= table_row_for(:minutes_in_timeframe)%>
 	</tr>
 	<tr>
-		<td>Approximated availability ratio</td><td></td><td></td><td></td><td></td>
+		<td>Approximated availability ratio</td><%= table_row_for(:availability_ratio)%>
 	</tr>
 </table>
 

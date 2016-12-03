@@ -35,6 +35,8 @@ class ProbeIndicatorsController < ApplicationController
     value1_above_threshold = 0
     value1_below_threshold = 0
     value1_ratio = 0
+    value1_accumulated = 0
+    value1_average = 0
       
     messages = Message.where('probe_id = :probe_id AND server_time >= :min_date AND server_time < :max_date', probe_id: probe_id, min_date: min_date, max_date: max_date).order('server_time DESC')
     
@@ -47,10 +49,11 @@ class ProbeIndicatorsController < ApplicationController
       value1_above_threshold = value1_above_threshold+1 if m.value1_above_threshold?
       value1_below_threshold = value1_below_threshold+1 if m.value1_below_threshold?
       value1_ratio = 100 - value1_above_threshold/(value1_below_threshold/100) unless value1_below_threshold == 0
-      
+      value1_accumulated += m.value1
+      value1_average = value1_accumulated / (alarms + restarts + heartbeats)
     end
     
-    stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio }
+    stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio, :value1_average => value1_average }
   end
   
 end
