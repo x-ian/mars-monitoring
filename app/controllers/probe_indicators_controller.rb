@@ -2,7 +2,7 @@ class ProbeIndicatorsController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @probe = (params[:probe_id].blank? ? Probe.find(1) : Probe.find(params[:probe_id]))    
+    @probe = (params[:probe_id].blank? ? Probe.first : Probe.find(params[:probe_id]))    
 
     @now = Time.now
     @today = Time.now.beginning_of_day #Date.today
@@ -10,7 +10,8 @@ class ProbeIndicatorsController < ApplicationController
     @daysago7 = (Time.now - 7.day).beginning_of_day #@today - 7.days
     @daysago30 = (Time.now - 30.day).beginning_of_day #@today - 30.day
     @ever = @today - 5000.day
-    @ever = Message.where('probe_id = :probe_id ', probe_id: @probe.id).order('server_time ASC').limit(1).first.server_time
+    m = Message.where('probe_id = :probe_id ', probe_id: @probe.id).order('server_time ASC').limit(1).first
+    @ever = m.server_time unless m.nil?
     
     # for today
     @stats_today = collect_overview(@probe.id, @today, @now)
@@ -47,7 +48,7 @@ class ProbeIndicatorsController < ApplicationController
 
     minutes_offline = 0
     first_message = true
-    heartbeat_interval = 120 + 2 # todo, change to real value
+    heartbeat_interval = Probe.find(probe_id).probe_configuration.heartbeat_interval / 60
     previous_contact = min_date
     last_message = nil 
     

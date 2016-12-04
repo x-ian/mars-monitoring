@@ -30,6 +30,14 @@
 	<td><%=@probe.probe_type.name%></td>
   </tr>
   <tr>
+	<td>Probe configuration</td>
+	<td><%=@probe.probe_configuration.name %></td>
+  </tr>
+  <tr>
+	<td>Heartbeat interval (mins)</td>
+	<td><%=@probe.probe_configuration.heartbeat_interval / 60 %></td>
+  </tr>
+  <tr>
 	<td>First contact</td>
 	<td>
 		<% message = Message.find_by_probe_id(@probe.id) %>
