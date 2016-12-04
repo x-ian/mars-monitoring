@@ -44,40 +44,77 @@ class ProbeIndicatorsController < ApplicationController
     
     previous_outgoing_message_count = 0
     previous_outgoing_message_count = messages.first.outgoing_message_count unless messages.first.nil?
+
+    minutes_offline = 0
+    first_message = true
+    heartbeat_interval = 120 + 2 # todo, change to real value
+    previous_contact = min_date
+    last_message = nil 
     
     messages.each do |m|
-    
-      alarms = alarms+1 if m.message_type.isAlarm?
-      restarts = restarts+1 if m.message_type.isRestart?
-      heartbeats = heartbeats+1 if m.message_type.isHeartbeat?
       
-      value1_above_threshold = value1_above_threshold+1 if m.value1_above_threshold?
-      value1_below_threshold = value1_below_threshold+1 if m.value1_below_threshold?
+      # availability
+      if !m.message_type.isAlarm?
+        if m.server_time <= previous_contact + heartbeat_interval.minutes
+          # first heartbeat is in time, looks ok at the beginning
+        else
+          # appears as if the first heartbeat didnt come in time, assuming downtime at the start
+          # use the whole time above the missing intervall
+          minutes_offline += (m.server_time - previous_contact - heartbeat_interval.minutes) / 60
+          minutes_offline += heartbeat_interval/2
+        end
+        previous_contact = m.server_time
+        last_message = m
+      end
+      
+      # message stats
+      alarms += 1 if m.message_type.isAlarm?
+      restarts += 1 if m.message_type.isRestart?
+      heartbeats += 1 if m.message_type.isHeartbeat?
+      
+      # service quality
+      value1_above_threshold += 1 if m.value1_above_threshold?
+      value1_below_threshold += 1 if m.value1_below_threshold?
       value1_accumulated += m.value1 unless m.value1.nil?
       
+      # message stats
       if (m.outgoing_message_count > previous_outgoing_message_count + 1)
-        missing_messages = missing_messages + (m.outgoing_message_count - previous_outgoing_message_count - 1)
+        missing_messages += (m.outgoing_message_count - previous_outgoing_message_count - 1)
       elsif (m.outgoing_message_count < previous_outgoing_message_count)
         if (m.outgoing_message_count == 1 && previous_outgoing_message_count == 255)
           # 8 bit message counter overflow from 255 to 0
         else
           # get missing messages from old counter up to 255
-          missing_messages = missing_messages + (255 - previous_outgoing_message_count)
+          missing_messages += (255 - previous_outgoing_message_count)
           # get missing messages from 0 up to current counter
-          missing_messages = missing_messages + m.outgoing_message_count - 1
+          missing_messages += m.outgoing_message_count - 1
         end
       end
       previous_outgoing_message_count = m.outgoing_message_count
       
     end
-
+    
+    # service quality
     value1_ratio = ((1 - (value1_above_threshold.to_f / (value1_above_threshold + value1_below_threshold))) * 100) unless value1_below_threshold == 0
     value1_average = value1_accumulated.to_f / (alarms + restarts + heartbeats) unless (alarms + restarts + heartbeats) == 0
     
+    # availability
     minutes_in_timeframe = (max_date.to_time.to_i - min_date.to_time.to_i) / 60
+    if !last_message.nil? && last_message.server_time + heartbeat_interval.minutes < max_date
+      # message missing before end of time frame
+      minutes_offline += (max_date - last_message.server_time - heartbeat_interval.minutes) / 60
+      minutes_offline += heartbeat_interval/2
+    end
+    if last_message.nil?
+      # no message at all, 100% downtime
+      minutes_offline = minutes_in_timeframe
+    end
+    availability_ratio = ((1 - (minutes_offline.to_f / minutes_in_timeframe)) * 100)
     
+    # message stats
     expected_heartbeats = minutes_in_timeframe / (Probe.find(probe_id).probe_configuration.heartbeat_interval / 60)
-    stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio, :value1_average => value1_average, :missing_messages => missing_messages, :minutes_in_timeframe => minutes_in_timeframe, :expected_heartbeats=> expected_heartbeats }
+    
+    stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio.round, :value1_average => value1_average, :missing_messages => missing_messages, :minutes_in_timeframe => minutes_in_timeframe, :expected_heartbeats=> expected_heartbeats, :minutes_offline => minutes_offline.round, :availability_ratio => availability_ratio.round }
   end
   
 end

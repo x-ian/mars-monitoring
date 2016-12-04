@@ -130,10 +130,10 @@
 		<th>Availability</th><td/>
 	</tr>
 	<tr>
-		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever (*)</th>
+		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
 	</tr>
 	<tr>
-		<td>Minutes without contact (approx.)</td><%= table_row_for(:minutes_without_contact)%>
+		<td>Minutes without contact (approx.) (4)</td><%= table_row_for(:minutes_offline)%>
 	</tr>
 	<tr>
 		<td>Total minutes in time frame</td><%= table_row_for(:minutes_in_timeframe)%>
@@ -142,7 +142,8 @@
 		<td>Availability ratio (approx.)</td><%= table_row_for(:availability_ratio)%>
 	</tr>
 </table>
-
+<br/>
+(4): No ultimate truth, kind of complex calculation, most likely doesn't catch all cases
 <br/>
 <br/><hr/><br/>
 
