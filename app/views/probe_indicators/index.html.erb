@@ -57,25 +57,6 @@
 
 <table>
 	<tr>
-		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
-	</tr>
-	<tr>
-		<td>Date min (incl.)</td><td><%=@today%></td><td><%=@yesterday%></td><td><%=@daysago7%></td><td><%=@daysago30%></td><td><%=@ever%></td>
-	</tr>
-	<tr>
-		<td>Date max (excl.)</td><td><%=@now%></td><td><%=@today%></td><td><%=@today%></td><td><%=@today%></td><td><%=@now%></td>
-	</tr>
-	<tr>
-		<td>Minutes in time frame</td><%= table_row_for(:minutes_in_timeframe)%>
-	</tr>
-	</tr>
-	
-</table>
-
-<br/><hr/><br/>
-
-<table>
-	<tr>
 		<th>Message stats</th><td/>
 	</tr>
 	<tr>
@@ -118,9 +99,9 @@
 		<td>Threshold</td><td colspan="5" align="center"><%=@probe.probe_configuration.value1_threshold%></td>
 	</tr>
 	<tr>
-		<td>Average value</td><%= table_row_for(:value1_average)%>
+		<td>Average value (5)</td><%= table_row_for(:value1_average)%>
 	</tr>
-	<tr>
+	<tr bgcolor="LightGrey">
 		<td>Service quality indicator (in %)</td><%= table_row_for(:value1_ratio)%>
 	</tr>
 	<tr>
@@ -130,7 +111,8 @@
 		<td># messages below threshold</td><%= table_row_for(:value1_below_threshold)%>
 	</tr>
 </table>
-
+<br/>
+(5): Average across all received messages, not necessarily equally spread over time in time period. E.g. 10 alarms above threshold in one hour and 10 heartbeats below threshold in the remaining 23 hours could give a misleading average.<br/>
 <br/><hr/><br/>
 
 <table>
@@ -146,7 +128,7 @@
 	<tr>
 		<td>Total minutes in time frame</td><%= table_row_for(:minutes_in_timeframe)%>
 	</tr>
-	<tr>
+	<tr bgcolor="LightGrey">
 		<td>Availability ratio (approx.)</td><%= table_row_for(:availability_ratio)%>
 	</tr>
 </table>
@@ -154,6 +136,24 @@
 (4): No ultimate truth, kind of complex calculation, most likely doesn't catch all cases
 <br/>
 <br/><hr/><br/>
+
+<table>
+	<tr>
+		<th>Date frames</th><td/>
+	</tr>
+	<tr>
+		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
+	</tr>
+	<tr>
+		<td>Date min (incl.)</td><td><%=@today%></td><td><%=@yesterday%></td><td><%=@daysago7%></td><td><%=@daysago30%></td><td><%=@ever%></td>
+	</tr>
+	<tr>
+		<td>Date max (excl.)</td><td><%=@now%></td><td><%=@today%></td><td><%=@today%></td><td><%=@today%></td><td><%=@now%></td>
+	</tr>	
+</table>
+
+<br/><hr/><br/>
+
 
 <%= current_time_zone.html_safe %>
 
