@@ -4,15 +4,16 @@ class ProbeIndicatorsController < ApplicationController
   def index
     @probe = (params[:probe_id].blank? ? Probe.find(1) : Probe.find(params[:probe_id]))    
 
-    @today = Date.today
-    @tomorrow = @today + 1.day
-    @yesterday = @today - 1.day
-    @daysago7 = @today - 7.days
-    @daysago30 = @today - 30.day
+    @now = Time.now
+    @today = Time.now.beginning_of_day #Date.today
+    @yesterday = (Time.now - 1.day).beginning_of_day #@today - 1.day
+    @daysago7 = (Time.now - 7.day).beginning_of_day #@today - 7.days
+    @daysago30 = (Time.now - 30.day).beginning_of_day #@today - 30.day
     @ever = @today - 5000.day
+    @ever = Message.where('probe_id = :probe_id ', probe_id: @probe.id).order('server_time ASC').limit(1).first.server_time
     
     # for today
-    @stats_today = collect_overview(@probe.id, @today, @tomorrow)
+    @stats_today = collect_overview(@probe.id, @today, @now)
     # for @yesterday
     @stats_yesterday = collect_overview(@probe.id, @yesterday, @today)
     # for last 7 days
@@ -20,7 +21,7 @@ class ProbeIndicatorsController < ApplicationController
     # for last 30 days
     @stats_daysago30 = collect_overview(@probe.id, @daysago30, @today)
     # for @ever
-    @stats_ever = collect_overview(@probe.id, @ever, @tomorrow)
+    @stats_ever = collect_overview(@probe.id, @ever, @now)
 
     respond_to do |format|
       format.html

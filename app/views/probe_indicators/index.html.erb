@@ -10,6 +10,10 @@
     <th>Probe details</th><td/>
   </tr>
   <tr>
+	<td>Current time</td>
+	<td><%=Time.now%></td>
+  </tr>
+  <tr>
 	<td>Name</td>
 	<td><%=@probe.name%></td>
   </tr>
@@ -26,15 +30,18 @@
 	<td><%=@probe.probe_type.name%></td>
   </tr>
   <tr>
+	<td>First contact</td>
+	<td>
+		<% message = Message.find_by_probe_id(@probe.id) %>
+		<%="never" if message.nil? %> <%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' unless message.nil? %>
+	</td>
+  </tr>
+  <tr>
 	<td>Last contact</td>
 	<td>
 		<% message = Message.find_last_by_probe_id(@probe.id) %>
 		<%="never" if message.nil? %> <%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' unless message.nil? %>
 	</td>
-  </tr>
-  <tr>
-	<td>Current date / time</td>
-	<td><%=Date.today%> / <%=Time.now%></td>
   </tr>
 </table>
 
@@ -45,7 +52,10 @@
 		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
 	</tr>
 	<tr>
-		<td>Dates min (incl.):max (excl.)</td><td><%=@today%>:<%=@tomorrow%></td><td><%=@yesterday%>:<%=@today%></td><td><%=@daysago7%>:<%=@today%></td><td><%=@daysago30%>:<%=@today%></td><td><%=@ever%>:<%=@tomorrow%></td>
+		<td>Date min (incl.)</td><td><%=@today%></td><td><%=@yesterday%></td><td><%=@daysago7%></td><td><%=@daysago30%></td><td><%=@ever%></td>
+	</tr>
+	<tr>
+		<td>Date max (excl.)</td><td><%=@now%></td><td><%=@today%></td><td><%=@today%></td><td><%=@today%></td><td><%=@now%></td>
 	</tr>
 	<tr>
 		<td>Minutes in time frame</td><%= table_row_for(:minutes_in_timeframe)%>
@@ -82,9 +92,10 @@
 		<td># inconsistent messages</td><%= table_row_for(:inconsistent_messages)%>
 	</tr>
 </table>
+<br/>
 (1): Missing messages: Each message has a message counter. Missing messages are counted through gaps in between the sequence of this message counter. Gaps of missing messages at the end of a time frame are not counted as there is no last message that could tell how many are missing.<br/>
 (2): Depending on the probe one alarm can be send when going above the threshold and another one when going below again. <br/>
-(3): Based on heartbeat interval of probe configuration (currently <%=@probe.probe_configuration.heartbeat_interval%> seconds). Doesn't work for time periods of today and ever.
+(3): Based on heartbeat interval of probe configuration (currently <%=@probe.probe_configuration.heartbeat_interval%> seconds). Doesn't work for time periods of today and ever.<br/>
 
 <br/><hr/><br/>
 
@@ -138,4 +149,4 @@
 <%= current_time_zone.html_safe %>
 
 <br/>
- (*): Excluding today
+ (*): Excluding today; always the whole period, regardless of probe active from the beginning of this period
