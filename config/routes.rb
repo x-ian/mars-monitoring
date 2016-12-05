@@ -19,6 +19,7 @@ MarsMonitoring::Application.routes.draw do
 
   get "visualize_text/index"
   get "visualize_text/messages"
+  post "visualize_text/delete_messages_from_here"
 
   get "dashboard/show"
   get "dashboard/d3_data"

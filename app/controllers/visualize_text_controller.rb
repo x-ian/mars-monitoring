@@ -57,4 +57,14 @@ class VisualizeTextController < ApplicationController
       end
     end
   end
+  
+  def delete_messages_from_here
+    message = Message.find(params[:id])
+    Message.where('probe_id = :probe_id AND id <= :id', probe_id: message.probe.id, id: message.id).delete_all
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+    end
+  end
+  
 end

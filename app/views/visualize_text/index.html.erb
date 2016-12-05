@@ -37,6 +37,10 @@
     <td><%= link_to 'Edit', edit_message_path(message) %></td>
     <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	-->
+	<% if (!current_user.nil?) && (current_user.role? :manager) %>
+		<td><%= link_to "Delete older messages from here", {:controller => "visualize_text", :action => :delete_messages_from_here, :id => message.id }, {:method => :post} %>
+	<%end%>
+</td>
   </tr>
 <% end %>
 </table>
