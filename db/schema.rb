@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161206134228) do
+ActiveRecord::Schema.define(:version => 20161206190033) do
 
   create_table "communication_channels", :force => true do |t|
     t.string   "name"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20161206134228) do
     t.integer  "probe_type_id"
     t.string   "cell_number"
     t.integer  "forward_subscription_id"
+    t.integer  "responsible_user_id"
   end
 
   create_table "subscriptions", :force => true do |t|

@@ -11,6 +11,7 @@
     <th>Probe type</th>
     <th>Forward subscription</th>
     <th>Cell number</th>
+    <th>Responsible user</th>
     <th>Enabled</th>
     <th></th>
     <th></th>
@@ -28,6 +29,7 @@
     <td><%= probe.probe_type.name unless probe.probe_type.nil? %></td>
     <td><%= probe.forward_subscription.name unless probe.forward_subscription.nil? %></td>
     <td><%= probe.cell_number %></td>
+    <td><%= probe.responsible_user.name unless probe.responsible_user.nil? %></td>
     <td><%= probe.enabled %></td>
     <td><%= link_to 'Show', probe %></td>
     <% if can? :update, probe %>

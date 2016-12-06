@@ -44,6 +44,10 @@
     <%= f.text_field :location_coordinates %>
   </div>
   <div class="field">
+    <%= f.label :responsible_user_id %><br />
+	<%= f.select :responsible_user_id, User.all.collect{|p| [p.name, p.id] if p.customer_id == @probe.customer_id}.compact, :include_blank => true %>
+  </div>
+  <div class="field">
     <%= f.label :enabled %><br />
     <%= f.check_box :enabled %>
   </div>

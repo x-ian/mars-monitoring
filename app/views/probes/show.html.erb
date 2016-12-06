@@ -46,6 +46,11 @@
 </p>
 
 <p>
+  <b>Responsible User:</b>
+  <%= @probe.responsible_user.name unless @probe.responsible_user.nil? %>
+</p>
+
+<p>
   <b>Enabled:</b>
   <%= @probe.enabled %>
 </p>

@@ -5,7 +5,8 @@ class Probe < ActiveRecord::Base
   belongs_to :location
   belongs_to :probe_configuration
   belongs_to :forward_subscription, :class_name => "Subscription"
-  attr_accessible :name, :location_coordinates, :enabled, :customer_id, :location_id, :probe_type_id, :cell_number, :probe_configuration_id, :forward_subscription_id
+  belongs_to :responsible_user, :class_name => "User"
+  attr_accessible :name, :location_coordinates, :enabled, :customer_id, :location_id, :probe_type_id, :cell_number, :probe_configuration_id, :forward_subscription_id, :responsible_user_id
 
   def status
     return "disabled" unless self.enabled?
