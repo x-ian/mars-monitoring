@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>ID</th>
     <th>Name</th>
     <th>Customer</th>
     <th>Location</th>
@@ -18,6 +19,7 @@
 
 <% @probes.each do |probe| %>
   <tr>
+    <td><%= probe.id %></td>
     <td><%= probe.name %></td>
     <td><%= probe.customer.name unless probe.customer.nil? %></td>
     <td><%= probe.location.name unless probe.location.nil? %></td>
