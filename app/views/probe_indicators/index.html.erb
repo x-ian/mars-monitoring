@@ -145,10 +145,10 @@
 		<td/><th>Today</th><th>Yesterday</th><th>Last 7 days (*)</th><th>Last 30 days (*)</th><th>Ever</th>
 	</tr>
 	<tr>
-		<td>Date min (incl.)</td><td><%=@today%></td><td><%=@yesterday%></td><td><%=@daysago7%></td><td><%=@daysago30%></td><td><%=@ever%></td>
+		<td>Date min (incl.)</td><td><%=@today_or_first_contact%></td><td><%=@yesterday_or_first_contact%></td><td><%=@daysago7_or_first_contact%></td><td><%=@daysago30_or_first_contact%></td><td><%=@first_contact%></td>
 	</tr>
 	<tr>
-		<td>Date max (excl.)</td><td><%=@now%></td><td><%=@today%></td><td><%=@today%></td><td><%=@today%></td><td><%=@now%></td>
+		<td>Date max (excl.)</td><td><%=@now%></td><td><%=@today_or_first_contact%></td><td><%=@today_or_first_contact%></td><td><%=@today_or_first_contact%></td><td><%=@now%></td>
 	</tr>	
 </table>
 
@@ -158,4 +158,5 @@
 <%= current_time_zone.html_safe %>
 
 <br/>
- (*): Excluding today; always the whole period, regardless of probe active from the beginning of this period
+ (*): Excluding today<br/>
+ All dates frames start at beginning of frame or first contact of probe

@@ -4,25 +4,29 @@ class ProbeIndicatorsController < ApplicationController
   def index
     @probe = (params[:probe_id].blank? ? Probe.first : Probe.find(params[:probe_id]))    
 
-    @now = Time.now
-    @today = Time.now.beginning_of_day #Date.today
-    @yesterday = (Time.now - 1.day).beginning_of_day #@today - 1.day
-    @daysago7 = (Time.now - 7.day).beginning_of_day #@today - 7.days
-    @daysago30 = (Time.now - 30.day).beginning_of_day #@today - 30.day
-    @ever = @today - 5000.day
     m = Message.where('probe_id = :probe_id ', probe_id: @probe.id).order('server_time ASC').limit(1).first
-    @ever = m.server_time unless m.nil?
+    @now = Time.now
+    @today_or_first_contact = Time.now.beginning_of_day
+    @today_or_first_contact = m.server_time if !m.nil? && @today_or_first_contact < m.server_time
+    @yesterday_or_first_contact = (Time.now - 1.day).beginning_of_day
+    @yesterday_or_first_contact = m.server_time if !m.nil? && @yesterday_or_first_contact < m.server_time
+    @daysago7_or_first_contact = (Time.now - 7.day).beginning_of_day
+    @daysago7_or_first_contact = m.server_time if !m.nil? && @daysago7_or_first_contact < m.server_time
+    @daysago30_or_first_contact = (Time.now - 30.day).beginning_of_day 
+    @daysago30_or_first_contact = m.server_time if !m.nil? && @daysago30_or_first_contact < m.server_time
+    @first_contact = @today_or_first_contact - 5000.day
+    @first_contact = m.server_time unless m.nil?
     
     # for today
-    @stats_today = collect_overview(@probe.id, @today, @now)
+    @stats_today = collect_overview(@probe.id, @today_or_first_contact, @now)
     # for @yesterday
-    @stats_yesterday = collect_overview(@probe.id, @yesterday, @today)
+    @stats_yesterday = collect_overview(@probe.id, @yesterday_or_first_contact, @today_or_first_contact)
     # for last 7 days
-    @stats_daysago7 = collect_overview(@probe.id, @daysago7, @today)
+    @stats_daysago7 = collect_overview(@probe.id, @daysago7_or_first_contact, @today_or_first_contact)
     # for last 30 days
-    @stats_daysago30 = collect_overview(@probe.id, @daysago30, @today)
-    # for @ever
-    @stats_ever = collect_overview(@probe.id, @ever, @now)
+    @stats_daysago30 = collect_overview(@probe.id, @daysago30_or_first_contact, @today_or_first_contact)
+    # from first contact
+    @stats_ever = collect_overview(@probe.id, @first_contact, @now)
 
     respond_to do |format|
       format.html
