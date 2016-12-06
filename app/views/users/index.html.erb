@@ -4,6 +4,7 @@
   <tr>
     <th>Customer</th>
     <th>Name</th>
+    <th>Org Unit</th>
     <th>Email</th>
     <th>Mobile number</th>
     <th>Role</th>
@@ -17,6 +18,7 @@
   <tr>
     <td><%= user.customer.name unless user.customer.nil? %></td>
     <td><%= user.name %></td>
+    <td><%= user.org_unit %></td>
     <td><%= user.email %></td>
     <td><%= user.mobile_number %></td>
     <td><%= user.role %></td>
