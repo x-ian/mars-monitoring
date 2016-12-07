@@ -52,7 +52,7 @@ class ProbeIndicatorsController < ApplicationController
 
     minutes_offline = 0
     first_message = true
-    heartbeat_interval = Probe.find(probe_id).probe_configuration.heartbeat_interval / 60 + 1
+    heartbeat_interval = Probe.find(probe_id).probe_configuration.heartbeat_interval / 60 + 3 # plus 3 grace minutes
     previous_contact = min_date
     last_message = nil 
     
