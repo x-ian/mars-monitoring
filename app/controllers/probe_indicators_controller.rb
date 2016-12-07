@@ -109,17 +109,18 @@ class ProbeIndicatorsController < ApplicationController
       # message missing before end of time frame
       minutes_offline += (max_date - last_message.server_time - heartbeat_interval.minutes) / 60
       minutes_offline += heartbeat_interval/2
+      minutes_offline = minutes_offline.round
     end
     if last_message.nil?
       # no message at all, 100% downtime
       minutes_offline = minutes_in_timeframe
     end
-    availability_ratio = ((1 - (minutes_offline.to_f / minutes_in_timeframe)) * 100)
+    availability_ratio = ((1 - (minutes_offline.to_f / minutes_in_timeframe)) * 100).round
     
     # message stats
     expected_heartbeats = minutes_in_timeframe / (Probe.find(probe_id).probe_configuration.heartbeat_interval / 60)
     
-    stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio.round, :value1_average => value1_average, :missing_messages => missing_messages, :minutes_in_timeframe => minutes_in_timeframe, :expected_heartbeats=> expected_heartbeats, :minutes_offline => minutes_offline.round, :availability_ratio => availability_ratio.round }
+    stats = { :alarms => alarms, :restarts => restarts, :heartbeats => heartbeats, :value1_above_threshold => value1_above_threshold, :value1_below_threshold => value1_below_threshold, :value1_ratio => value1_ratio.round, :value1_average => value1_average, :missing_messages => missing_messages, :minutes_in_timeframe => minutes_in_timeframe, :expected_heartbeats=> expected_heartbeats, :minutes_offline => minutes_offline, :availability_ratio => availability_ratio }
   end
   
 end
