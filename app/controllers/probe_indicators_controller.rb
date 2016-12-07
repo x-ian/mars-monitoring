@@ -52,7 +52,7 @@ class ProbeIndicatorsController < ApplicationController
 
     minutes_offline = 0
     first_message = true
-    heartbeat_interval = Probe.find(probe_id).probe_configuration.heartbeat_interval / 60
+    heartbeat_interval = Probe.find(probe_id).probe_configuration.heartbeat_interval / 60 + 1
     previous_contact = min_date
     last_message = nil 
     
@@ -60,9 +60,12 @@ class ProbeIndicatorsController < ApplicationController
       
       # availability
       if !m.message_type.isAlarm?
+        logger.debug "1"
         if m.server_time <= previous_contact + heartbeat_interval.minutes
+          logger.debug "2"
           # first heartbeat is in time, looks ok at the beginning
         else
+          logger.debug "3"
           # appears as if the first heartbeat didnt come in time, assuming downtime at the start
           # use the whole time above the missing intervall
           minutes_offline += (m.server_time - previous_contact - heartbeat_interval.minutes) / 60
@@ -106,12 +109,14 @@ class ProbeIndicatorsController < ApplicationController
     # availability
     minutes_in_timeframe = (max_date.to_time.to_i - min_date.to_time.to_i) / 60
     if !last_message.nil? && last_message.server_time + heartbeat_interval.minutes < max_date
+      logger.debug "4"
       # message missing before end of time frame
       minutes_offline += (max_date - last_message.server_time - heartbeat_interval.minutes) / 60
       minutes_offline += heartbeat_interval/2
       minutes_offline = minutes_offline.round
     end
     if last_message.nil?
+      logger.debug "5"
       # no message at all, 100% downtime
       minutes_offline = minutes_in_timeframe
     end
