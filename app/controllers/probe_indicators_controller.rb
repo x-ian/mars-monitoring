@@ -60,7 +60,7 @@ class ProbeIndicatorsController < ApplicationController
       
       # availability
       if !m.message_type.isAlarm?
-        logger.debug "1 " +  m.server_time.to_s + " " + previous_contact.to_s + " " + heartbeat_interval.minutes
+        logger.debug "1 " +  m.server_time.to_s + " " + previous_contact.to_s + " " + heartbeat_interval
         if m.server_time <= previous_contact + heartbeat_interval.minutes
           logger.debug "2"
           # first heartbeat is in time, looks ok at the beginning
@@ -109,7 +109,7 @@ class ProbeIndicatorsController < ApplicationController
     # availability
     minutes_in_timeframe = (max_date.to_time.to_i - min_date.to_time.to_i) / 60
     if !last_message.nil? && last_message.server_time + heartbeat_interval.minutes < max_date
-      logger.debug "4 " + last_message.server_time.to_s + " " + heartbeat_interval.minutes + " " + max_date.to_s
+      logger.debug "4 " + last_message.server_time.to_s + " " + heartbeat_interval + " " + max_date.to_s
       # message missing before end of time frame
       minutes_offline += (max_date - last_message.server_time - heartbeat_interval.minutes) / 60
       minutes_offline += heartbeat_interval/2
