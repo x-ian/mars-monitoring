@@ -133,7 +133,7 @@
 	</tr>
 </table>
 <br/>
-(4): No ultimate truth, kind of complex calculation, most likely doesn't catch all cases
+(4): No ultimate truth, kind of complex calculation, most likely doesn't catch all cases. Checks if the interval between restart and/or heartbeats is bigger than the configured heartbeat_interval of the probe_configuration plus 3 'grace' minutes. If the time period is bigger than that, that the full time in minutes from the expected heartbeat/restart to actual message plus half of the heartbeat_interval (as we don't know when the probe lost contact, we simplify/average that it lost contact in the middle of the interval). Todo: Should actually do only this if there was a known restart.
 <br/>
 <br/><hr/><br/>
 

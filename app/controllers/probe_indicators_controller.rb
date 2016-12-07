@@ -60,16 +60,16 @@ class ProbeIndicatorsController < ApplicationController
       
       # availability
       if !m.message_type.isAlarm?
-        logger.error "1 " +  m.server_time.to_s + " " + previous_contact.to_s + " " + heartbeat_interval.to_s
+        #logger.error "1 " +  m.server_time.to_s + " " + previous_contact.to_s + " " + heartbeat_interval.to_s
         if m.server_time <= previous_contact + heartbeat_interval.minutes
-          logger.error "2"
+          #logger.error "2"
           # first heartbeat is in time, looks ok at the beginning
         else
-          # appears as if the first heartbeat didnt come in time, assuming downtime at the start
-          # use the whole time above the missing intervall
+          # appears as if the heartbeat didnt come in time, assuming downtime at the start
+          # use the whole time above the missing interval
           minutes_offline += (m.server_time - previous_contact - heartbeat_interval.minutes) / 60
           minutes_offline += heartbeat_interval/2
-          logger.error "3" + minutes_offline.to_s
+          #logger.error "3" + minutes_offline.to_s
         end
         previous_contact = m.server_time
         last_message = m
@@ -113,12 +113,12 @@ class ProbeIndicatorsController < ApplicationController
       minutes_offline += (max_date - last_message.server_time - heartbeat_interval.minutes) / 60
       minutes_offline += heartbeat_interval/2
       minutes_offline = minutes_offline.round
-      logger.error "4 " + last_message.server_time.to_s + " " + heartbeat_interval.to_s + " " + max_date.to_s + " " + minutes_offline.to_s
+      #logger.error "4 " + last_message.server_time.to_s + " " + heartbeat_interval.to_s + " " + max_date.to_s + " " + minutes_offline.to_s
     end
     if last_message.nil?
       # no message at all, 100% downtime
       minutes_offline = minutes_in_timeframe
-      logger.error "5 " + minutes_offline.to_s
+      #logger.error "5 " + minutes_offline.to_s
     end
     availability_ratio = begin
        ((1 - (minutes_offline.to_f / minutes_in_timeframe)) * 100).round
