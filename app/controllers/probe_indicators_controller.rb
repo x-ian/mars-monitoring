@@ -115,7 +115,12 @@ class ProbeIndicatorsController < ApplicationController
       # no message at all, 100% downtime
       minutes_offline = minutes_in_timeframe
     end
-    availability_ratio = ((1 - (minutes_offline.to_f / minutes_in_timeframe)) * 100).round
+    availability_ratio = begin
+       ((1 - (minutes_offline.to_f / minutes_in_timeframe)) * 100).round
+    rescue Exception
+       -1
+    end
+    #availability_ratio = ((1 - (minutes_offline.to_f / minutes_in_timeframe)) * 100).round
     
     # message stats
     expected_heartbeats = minutes_in_timeframe / (Probe.find(probe_id).probe_configuration.heartbeat_interval / 60)
