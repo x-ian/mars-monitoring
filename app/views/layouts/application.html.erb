@@ -29,9 +29,15 @@
 			<li><%= link_to "Current status", current_status_by_location_probe_type_path %></li>
 			<li>Data views</li>
 			<ul id="ul2">
-	   			<li><%= link_to "Indicators", probe_indicators_index_path %></li>
-	   			<li><%= link_to "Graphical view", visualize_d3_single_probe_path %></li>
-				<li><%= link_to "Textual view", visualize_text_index_path %></li>
+	   			<% if @current_probe_id.nil? %>
+					<li><%= link_to "Indicators", probe_indicators_index_path %></li>
+		   			<li><%= link_to "Graphical view", visualize_d3_single_probe_path %></li>
+					<li><%= link_to "Textual view", visualize_text_index_path %></li>
+				<%else%>
+					<li><%= link_to "Indicators", probe_indicators_index_path(:probe_id => @current_probe_id) %> </li>
+		   			<li><%= link_to "Graphical view", visualize_d3_single_probe_path(:probe_id => @current_probe_id) %></li>
+					<li><%= link_to "Textual view", visualize_text_index_path(:probe_id => @current_probe_id) %></li>
+				<%end%>
 			</ul>
 		<% end %>
 		<% if (!current_user.nil?) && (current_user.role? :manager) %>

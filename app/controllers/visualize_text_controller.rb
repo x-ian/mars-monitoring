@@ -10,6 +10,8 @@ class VisualizeTextController < ApplicationController
     # stupid workaround to make datepicker use a preset value without a proper rails model
     @foo = OpenStruct.new(:start_date => (params[:foo].blank? || params[:foo][:start_date].blank? ? '' : params[:foo][:start_date]), :end_date => (params[:foo].blank? || params[:foo][:end_date].blank? ? '' : params[:foo][:end_date]))
     
+    @current_probe_id = @probe.id
+    
     value1_type = false
     value2_type = false
     value3_type = false

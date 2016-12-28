@@ -3,7 +3,8 @@ class ProbeIndicatorsController < ApplicationController
   
   def index
     @probe = (params[:probe_id].blank? ? Probe.first : Probe.find(params[:probe_id]))    
-
+    @current_probe_id = @probe.id
+    
     m = Message.where('probe_id = :probe_id ', probe_id: @probe.id).order('server_time ASC').limit(1).first
     @now = Time.now
     @today_or_first_contact = Time.now.beginning_of_day

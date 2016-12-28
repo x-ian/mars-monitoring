@@ -9,6 +9,8 @@ class VisualizeController < ApplicationController
     @probe_id = params[:probe_id]
     @start_date = DateTime.new(2012-01-01)
     @end_date  = Time.now
+    
+    @current_probe_id = @probe_id
   end
   
   def d3_data
@@ -17,6 +19,8 @@ class VisualizeController < ApplicationController
     @start_date  = params[:start_date].blank? ? DateTime.new(2012-10-01) : DateTime.strptime(params[:start_date], "%Y-%m-%d")
     @end_date  = (params[:end_date].blank? ? Time.now : DateTime.strptime(params[:end_date], "%Y-%m-%d") + 1.day)
     
+    @current_probe_id = @probe_id
+
     value1_type = false
     value2_type = false
     value3_type = false
