@@ -8,7 +8,7 @@ class Message < ActiveRecord::Base
   before_create :set_probe_enabled
   
   def value1_above_threshold?
-    if value1.nil?
+    if value1.nil? || probe.probe_configuration.value1_threshold.nil?
       false
     else
       probe.probe_configuration.value1_threshold < value1
@@ -16,7 +16,7 @@ class Message < ActiveRecord::Base
   end
 
   def value1_below_threshold?
-    if value1.nil?
+    if value1.nil? || probe.probe_configuration.value1_threshold.nil?
       true
     else
       probe.probe_configuration.value1_threshold >= value1
