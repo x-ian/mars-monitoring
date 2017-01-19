@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170119161949) do
+ActiveRecord::Schema.define(:version => 20170119171604) do
 
   create_table "communication_channels", :force => true do |t|
     t.string   "name"
@@ -65,12 +65,12 @@ ActiveRecord::Schema.define(:version => 20170119161949) do
     t.datetime "device_time"
     t.datetime "server_time"
     t.integer  "device_uptime"
-    t.decimal  "value1"
-    t.decimal  "value2"
-    t.decimal  "value3"
-    t.decimal  "value4"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.decimal  "value1",                 :precision => 10, :scale => 2
+    t.decimal  "value2",                 :precision => 10, :scale => 2
+    t.decimal  "value3",                 :precision => 10, :scale => 2
+    t.decimal  "value4",                 :precision => 10, :scale => 2
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.boolean  "probe_enabled"
     t.boolean  "archived"
   end
