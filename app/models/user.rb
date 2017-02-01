@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   
   def set_default_values
     self.role ||= :user
+    self.time_zone = 'Harare'
   end
   
 end
