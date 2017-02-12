@@ -195,6 +195,9 @@ class MessagesController < ApplicationController
       respond_to do |format|
         if saved
           MailNotifier.forward_to_all(@message)
+          if @message.probe.probe_configuration.generate_alarm_from_heartbeat?
+            @message.probe.probe_configuration.generate_alarm_from_heartbeat(@message)
+          end
           format.json { render json: @message, status: :created, location: @message }
         else
           m = InvalidMessage.new
