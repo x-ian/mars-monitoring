@@ -49,18 +49,18 @@ class VisualizeTextController < ApplicationController
     @value_type2 = @probe.probe_type.value2_type.name
     @value_type3 = @probe.probe_type.value3_type.name
     @value_type4 = @probe.probe_type.value4_type.name
-    @value_type5 = @probe.probe_type.value5_type.name
-    @value_type6 = @probe.probe_type.value6_type.name
-    @value_type7 = @probe.probe_type.value7_type.name
-    @value_type8 = @probe.probe_type.value8_type.name
-    @value_type9 = @probe.probe_type.value9_type.name
-    @value_type10 = @probe.probe_type.value10_type.name
-    @value_type11 = @probe.probe_type.value11_type.name
-    @value_type12 = @probe.probe_type.value12_type.name
-    @value_type13 = @probe.probe_type.value13_type.name
-    @value_type14 = @probe.probe_type.value14_type.name
-    @value_type15 = @probe.probe_type.value15_type.name
-    @value_type16 = @probe.probe_type.value16_type.name
+    @value_type5 = @probe.probe_type.value5_type.name unless @probe.probe_type.value5_type.nil?
+    @value_type6 = @probe.probe_type.value6_type.name unless @probe.probe_type.value6_type.nil?
+    @value_type7 = @probe.probe_type.value7_type.name unless @probe.probe_type.value7_type.nil?
+    @value_type8 = @probe.probe_type.value8_type.name unless @probe.probe_type.value8_type.nil?
+    @value_type9 = @probe.probe_type.value9_type.name unless @probe.probe_type.value9_type.nil?
+    @value_type10 = @probe.probe_type.value10_type.name unless @probe.probe_type.value10_type.nil?
+    @value_type11 = @probe.probe_type.value11_type.name unless @probe.probe_type.value11_type.nil?
+    @value_type12 = @probe.probe_type.value12_type.name unless @probe.probe_type.value12_type.nil?
+    @value_type13 = @probe.probe_type.value13_type.name unless @probe.probe_type.value13_type.nil?
+    @value_type14 = @probe.probe_type.value14_type.name unless @probe.probe_type.value14_type.nil?
+    @value_type15 = @probe.probe_type.value15_type.name unless @probe.probe_type.value15_type.nil?
+    @value_type16 = @probe.probe_type.value16_type.name unless @probe.probe_type.value16_type.nil?
     
     tsv = "date";
     
