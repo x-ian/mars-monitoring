@@ -82,7 +82,7 @@ class MessagesController < ApplicationController
       tokens = data.split(",")
 
       # message checks
-      raise "wrong number of commas" unless data.count(",") == 9
+      raise "wrong number of commas" unless data.count(",") == 9 || data.count(",") == 20
       raise "invalid message_type" unless (MessageType.idFor(tokens[0]) > 0 && MessageType.idFor(tokens[0]) < 4)
       raise "probe not found" if Probe.find(tokens[2]).nil?
       raise "invalid date" if DateTime.strptime(tokens[5], '%Y%m%d-%H%M%S').nil?
@@ -100,6 +100,21 @@ class MessagesController < ApplicationController
       @message.value2 = tokens[7]
       @message.value3 = tokens[8]
       @message.value4 = tokens[9]
+      if data.count(",") == 20
+        @message.value5 = tokens[10]
+        @message.value6 = tokens[11]
+        @message.value7 = tokens[12]
+        @message.value8 = tokens[13]
+        @message.value9 = tokens[14]
+        @message.value10 = tokens[15]
+        @message.value11 = tokens[16]
+        @message.value12 = tokens[17]
+        @message.value13 = tokens[18]
+        @message.value14 = tokens[19]
+        @message.value15 = tokens[20]
+        @message.value16 = tokens[21]
+      end
+      
       #    m.server_time(tokens[])
       #   m.probe_enabled(tokens[])
       saved = @message.save
@@ -135,7 +150,7 @@ class MessagesController < ApplicationController
         tokens = data.split(",")
 
         # message checks
-        raise "wrong number of commas" unless data.count(",") == 10
+        raise "wrong number of commas" unless data.count(",") == 10 || data.count(",") == 21
         raise "invalid message_type" unless (MessageType.idFor(tokens[0]) > 0 && MessageType.idFor(tokens[0]) < 4)
         raise "probe not found" if Probe.find(tokens[2]).nil?
         raise "invalid date" if DateTime.strptime(tokens[5], '%Y%m%d-%H%M%S').nil?
@@ -155,6 +170,20 @@ class MessagesController < ApplicationController
         @message.value2 = tokens[8]
         @message.value3 = tokens[9]
         @message.value4 = tokens[10]
+        if data.count(",") == 21
+          @message.value5 = tokens[11]
+          @message.value6 = tokens[12]
+          @message.value7 = tokens[13]
+          @message.value8 = tokens[14]
+          @message.value9 = tokens[15]
+          @message.value10 = tokens[16]
+          @message.value11 = tokens[17]
+          @message.value12 = tokens[18]
+          @message.value13 = tokens[19]
+          @message.value14 = tokens[20]
+          @message.value15 = tokens[21]
+          @message.value16 = tokens[22]
+        end
         @message.server_time = DateTime.strptime(tokens[6], '%Y%m%d-%H%M%S')
         @message.archived = false
         saved = @message.save
