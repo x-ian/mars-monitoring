@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170119171604) do
+ActiveRecord::Schema.define(:version => 20170212144522) do
 
   create_table "communication_channels", :force => true do |t|
     t.string   "name"
@@ -73,6 +73,18 @@ ActiveRecord::Schema.define(:version => 20170119171604) do
     t.datetime "updated_at",                                            :null => false
     t.boolean  "probe_enabled"
     t.boolean  "archived"
+    t.decimal  "value5",                 :precision => 10, :scale => 2
+    t.decimal  "value6",                 :precision => 10, :scale => 2
+    t.decimal  "value7",                 :precision => 10, :scale => 2
+    t.decimal  "value8",                 :precision => 10, :scale => 2
+    t.decimal  "value9",                 :precision => 10, :scale => 2
+    t.decimal  "value10",                :precision => 10, :scale => 2
+    t.decimal  "value11",                :precision => 10, :scale => 2
+    t.decimal  "value12",                :precision => 10, :scale => 2
+    t.decimal  "value13",                :precision => 10, :scale => 2
+    t.decimal  "value14",                :precision => 10, :scale => 2
+    t.decimal  "value15",                :precision => 10, :scale => 2
+    t.decimal  "value16",                :precision => 10, :scale => 2
   end
 
   create_table "probe_configurations", :force => true do |t|
@@ -89,6 +101,18 @@ ActiveRecord::Schema.define(:version => 20170119171604) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "name"
+    t.float    "value5_threshold"
+    t.float    "value6_threshold"
+    t.float    "value7_threshold"
+    t.float    "value8_threshold"
+    t.float    "value9_threshold"
+    t.float    "value10_threshold"
+    t.float    "value11_threshold"
+    t.float    "value12_threshold"
+    t.float    "value13_threshold"
+    t.float    "value14_threshold"
+    t.float    "value15_threshold"
+    t.float    "value16_threshold"
   end
 
   create_table "probe_statuses", :force => true do |t|
@@ -110,6 +134,18 @@ ActiveRecord::Schema.define(:version => 20170119171604) do
     t.integer  "value2_type_id"
     t.integer  "value3_type_id"
     t.integer  "value4_type_id"
+    t.integer  "value5_type_id"
+    t.integer  "value6_type_id"
+    t.integer  "value7_type_id"
+    t.integer  "value8_type_id"
+    t.integer  "value9_type_id"
+    t.integer  "value10_type_id"
+    t.integer  "value11_type_id"
+    t.integer  "value12_type_id"
+    t.integer  "value13_type_id"
+    t.integer  "value14_type_id"
+    t.integer  "value15_type_id"
+    t.integer  "value16_type_id"
   end
 
   create_table "probes", :force => true do |t|

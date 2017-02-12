@@ -54,8 +54,8 @@ class VisualizeTextController < ApplicationController
       format.html
       format.xls do
         render :xls => @messages_xls,
-                       :columns => [ :probe_id, :message_type_id, :value1, :value2, :value3, :value4, :server_time, :outgoing_message_count, :restart_count ],
-                       :headers => %w[ probe_id message_type value1 value2 value3 value4 server_time outgoing_message_count restart_count ]
+                       :columns => [ :probe_id, :message_type_id, :value1, :value2, :value3, :value4, :value5, :value6, :value7, :value8, :value9, :value10, :value11, :value12, :value13, :value14, :value15, :value16, :server_time, :outgoing_message_count, :restart_count ],
+                       :headers => %w[ probe_id message_type value1 value2 value3 value4 value5 value6 value7 value8 value9 value10 value11 value12 value13 value14 value15 value16 server_time outgoing_message_count restart_count ]
       end
     end
   end

@@ -13,10 +13,22 @@
 <table>
   <tr>
     <th>Message type</th>
-    <th><%=@value_type1%></th>
-    <th><%=@value_type2%></th>
-    <th><%=@value_type3%></th>
-    <th><%=@value_type4%></th>
+    <%= "<th>".html_safe + @value_type1 + "</th>".html_safe if !@probe.probe_type.value1_type.nil? && @probe.probe_type.value1_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type2 + "</th>".html_safe if !@probe.probe_type.value2_type.nil? && @probe.probe_type.value2_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type3 + "</th>".html_safe if !@probe.probe_type.value3_type.nil? && @probe.probe_type.value3_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type4 + "</th>".html_safe if !@probe.probe_type.value4_type.nil? && @probe.probe_type.value4_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type5 + "</th>".html_safe if !@probe.probe_type.value5_type.nil? && @probe.probe_type.value5_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type6 + "</th>".html_safe if !@probe.probe_type.value6_type.nil? && @probe.probe_type.value6_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type7 + "</th>".html_safe if !@probe.probe_type.value7_type.nil? && @probe.probe_type.value7_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type8 + "</th>".html_safe if !@probe.probe_type.value8_type.nil? && @probe.probe_type.value8_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type9 + "</th>".html_safe if !@probe.probe_type.value9_type.nil? && @probe.probe_type.value9_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type10 + "</th>".html_safe if !@probe.probe_type.value10_type.nil? && @probe.probe_type.value10_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type11 + "</th>".html_safe if !@probe.probe_type.value11_type.nil? && @probe.probe_type.value11_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type12 + "</th>".html_safe if !@probe.probe_type.value12_type.nil? && @probe.probe_type.value12_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type13 + "</th>".html_safe if !@probe.probe_type.value13_type.nil? && @probe.probe_type.value13_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type14 + "</th>".html_safe if !@probe.probe_type.value14_type.nil? && @probe.probe_type.value14_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type15 + "</th>".html_safe if !@probe.probe_type.value15_type.nil? && @probe.probe_type.value15_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<th>".html_safe + @value_type16 + "</th>".html_safe if !@probe.probe_type.value16_type.nil? && @probe.probe_type.value16_type_id != ValueType::NOT_CONFIGURED%>
     <th>Server time</th>
     <th># Outgoing msgs</th>
     <th># Restarts</th>
@@ -25,10 +37,22 @@
 <% @messages.each do |message| %>
   <tr>
     <td><%= message.message_type.name unless message.message_type.nil? %></td>
-    <td><%= message.value1 %></td>
-    <td><%= message.value2 %></td>
-    <td><%= message.value3 %></td>
-    <td><%= message.value4 %></td>
+    <%= "<td>".html_safe + message.value1.to_s + "</td>".html_safe if !@probe.probe_type.value1_type.nil? && @probe.probe_type.value1_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value2.to_s + "</td>".html_safe if !@probe.probe_type.value2_type.nil? && @probe.probe_type.value2_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value3.to_s + "</td>".html_safe if !@probe.probe_type.value3_type.nil? && @probe.probe_type.value3_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value4.to_s + "</td>".html_safe if !@probe.probe_type.value4_type.nil? && @probe.probe_type.value4_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value5.to_s + "</td>".html_safe if !@probe.probe_type.value5_type.nil? && @probe.probe_type.value5_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value6.to_s + "</td>".html_safe if !@probe.probe_type.value6_type.nil? && @probe.probe_type.value6_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value7.to_s + "</td>".html_safe if !@probe.probe_type.value7_type.nil? && @probe.probe_type.value7_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value8.to_s + "</td>".html_safe if !@probe.probe_type.value8_type.nil? && @probe.probe_type.value8_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value9.to_s + "</td>".html_safe if !@probe.probe_type.value9_type.nil? && @probe.probe_type.value9_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value10.to_s + "</td>".html_safe if !@probe.probe_type.value10_type.nil? && @probe.probe_type.value10_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value11.to_s + "</td>".html_safe if !@probe.probe_type.value11_type.nil? && @probe.probe_type.value11_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value12.to_s + "</td>".html_safe if !@probe.probe_type.value12_type.nil? && @probe.probe_type.value12_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value13.to_s + "</td>".html_safe if !@probe.probe_type.value13_type.nil? && @probe.probe_type.value13_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value14.to_s + "</td>".html_safe if !@probe.probe_type.value14_type.nil? && @probe.probe_type.value14_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value15.to_s + "</td>".html_safe if !@probe.probe_type.value15_type.nil? && @probe.probe_type.value15_type_id != ValueType::NOT_CONFIGURED%>
+    <%= "<td>".html_safe + message.value16.to_s + "</td>".html_safe if !@probe.probe_type.value16_type.nil? && @probe.probe_type.value16_type_id != ValueType::NOT_CONFIGURED%>
     <td><%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
     <td><%= message.outgoing_message_count %></td>
     <td><%= message.restart_count %></td>
