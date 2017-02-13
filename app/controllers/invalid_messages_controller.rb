@@ -42,7 +42,7 @@ class InvalidMessagesController < ApplicationController
   # POST /invalid_messages
   # POST /invalid_messages.json
   def create
-    @invalid_message = InvalidMessage.new(params[:invalid_message])
+    @invalid_message = InvalidMessage.new(invalid_message_params)
 
     respond_to do |format|
       if @invalid_message.save
@@ -61,7 +61,7 @@ class InvalidMessagesController < ApplicationController
     @invalid_message = InvalidMessage.find(params[:id])
 
     respond_to do |format|
-      if @invalid_message.update_attributes(params[:invalid_message])
+      if @invalid_message.update_attributes(invalid_message_params)
         format.html { redirect_to @invalid_message, notice: 'Invalid message was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,9 @@ class InvalidMessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def invalid_message_params
+      params.require(:invalid_message).permit(:content, :reason, :read, :source)
+    end
 end

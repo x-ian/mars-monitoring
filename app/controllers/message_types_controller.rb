@@ -42,7 +42,7 @@ class MessageTypesController < ApplicationController
   # POST /message_types
   # POST /message_types.json
   def create
-    @message_type = MessageType.new(params[:message_type])
+    @message_type = MessageType.new(message_type_params)
 
     respond_to do |format|
       if @message_type.save
@@ -61,7 +61,7 @@ class MessageTypesController < ApplicationController
     @message_type = MessageType.find(params[:id])
 
     respond_to do |format|
-      if @message_type.update_attributes(params[:message_type])
+      if @message_type.update_attributes(message_type_params)
         format.html { redirect_to @message_type, notice: 'Message type was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,9 @@ class MessageTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def message_type_params
+      params.require(:message_type).permit(:name)
+    end
 end

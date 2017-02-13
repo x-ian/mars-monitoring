@@ -42,7 +42,7 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    @subscription = Subscription.new(params[:subscription])
+    @subscription = Subscription.new(subscription_params)
 
     respond_to do |format|
       if @subscription.save
@@ -61,7 +61,7 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
 
     respond_to do |format|
-      if @subscription.update_attributes(params[:subscription])
+      if @subscription.update_attributes(subscription_params)
         format.html { redirect_to @subscription, notice: 'Subscription was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,9 @@ class SubscriptionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def subscription_params
+      params.require(:subscription).permit(:name, :include_heartbeat, :include_alarm, :include_restart, :subscriber1_id, :subscriber2_id, :subscriber3_id, :subscriber4_id, :subscriber5_id)
+    end
 end

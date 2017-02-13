@@ -42,7 +42,7 @@ class CommunicationChannelsController < ApplicationController
   # POST /communication_channels
   # POST /communication_channels.json
   def create
-    @communication_channel = CommunicationChannel.new(params[:communication_channel])
+    @communication_channel = CommunicationChannel.new(communication_channel_params)
 
     respond_to do |format|
       if @communication_channel.save
@@ -61,7 +61,7 @@ class CommunicationChannelsController < ApplicationController
     @communication_channel = CommunicationChannel.find(params[:id])
 
     respond_to do |format|
-      if @communication_channel.update_attributes(params[:communication_channel])
+      if @communication_channel.update_attributes(communication_channel_params)
         format.html { redirect_to @communication_channel, notice: 'Communication channel was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,9 @@ class CommunicationChannelsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def communication_channel_params
+      params.require(:communication_channel).permit(:name)
+    end
 end

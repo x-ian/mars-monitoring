@@ -42,7 +42,7 @@ class ProbeConfigurationsController < ApplicationController
   # POST /probe_configurations
   # POST /probe_configurations.json
   def create
-    @probe_configuration = ProbeConfiguration.new(params[:probe_configuration])
+    @probe_configuration = ProbeConfiguration.new(probe_configuration_params)
 
     respond_to do |format|
       if @probe_configuration.save
@@ -61,7 +61,7 @@ class ProbeConfigurationsController < ApplicationController
     @probe_configuration = ProbeConfiguration.find(params[:id])
 
     respond_to do |format|
-      if @probe_configuration.update_attributes(params[:probe_configuration])
+      if @probe_configuration.update_attributes(probe_configuration_params)
         format.html { redirect_to @probe_configuration, notice: 'Probe configuration was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,10 @@ class ProbeConfigurationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private 
+    def probe_configuration_params
+      params.require(:probe_configuration).permit(:alarm_interval, :name, :heartbeat_interval, :rule_assumed, :rule_error, :rule_ok, :rule_warning, :value1_threshold, :value2_threshold, :value3_threshold, :value4_threshold, :value5_threshold, :value6_threshold, :value7_threshold, :value8_threshold, :value9_threshold, :value10_threshold, :value11_threshold, :value12_threshold, :value13_threshold, :value14_threshold, :value15_threshold, :value16_threshold)
+    end
+  
 end

@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  #attr_accessible :email, :password, :password_confirmation, :remember_me
   belongs_to :customer
-  attr_accessible :name, :customer_id, :email, :mobile_number, :role, :time_zone, :org_unit
+  #attr_accessible :name, :customer_id, :email, :mobile_number, :role, :time_zone, :org_unit
   has_many :probes, :foreign_key => :responsible_user_id
   
   after_initialize :set_default_values

@@ -42,7 +42,7 @@ class ProbeTypesController < ApplicationController
   # POST /probe_types
   # POST /probe_types.json
   def create
-    @probe_type = ProbeType.new(params[:probe_type])
+    @probe_type = ProbeType.new(probe_type_params)
 
     respond_to do |format|
       if @probe_type.save
@@ -61,7 +61,7 @@ class ProbeTypesController < ApplicationController
     @probe_type = ProbeType.find(params[:id])
 
     respond_to do |format|
-      if @probe_type.update_attributes(params[:probe_type])
+      if @probe_type.update_attributes(probe_type_params)
         format.html { redirect_to @probe_type, notice: 'Probe type was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,10 @@ class ProbeTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def probe_type_params
+      params.require(:probe_type).permit(:description, :name, :value1_type_id, :value2_type_id, :value3_type_id, :value4_type_id, :value5_type_id, :value6_type_id, :value7_type_id, :value8_type_id, :value9_type_id, :value10_type_id, :value11_type_id, :value12_type_id, :value13_type_id, :value14_type_id, :value15_type_id, :value16_type_id, :communication_channel_id)
+    end
+
 end

@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   has_many :events
   belongs_to :message_type
   belongs_to :probe
-  attr_accessible :device_time, :device_uptime, :message_type_id, :outgoing_message_count, :probe_id, :restart_count, :value1, :value2, :value3, :value4, :value5, :value6, :value7, :value8, :value9, :value10, :value11, :value12, :value13, :value14, :value15, :value16, :server_time, :probe_enabled, :archived
+  #attr_accessible :device_time, :device_uptime, :message_type_id, :outgoing_message_count, :probe_id, :restart_count, :value1, :value2, :value3, :value4, :value5, :value6, :value7, :value8, :value9, :value10, :value11, :value12, :value13, :value14, :value15, :value16, :server_time, :probe_enabled, :archived
 
   before_create :set_server_time_to_now
   before_create :set_probe_enabled

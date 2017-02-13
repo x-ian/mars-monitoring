@@ -42,7 +42,7 @@ class ProbesController < ApplicationController
   # POST /probes
   # POST /probes.json
   def create
-    @probe = Probe.new(params[:probe])
+    @probe = Probe.new(probe_params)
 
     respond_to do |format|
       if @probe.save
@@ -61,7 +61,7 @@ class ProbesController < ApplicationController
     @probe = Probe.find(params[:id])
 
     respond_to do |format|
-      if @probe.update_attributes(params[:probe])
+      if @probe.update_attributes(probe_params)
         format.html { redirect_to @probe, notice: 'Probe was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,9 @@ class ProbesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def probe_params
+      params.require(:probe).permit(:name, :location_coordinates, :enabled, :customer_id, :location_id, :probe_type_id, :cell_number, :probe_configuration_id, :forward_subscription_id, :responsible_user_id)
+    end
 end

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7'
+#gem 'rails', '4.2.7'
+gem 'rails', '5.0.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -12,7 +13,7 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-#group :assets do
+group :assets do
   gem 'sass-rails'#,   '~> 3.2.3'
   gem 'coffee-rails'#, '~> 3.2.1'
 
@@ -20,10 +21,10 @@ end
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier'#, '>= 1.0.3'
-#end
+end
 
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+#gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -45,21 +46,20 @@ end
 # To use debugger
 # gem 'debugger'
 
-gem 'quiet_assets', :group => :development
+#gem 'quiet_assets', :group => :development
 
 #gem 'jquery_datepicker'
 
 gem 'devise'
 
-#gem 'will_paginate', '~> 3.1.1'
 gem 'will_paginate'
 
-#gem 'cancancan', '~> 1.10'
 gem 'cancancan'
 
 gem 'd3_rails'
 
-#gem 'to_xls', '~> 1.0.0'
 gem 'to_xls'
 
-gem 'protected_attributes'
+#gem 'protected_attributes'
+
+gem 'railties'

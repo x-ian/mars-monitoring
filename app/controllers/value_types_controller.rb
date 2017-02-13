@@ -42,7 +42,7 @@ class ValueTypesController < ApplicationController
   # POST /value_types
   # POST /value_types.json
   def create
-    @value_type = ValueType.new(params[:value_type])
+    @value_type = ValueType.new(value_type_params])
 
     respond_to do |format|
       if @value_type.save
@@ -61,7 +61,7 @@ class ValueTypesController < ApplicationController
     @value_type = ValueType.find(params[:id])
 
     respond_to do |format|
-      if @value_type.update_attributes(params[:value_type])
+      if @value_type.update_attributes(value_type_params)
         format.html { redirect_to @value_type, notice: 'Value type was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,9 @@ class ValueTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def value_type_params
+      params.require(:value_type).permit(:description, :name, :cumulative)
+    end
 end

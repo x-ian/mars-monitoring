@@ -1,6 +1,6 @@
 class ProbeStatus < ActiveRecord::Base
   has_many :events
-  attr_accessible :assumed, :name, :status, :severity_order
+  #attr_accessible :assumed, :name, :status, :severity_order
   #=begin
   DISABLED = ProbeStatus.find(9)
   OK = ProbeStatus.find(1)

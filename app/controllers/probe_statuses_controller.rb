@@ -42,7 +42,7 @@ class ProbeStatusesController < ApplicationController
   # POST /probe_statuses
   # POST /probe_statuses.json
   def create
-    @probe_status = ProbeStatus.new(params[:probe_status])
+    @probe_status = ProbeStatus.new(probe_status_params)
 
     respond_to do |format|
       if @probe_status.save
@@ -61,7 +61,7 @@ class ProbeStatusesController < ApplicationController
     @probe_status = ProbeStatus.find(params[:id])
 
     respond_to do |format|
-      if @probe_status.update_attributes(params[:probe_status])
+      if @probe_status.update_attributes(probe_status_params)
         format.html { redirect_to @probe_status, notice: 'Probe status was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,10 @@ class ProbeStatusesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def probe_status_params
+      params.require(:probe_status).permit(:assumed, :name, :status, :severity_order)
+    end
+  
 end

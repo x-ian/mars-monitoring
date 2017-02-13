@@ -11,7 +11,5 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ujs
-//= require jquery-ui
 //= require d3.v3
 //= require_tree .

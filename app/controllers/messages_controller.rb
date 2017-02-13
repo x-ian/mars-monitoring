@@ -57,7 +57,7 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(params[:message])
+    @message = Message.new(message_params)
 
     respond_to do |format|
        if @message.save
@@ -219,7 +219,7 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
 
     respond_to do |format|
-      if @message.update_attributes(params[:message])
+      if @message.update_attributes(message_params)
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
         format.json { head :no_content }
       else
@@ -240,4 +240,9 @@ class MessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private 
+    def message_params
+      params.require(:message).permit(:device_time, :device_uptime, :message_type_id, :outgoing_message_count, :probe_id, :restart_count, :value1, :value2, :value3, :value4, :value5, :value6, :value7, :value8, :value9, :value10, :value11, :value12, :value13, :value14, :value15, :value16, :server_time, :probe_enabled, :archived)
+    end
 end
