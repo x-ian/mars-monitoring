@@ -66,7 +66,7 @@ MarsMonitoring::Application.routes.draw do
 
   resources :customers
 
-  match "messages/index_archived", :via => [:get]
+  get "messages/index_archived"
 
   resources :messages
 

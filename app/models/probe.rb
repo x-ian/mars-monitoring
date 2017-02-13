@@ -12,7 +12,7 @@ class Probe < ActiveRecord::Base
     return "disabled" unless self.enabled?
     status = ""
         # todo, simplified by only looking for last message
-        message = Message.find_last_by_probe_id(self.id)
+        message = Message.where(probe_id: self.id).last
         if message.nil?
           status = "no contact"
         else
@@ -31,7 +31,7 @@ class Probe < ActiveRecord::Base
   def current_status
     return ProbeStatus::DISABLED unless self.enabled?
     # todo, simplified by only looking for last message
-    m = Message.find_last_by_probe_id(self.id)
+    m = Message.where(probe_id: self.id).last
     return ProbeStatus.find(ProbeStatus::NO_DATA) if m.nil?
     assumed = (m.server_time < DateTime.now-2.days)
     above_threshold = false

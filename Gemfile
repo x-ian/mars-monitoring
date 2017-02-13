@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.21'
+gem 'rails', '4.2.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -12,15 +12,15 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+#group :assets do
+  gem 'sass-rails'#,   '~> 3.2.3'
+  gem 'coffee-rails'#, '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-end
+  gem 'uglifier'#, '>= 1.0.3'
+#end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -35,11 +35,11 @@ gem 'jquery-ui-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano', '~> 3.0', require: false, group: :development
+gem 'capistrano' #, '~> 3.0', require: false, group: :development
 
 group :development do
-  gem 'capistrano-rails',   '~> 1.1', require: false
-  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-rails'#,   '~> 1.1', require: false
+  gem 'capistrano-bundler'#, '~> 1.1', require: false
 end
 
 # To use debugger
@@ -47,14 +47,19 @@ end
 
 gem 'quiet_assets', :group => :development
 
-gem 'jquery_datepicker'
+#gem 'jquery_datepicker'
 
 gem 'devise'
 
-gem 'will_paginate', '~> 3.1.1'
+#gem 'will_paginate', '~> 3.1.1'
+gem 'will_paginate'
 
-gem 'cancancan', '~> 1.10'
+#gem 'cancancan', '~> 1.10'
+gem 'cancancan'
 
 gem 'd3_rails'
 
-gem 'to_xls', '~> 1.0.0'
+#gem 'to_xls', '~> 1.0.0'
+gem 'to_xls'
+
+gem 'protected_attributes'

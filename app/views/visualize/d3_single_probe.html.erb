@@ -33,8 +33,8 @@
 <body>
 <%= form_tag("", :method => "get", :onsubmit => "return drawOnSubmit()") do %>
   Probe: <%= select_tag 'probe_id', options_for_select(Probe.accessible_by(current_ability).select{|p| p.enabled?}.collect{|p| ["#{p.customer.name}: #{p.name} (#{p.location.name})", p.id] }.sort, @probe.id), :onchange => "drawOnSubmit()" %>
-  Start date: <%= datepicker_input(:foo, :start_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
-  End date: <%= datepicker_input(:foo, :end_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
+  Start date: <%= text_field :foo, :start_date %> <%# datepicker_input(:foo, :start_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
+  End date: <%= text_field :foo, :end_date %> <%# datepicker_input(:foo, :end_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
   <%= submit_tag "Refresh" %>
 <% end %> 
 

@@ -3,7 +3,7 @@
 				<%=probe.name%> <br/>
 				Location: <%= probe.location.name %> <br/> 
 				Last contact: 
-				<% message = Message.find_last_by_probe_id(probe.id) %>
+				<% message = Message.where(probe_id: probe.id).last %>
 				<%= "never" if message.nil? %>
 				<%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' unless message.nil? %>
 				<br/>
