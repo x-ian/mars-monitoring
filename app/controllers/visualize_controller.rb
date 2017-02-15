@@ -62,7 +62,7 @@ class VisualizeController < ApplicationController
     line += "\n"
     tsv << line
     
-    messages =     m = Message.where("probe_id = ? AND server_time >= ? AND server_time <= ?", @probe.id, @start_date, @end_date).order("server_time ASC")
+    messages = Message.where("probe_id = ? AND server_time >= ? AND server_time <= ?", @probe.id, @start_date, @end_date).order("server_time ASC")
     for m in messages
       line = "#{m.server_time.strftime("%Y%m%d-%H%M%S")}"
       line += "\t#{m.value1}\t#{value1_threshold}" if value1_type
