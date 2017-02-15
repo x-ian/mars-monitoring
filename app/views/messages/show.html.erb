@@ -1,131 +1,67 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Message -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <b>Probe:</b>
-  <%= link_to "#{@message.probe.name} (#{@message.probe.location.name})", @message.probe %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:id) %>:</strong></dt>
+  <dd><%= @message.id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:probe_id) %>:</strong></dt>
+  <dd><%= link_to "#{@message.probe.name} (#{@message.probe.location.name})", @message.probe %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:message_type_id) %>:</strong></dt>
+  <dd><%= @message.message_type.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:device_time) %>:</strong></dt>
+  <dd><%= @message.device_time %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:server_time) %>:</strong></dt>
+  <dd><%= @message.server_time %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:device_uptime) %>:</strong></dt>
+  <dd><%= @message.device_uptime %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:probe_enabled) %>:</strong></dt>
+  <dd><%= @message.probe_enabled %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:archived) %>:</strong></dt>
+  <dd><%= @message.archived %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value1) %>:</strong></dt>
+  <dd><%= @message.value1 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value2) %>:</strong></dt>
+  <dd><%= @message.value2 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value3) %>:</strong></dt>
+  <dd><%= @message.value3 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value4) %>:</strong></dt>
+  <dd><%= @message.value4 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value5) %>:</strong></dt>
+  <dd><%= @message.value5 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value6) %>:</strong></dt>
+  <dd><%= @message.value6 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value7) %>:</strong></dt>
+  <dd><%= @message.value7 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value8) %>:</strong></dt>
+  <dd><%= @message.value8 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value9) %>:</strong></dt>
+  <dd><%= @message.value9 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value10) %>:</strong></dt>
+  <dd><%= @message.value10 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value11) %>:</strong></dt>
+  <dd><%= @message.value11 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value12) %>:</strong></dt>
+  <dd><%= @message.value12 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value13) %>:</strong></dt>
+  <dd><%= @message.value13 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value14) %>:</strong></dt>
+  <dd><%= @message.value14 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value15) %>:</strong></dt>
+  <dd><%= @message.value15 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value16) %>:</strong></dt>
+  <dd><%= @message.value16 %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:created_at) %>:</strong></dt>
+  <dd><%= @message.created_at %></dd>
+</dl>
 
-<p>
-  <b>Message type:</b>
-  <%= @message.message_type.name %>
-</p>
-
-<p>
-  <b>Outgoing message count:</b>
-  <%= @message.outgoing_message_count %>
-</p>
-
-<p>
-  <b>Restart count:</b>
-  <%= @message.restart_count %>
-</p>
-
-<p>
-  <b>Device time:</b>
-  <%= @message.device_time.strftime '%Y-%m-%d %H:%M:%S' %>
-</p>
-
-<p>
-  <b>Device uptime:</b>
-  <%= @message.device_uptime %>
-</p>
-
-<p>
-  <b>Value1:</b>
-  <%= @message.value1 %>
-</p>
-
-<p>
-  <b>Value2:</b>
-  <%= @message.value2 %>
-</p>
-
-<p>
-  <b>Value3:</b>
-  <%= @message.value3 %>
-</p>
-
-<p>
-  <b>Value4:</b>
-  <%= @message.value4 %>
-</p>
-
-<p>
-  <b>Value5:</b>
-  <%= @message.value5 %>
-</p>
-
-<p>
-  <b>Value6:</b>
-  <%= @message.value6 %>
-</p>
-
-<p>
-  <b>Value7:</b>
-  <%= @message.value7 %>
-</p>
-
-<p>
-  <b>Value8:</b>
-  <%= @message.value8 %>
-</p>
-
-<p>
-  <b>Value9:</b>
-  <%= @message.value9 %>
-</p>
-
-<p>
-  <b>Value10:</b>
-  <%= @message.value10 %>
-</p>
-
-<p>
-  <b>Value11:</b>
-  <%= @message.value11 %>
-</p>
-
-<p>
-  <b>Value12:</b>
-  <%= @message.value12 %>
-</p>
-
-<p>
-  <b>Value13:</b>
-  <%= @message.value13 %>
-</p>
-
-<p>
-  <b>Value14:</b>
-  <%= @message.value14 %>
-</p>
-
-<p>
-  <b>Value15:</b>
-  <%= @message.value15 %>
-</p>
-
-<p>
-  <b>Value16:</b>
-  <%= @message.value16 %>
-</p>
-
-<p>
-  <b>Server time:</b>
-  <%= @message.server_time.strftime '%Y-%m-%d %H:%M:%S' %>
-</p>
-
-<p>
-  <b>Probe enabled:</b>
-  <%= @message.probe_enabled %>
-</p>
-
-<p>
-  <b>Message archived:</b>
-  <%= @message.archived %>
-</p>
-
-<%= current_time_zone.html_safe %>
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              messages_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_message_path(@message), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              message_path(@message),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

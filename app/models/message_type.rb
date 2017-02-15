@@ -1,6 +1,5 @@
 class MessageType < ActiveRecord::Base
   has_many :messages
-  #attr_accessible :name
   
   ALARM = 1 #EventType.exists?(1) ? EventType.find(1).id : nil
   RESTART = 2 #EventType.exists?(1) ? EventType.find(1).id : nil

@@ -1,89 +1,58 @@
 class CommunicationChannelsController < ApplicationController
-  before_filter :authenticate_user!
-
+  before_action :set_communication_channel, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
   # GET /communication_channels
-  # GET /communication_channels.json
   def index
     @communication_channels = CommunicationChannel.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @communication_channels }
-    end
   end
 
   # GET /communication_channels/1
-  # GET /communication_channels/1.json
   def show
-    @communication_channel = CommunicationChannel.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @communication_channel }
-    end
   end
 
   # GET /communication_channels/new
-  # GET /communication_channels/new.json
   def new
     @communication_channel = CommunicationChannel.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @communication_channel }
-    end
   end
 
   # GET /communication_channels/1/edit
   def edit
-    @communication_channel = CommunicationChannel.find(params[:id])
   end
 
   # POST /communication_channels
-  # POST /communication_channels.json
   def create
     @communication_channel = CommunicationChannel.new(communication_channel_params)
 
-    respond_to do |format|
-      if @communication_channel.save
-        format.html { redirect_to @communication_channel, notice: 'Communication channel was successfully created.' }
-        format.json { render json: @communication_channel, status: :created, location: @communication_channel }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @communication_channel.errors, status: :unprocessable_entity }
-      end
+    if @communication_channel.save
+      redirect_to @communication_channel, notice: 'Communication channel was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PUT /communication_channels/1
-  # PUT /communication_channels/1.json
+  # PATCH/PUT /communication_channels/1
   def update
-    @communication_channel = CommunicationChannel.find(params[:id])
-
-    respond_to do |format|
-      if @communication_channel.update_attributes(communication_channel_params)
-        format.html { redirect_to @communication_channel, notice: 'Communication channel was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @communication_channel.errors, status: :unprocessable_entity }
-      end
+    if @communication_channel.update(communication_channel_params)
+      redirect_to @communication_channel, notice: 'Communication channel was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /communication_channels/1
-  # DELETE /communication_channels/1.json
   def destroy
-    @communication_channel = CommunicationChannel.find(params[:id])
     @communication_channel.destroy
-
-    respond_to do |format|
-      format.html { redirect_to communication_channels_url }
-      format.json { head :no_content }
-    end
+    redirect_to communication_channels_url, notice: 'Communication channel was successfully destroyed.'
   end
 
-  private 
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_communication_channel
+      @communication_channel = CommunicationChannel.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
     def communication_channel_params
       params.require(:communication_channel).permit(:name)
     end

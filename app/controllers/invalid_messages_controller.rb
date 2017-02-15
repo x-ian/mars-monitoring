@@ -1,90 +1,59 @@
 class InvalidMessagesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :set_invalid_message, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /invalid_messages
-  # GET /invalid_messages.json
   def index
     @invalid_messages = InvalidMessage.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @invalid_messages }
-    end
   end
 
   # GET /invalid_messages/1
-  # GET /invalid_messages/1.json
   def show
-    @invalid_message = InvalidMessage.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @invalid_message }
-    end
   end
 
   # GET /invalid_messages/new
-  # GET /invalid_messages/new.json
   def new
     @invalid_message = InvalidMessage.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @invalid_message }
-    end
   end
 
   # GET /invalid_messages/1/edit
   def edit
-    @invalid_message = InvalidMessage.find(params[:id])
   end
 
   # POST /invalid_messages
-  # POST /invalid_messages.json
   def create
     @invalid_message = InvalidMessage.new(invalid_message_params)
 
-    respond_to do |format|
-      if @invalid_message.save
-        format.html { redirect_to @invalid_message, notice: 'Invalid message was successfully created.' }
-        format.json { render json: @invalid_message, status: :created, location: @invalid_message }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @invalid_message.errors, status: :unprocessable_entity }
-      end
+    if @invalid_message.save
+      redirect_to @invalid_message, notice: 'Invalid message was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PUT /invalid_messages/1
-  # PUT /invalid_messages/1.json
+  # PATCH/PUT /invalid_messages/1
   def update
-    @invalid_message = InvalidMessage.find(params[:id])
-
-    respond_to do |format|
-      if @invalid_message.update_attributes(invalid_message_params)
-        format.html { redirect_to @invalid_message, notice: 'Invalid message was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @invalid_message.errors, status: :unprocessable_entity }
-      end
+    if @invalid_message.update(invalid_message_params)
+      redirect_to @invalid_message, notice: 'Invalid message was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /invalid_messages/1
-  # DELETE /invalid_messages/1.json
   def destroy
-    @invalid_message = InvalidMessage.find(params[:id])
     @invalid_message.destroy
-
-    respond_to do |format|
-      format.html { redirect_to invalid_messages_url }
-      format.json { head :no_content }
-    end
+    redirect_to invalid_messages_url, notice: 'Invalid message was successfully destroyed.'
   end
 
-  private 
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_invalid_message
+      @invalid_message = InvalidMessage.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
     def invalid_message_params
-      params.require(:invalid_message).permit(:content, :reason, :read, :source)
+      params.require(:invalid_message).permit(:read, :reason, :content, :source)
     end
 end

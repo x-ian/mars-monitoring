@@ -1,90 +1,59 @@
 class ValueTypesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :set_value_type, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /value_types
-  # GET /value_types.json
   def index
     @value_types = ValueType.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @value_types }
-    end
   end
 
   # GET /value_types/1
-  # GET /value_types/1.json
   def show
-    @value_type = ValueType.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @value_type }
-    end
   end
 
   # GET /value_types/new
-  # GET /value_types/new.json
   def new
     @value_type = ValueType.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @value_type }
-    end
   end
 
   # GET /value_types/1/edit
   def edit
-    @value_type = ValueType.find(params[:id])
   end
 
   # POST /value_types
-  # POST /value_types.json
   def create
-    @value_type = ValueType.new(value_type_params])
+    @value_type = ValueType.new(value_type_params)
 
-    respond_to do |format|
-      if @value_type.save
-        format.html { redirect_to @value_type, notice: 'Value type was successfully created.' }
-        format.json { render json: @value_type, status: :created, location: @value_type }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @value_type.errors, status: :unprocessable_entity }
-      end
+    if @value_type.save
+      redirect_to @value_type, notice: 'Value type was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PUT /value_types/1
-  # PUT /value_types/1.json
+  # PATCH/PUT /value_types/1
   def update
-    @value_type = ValueType.find(params[:id])
-
-    respond_to do |format|
-      if @value_type.update_attributes(value_type_params)
-        format.html { redirect_to @value_type, notice: 'Value type was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @value_type.errors, status: :unprocessable_entity }
-      end
+    if @value_type.update(value_type_params)
+      redirect_to @value_type, notice: 'Value type was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /value_types/1
-  # DELETE /value_types/1.json
   def destroy
-    @value_type = ValueType.find(params[:id])
     @value_type.destroy
-
-    respond_to do |format|
-      format.html { redirect_to value_types_url }
-      format.json { head :no_content }
-    end
+    redirect_to value_types_url, notice: 'Value type was successfully destroyed.'
   end
 
-  private 
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_value_type
+      @value_type = ValueType.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
     def value_type_params
-      params.require(:value_type).permit(:description, :name, :cumulative)
+      params.require(:value_type).permit(:name, :cumulative, :description)
     end
 end

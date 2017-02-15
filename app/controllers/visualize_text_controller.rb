@@ -1,7 +1,7 @@
 require 'ostruct'
 
 class VisualizeTextController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     @probe = (params[:probe_id].blank? ? Probe.find(1) : Probe.find(params[:probe_id]))

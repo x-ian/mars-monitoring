@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  around_filter :user_time_zone, if: :current_user
-
+  around_action :user_time_zone, if: :current_user
 
   include CanCan::ControllerAdditions
 

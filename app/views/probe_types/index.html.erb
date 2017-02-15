@@ -1,59 +1,48 @@
-<h1>Listing probe_types</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Communication channel</th>
-    <th>Value1 type</th>
-    <th>Value2 type</th>
-    <th>Value3 type</th>
-    <th>Value4 type</th>
-    <th>Value5 type</th>
-    <th>Value6 type</th>
-    <th>Value7 type</th>
-    <th>Value8 type</th>
-    <th>Value9 type</th>
-    <th>Value10 type</th>
-    <th>Value11 type</th>
-    <th>Value12 type</th>
-    <th>Value13 type</th>
-    <th>Value14 type</th>
-    <th>Value15 type</th>
-    <th>Value16 type</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @probe_types.each do |probe_type| %>
-  <tr>
-    <td><%= probe_type.name %></td>
-    <td><%= probe_type.description %></td>
-    <td><%= probe_type.communication_channel.name unless probe_type.communication_channel.nil? %></td>
-    <td><%= probe_type.value1_type.name unless probe_type.value1_type.nil? %></td>
-    <td><%= probe_type.value2_type.name unless probe_type.value2_type.nil? %></td>
-    <td><%= probe_type.value3_type.name unless probe_type.value3_type.nil? %></td>
-    <td><%= probe_type.value4_type.name unless probe_type.value4_type.nil?%></td>
-    <td><%= probe_type.value5_type.name unless probe_type.value5_type.nil?%></td>
-    <td><%= probe_type.value6_type.name unless probe_type.value6_type.nil?%></td>
-    <td><%= probe_type.value7_type.name unless probe_type.value7_type.nil?%></td>
-    <td><%= probe_type.value8_type.name unless probe_type.value8_type.nil?%></td>
-    <td><%= probe_type.value9_type.name unless probe_type.value9_type.nil?%></td>
-    <td><%= probe_type.value10_type.name unless probe_type.value10_type.nil?%></td>
-    <td><%= probe_type.value11_type.name unless probe_type.value11_type.nil?%></td>
-    <td><%= probe_type.value12_type.name unless probe_type.value12_type.nil?%></td>
-    <td><%= probe_type.value13_type.name unless probe_type.value13_type.nil?%></td>
-    <td><%= probe_type.value14_type.name unless probe_type.value14_type.nil?%></td>
-    <td><%= probe_type.value15_type.name unless probe_type.value15_type.nil?%></td>
-    <td><%= probe_type.value16_type.name unless probe_type.value16_type.nil?%></td>
-    <td><%= link_to 'Show', probe_type %></td>
-    <td><%= link_to 'Edit', edit_probe_type_path(probe_type) %></td>
-    <td><%= link_to 'Destroy', probe_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = ProbeType -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:communication_channel_id) %></th>
+      <th><%= model_class.human_attribute_name(:value1_type_id) %></th>
+      <th><%= model_class.human_attribute_name(:value2_type_id) %></th>
+      <th><%= model_class.human_attribute_name(:value3_type_id) %></th>
+      <th><%= model_class.human_attribute_name(:value4_type_id) %></th>
+	  <th>More Value types</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @probe_types.each do |probe_type| %>
+      <tr>
+        <td><%= link_to probe_type.name, probe_type_path(probe_type) %></td>
+        <td><%= probe_type.description %></td>
+        <td><%= probe_type.communication_channel.name unless probe_type.communication_channel.nil? %></td>
+        <td><%= probe_type.value1_type.name unless probe_type.value1_type.nil? %></td>
+        <td><%= probe_type.value2_type.name unless probe_type.value2_type.nil? %></td>
+        <td><%= probe_type.value3_type.name unless probe_type.value3_type.nil? %></td>
+        <td><%= probe_type.value4_type.name unless probe_type.value4_type.nil? %></td>
+		<td>...</td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      probe_type_path(probe_type), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_probe_type_path(probe_type), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      probe_type_path(probe_type),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Probe type', new_probe_type_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_probe_type_path,
+            :class => 'btn btn-primary' %>

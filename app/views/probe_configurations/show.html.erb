@@ -1,120 +1,67 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = ProbeConfiguration -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @probe_configuration.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:id) %>:</strong></dt>
+  <dd><%= @probe_configuration.id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @probe_configuration.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:rule_ok) %>:</strong></dt>
+  <dd><%= @probe_configuration.rule_ok %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:rule_warning) %>:</strong></dt>
+  <dd><%= @probe_configuration.rule_warning %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:rule_error) %>:</strong></dt>
+  <dd><%= @probe_configuration.rule_error %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:rule_assumed) %>:</strong></dt>
+  <dd><%= @probe_configuration.rule_assumed %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:heartbeat_interval) %>:</strong></dt>
+  <dd><%= @probe_configuration.heartbeat_interval %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:alarm_interval) %>:</strong></dt>
+  <dd><%= @probe_configuration.alarm_interval %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value1_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value1_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value2_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value2_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value3_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value3_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value4_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value4_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value5_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value5_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value6_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value6_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value7_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value7_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value8_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value8_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value9_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value9_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value10_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value10_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value11_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value11_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value12_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value12_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value13_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value13_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value14_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value14_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value15_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value15_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value16_threshold) %>:</strong></dt>
+  <dd><%= @probe_configuration.value16_threshold %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:created_at) %>:</strong></dt>
+  <dd><%= @probe_configuration.created_at %></dd>
+</dl>
 
-<p>
-  <b>Rule ok:</b>
-  <%= @probe_configuration.rule_ok %>
-</p>
-
-<p>
-  <b>Rule warning:</b>
-  <%= @probe_configuration.rule_warning %>
-</p>
-
-<p>
-  <b>Rule error:</b>
-  <%= @probe_configuration.rule_error %>
-</p>
-
-<p>
-  <b>Rule assumed:</b>
-  <%= @probe_configuration.rule_assumed %>
-</p>
-
-<p>
-  <b>Heartbeat interval:</b>
-  <%= @probe_configuration.heartbeat_interval %>
-</p>
-
-<p>
-  <b>Alarm interval:</b>
-  <%= @probe_configuration.alarm_interval %>
-</p>
-
-<p>
-  <b>Value1 threshold:</b>
-  <%= @probe_configuration.value1_threshold %>
-</p>
-
-<p>
-  <b>Value2 threshold:</b>
-  <%= @probe_configuration.value2_threshold %>
-</p>
-
-<p>
-  <b>Value3 threshold:</b>
-  <%= @probe_configuration.value3_threshold %>
-</p>
-
-<p>
-  <b>Value4 threshold:</b>
-  <%= @probe_configuration.value4_threshold %>
-</p>
-
-<p>
-  <b>Value5 threshold:</b>
-  <%= @probe_configuration.value5_threshold %>
-</p>
-
-<p>
-  <b>Value6 threshold:</b>
-  <%= @probe_configuration.value6_threshold %>
-</p>
-
-<p>
-  <b>Value7 threshold:</b>
-  <%= @probe_configuration.value7_threshold %>
-</p>
-
-<p>
-  <b>Value8 threshold:</b>
-  <%= @probe_configuration.value8_threshold %>
-</p>
-
-<p>
-  <b>Value9 threshold:</b>
-  <%= @probe_configuration.value9_threshold %>
-</p>
-
-<p>
-  <b>Value10 threshold:</b>
-  <%= @probe_configuration.value10_threshold %>
-</p>
-
-<p>
-  <b>Value11 threshold:</b>
-  <%= @probe_configuration.value11_threshold %>
-</p>
-
-<p>
-  <b>Value12 threshold:</b>
-  <%= @probe_configuration.value12_threshold %>
-</p>
-
-<p>
-  <b>Value13 threshold:</b>
-  <%= @probe_configuration.value13_threshold %>
-</p>
-
-<p>
-  <b>Value14 threshold:</b>
-  <%= @probe_configuration.value14_threshold %>
-</p>
-
-<p>
-  <b>Value15 threshold:</b>
-  <%= @probe_configuration.value15_threshold %>
-</p>
-
-<p>
-  <b>Value16 threshold:</b>
-  <%= @probe_configuration.value16_threshold %>
-</p>
-
-
-<%= link_to 'Edit', edit_probe_configuration_path(@probe_configuration) %> |
-<%= link_to 'Back', probe_configurations_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              probe_configurations_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_probe_configuration_path(@probe_configuration), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              probe_configuration_path(@probe_configuration),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

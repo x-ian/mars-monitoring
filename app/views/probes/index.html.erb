@@ -1,47 +1,50 @@
-<h1>Listing probes</h1>
-
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Customer</th>
-    <th>Location</th>
-    <th>Location coordinates</th>
-    <th>Probe configuration</th>
-    <th>Probe type</th>
-    <th>Forward subscription</th>
-    <th>Cell number</th>
-    <th>Responsible user</th>
-    <th>Enabled</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @probes.each do |probe| %>
-  <tr>
-    <td><%= probe.id %></td>
-    <td><%= probe.name %></td>
-    <td><%= probe.customer.name unless probe.customer.nil? %></td>
-    <td><%= probe.location.name unless probe.location.nil? %></td>
-    <td><%= probe.location_coordinates %></td>
-    <td><%= probe.probe_configuration.name unless probe.probe_configuration.nil? %></td>
-    <td><%= probe.probe_type.name unless probe.probe_type.nil? %></td>
-    <td><%= probe.forward_subscription.name unless probe.forward_subscription.nil? %></td>
-    <td><%= probe.cell_number %></td>
-    <td><%= probe.responsible_user.name unless probe.responsible_user.nil? %></td>
-    <td><%= probe.enabled %></td>
-    <td><%= link_to 'Show', probe %></td>
-    <% if can? :update, probe %>
-		<td><%= link_to 'Edit', edit_probe_path(probe) %></td>
-	<% end %>
-    <% if can? :update, probe %>
-		<td><%= link_to 'Destroy', probe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	<% end %>
-  </tr>
-<% end %>
+<%- model_class = Probe -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:customer_id) %></th>
+      <th><%= model_class.human_attribute_name(:location_id) %></th>
+      <th><%= model_class.human_attribute_name(:enabled) %></th>
+      <th><%= model_class.human_attribute_name(:probe_configuration_id) %></th>
+      <th><%= model_class.human_attribute_name(:probe_type_id) %></th>
+      <th><%= model_class.human_attribute_name(:cell_number) %></th>
+      <th><%= model_class.human_attribute_name(:forward_subscription_id) %></th>
+      <th><%= model_class.human_attribute_name(:responsible_user_id) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @probes.each do |probe| %>
+      <tr>
+        <td><%= link_to probe.name, probe_path(probe) %></td>
+        <td><%= probe.customer.name unless probe.customer.nil? %></td>
+        <td><%= probe.location.name unless probe.location.nil? %></td>
+        <td><%= probe.enabled %></td>
+        <td><%= probe.probe_configuration.name unless probe.probe_configuration.nil? %></td>
+        <td><%= probe.probe_type.name unless probe.probe_type.nil? %></td>
+        <td><%= probe.cell_number %></td>
+        <td><%= probe.forward_subscription.name unless probe.forward_subscription.nil? %></td>
+        <td><%= probe.responsible_user.name unless probe.responsible_user.nil? %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      probe_path(probe), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_probe_path(probe), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      probe_path(probe),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Probe', new_probe_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_probe_path,
+            :class => 'btn btn-primary' %>

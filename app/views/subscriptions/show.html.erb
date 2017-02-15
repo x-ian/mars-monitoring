@@ -1,50 +1,39 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Subscription -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @subscription.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:id) %>:</strong></dt>
+  <dd><%= @subscription.id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @subscription.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:subscriber1_id) %>:</strong></dt>
+  <dd><%= @subscription.subscriber1.name unless @subscription.subscriber1.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:subscriber2_id) %>:</strong></dt>
+  <dd><%= @subscription.subscriber2.name unless @subscription.subscriber2.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:subscriber3_id) %>:</strong></dt>
+  <dd><%= @subscription.subscriber3.name unless @subscription.subscriber3.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:subscriber4_id) %>:</strong></dt>
+  <dd><%= @subscription.subscriber4.name unless @subscription.subscriber4.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:subscriber5_id) %>:</strong></dt>
+  <dd><%= @subscription.subscriber5.name unless @subscription.subscriber5.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:include_heartbeat) %>:</strong></dt>
+  <dd><%= @subscription.include_heartbeat %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:include_alarm) %>:</strong></dt>
+  <dd><%= @subscription.include_alarm %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:include_restart) %>:</strong></dt>
+  <dd><%= @subscription.include_restart %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:created_at) %>:</strong></dt>
+  <dd><%= @subscription.created_at %></dd>
+</dl>
 
-<p>
-  <b>Subscriber 1:</b>
-  <%= @subscription.subscriber1.name unless @subscription.subscriber1.nil? %>
-</p>
-
-<p>
-  <b>Subscriber 2:</b>
-  <%= @subscription.subscriber2.name unless @subscription.subscriber2.nil? %>
-</p>
-
-<p>
-  <b>Subscriber 3:</b>
-  <%= @subscription.subscriber3.name unless @subscription.subscriber3.nil? %>
-</p>
-
-<p>
-  <b>Subscriber 4:</b>
-  <%= @subscription.subscriber4.name unless @subscription.subscriber4.nil? %>
-</p>
-
-<p>
-  <b>Subscriber 5:</b>
-  <%= @subscription.subscriber5.name unless @subscription.subscriber5.nil? %>
-</p>
-
-<p>
-  <b>Include Heartbeat:</b>
-  <%= @subscription.include_heartbeat %>
-</p>
-
-<p>
-  <b>Include Alarm:</b>
-  <%= @subscription.include_alarm %>
-</p>
-
-<p>
-  <b>Include Restart:</b>
-  <%= @subscription.include_restart %>
-</p>
-
-
-<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
-<%= link_to 'Back', subscriptions_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              subscriptions_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_subscription_path(@subscription), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              subscription_path(@subscription),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

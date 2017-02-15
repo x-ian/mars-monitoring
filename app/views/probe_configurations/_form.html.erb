@@ -1,109 +1,188 @@
-<%= form_for(@probe_configuration) do |f| %>
-  <% if @probe_configuration.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@probe_configuration.errors.count, "error") %> prohibited this probe_configuration from being saved:</h2>
+<%= form_for @probe_configuration, :html => { :class => "form-horizontal probe_configuration" } do |f| %>
 
-      <ul>
-      <% @probe_configuration.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <% if @probe_configuration.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@probe_configuration.errors.count, "error") %> prohibited this probe_configuration from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @probe_configuration.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :Name %><br />
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :size => "20", :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
   </div>
-  <div class="field">
-    <%= f.label :rule_ok %><br />
-    <%= f.text_area :rule_ok %>
+  <div class="form-group">
+    <%= f.label :rule_ok, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :rule_ok, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:rule_ok) %>
   </div>
-  <div class="field">
-    <%= f.label :rule_warning %><br />
-    <%= f.text_area :rule_warning %>
+  <div class="form-group">
+    <%= f.label :rule_warning, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :rule_warning, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:rule_warning) %>
   </div>
-  <div class="field">
-    <%= f.label :rule_error %><br />
-    <%= f.text_area :rule_error %>
+  <div class="form-group">
+    <%= f.label :rule_error, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :rule_error, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:rule_error) %>
   </div>
-  <div class="field">
-    <%= f.label :rule_assumed %><br />
-    <%= f.text_area :rule_assumed %>
+  <div class="form-group">
+    <%= f.label :rule_assumed, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :rule_assumed, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:rule_assumed) %>
   </div>
-  <div class="field">
-    <%= f.label :heartbeat_interval %> (in seconds)<br />
-    <%= f.number_field :heartbeat_interval %>
+  <div class="form-group">
+    <%= f.label :heartbeat_interval, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :heartbeat_interval, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:heartbeat_interval) %>
   </div>
-  <div class="field">
-    <%= f.label :alarm_interval %> (in seconds)<br />
-    <%= f.number_field :alarm_interval %>
+  <div class="form-group">
+    <%= f.label :alarm_interval, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :alarm_interval, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:alarm_interval) %>
   </div>
-  <div class="field">
-    <%= f.label :value1_threshold %><br />
-    <%= f.text_field :value1_threshold %>
+  <div class="form-group">
+    <%= f.label :value1_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value1_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value1_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value2_threshold %><br />
-    <%= f.text_field :value2_threshold %>
+  <div class="form-group">
+    <%= f.label :value2_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value2_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value2_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value3_threshold %><br />
-    <%= f.text_field :value3_threshold %>
+  <div class="form-group">
+    <%= f.label :value3_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value3_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value3_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value4_threshold %><br />
-    <%= f.text_field :value4_threshold %>
+  <div class="form-group">
+    <%= f.label :value4_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value4_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value4_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value5_threshold %><br />
-    <%= f.text_field :value5_threshold %>
+  <div class="form-group">
+    <%= f.label :value5_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value5_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value5_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value6_threshold %><br />
-    <%= f.text_field :value6_threshold %>
+  <div class="form-group">
+    <%= f.label :value6_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value6_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value6_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value7_threshold %><br />
-    <%= f.text_field :value7_threshold %>
+  <div class="form-group">
+    <%= f.label :value7_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value7_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value7_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value8_threshold %><br />
-    <%= f.text_field :value8_threshold %>
+  <div class="form-group">
+    <%= f.label :value8_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value8_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value8_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value9_threshold %><br />
-    <%= f.text_field :value9_threshold %>
+  <div class="form-group">
+    <%= f.label :value9_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value9_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value9_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value10_threshold %><br />
-    <%= f.text_field :value10_threshold %>
+  <div class="form-group">
+    <%= f.label :value10_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value10_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value10_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value11_threshold %><br />
-    <%= f.text_field :value11_threshold %>
+  <div class="form-group">
+    <%= f.label :value11_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value11_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value11_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value12_threshold %><br />
-    <%= f.text_field :value12_threshold %>
+  <div class="form-group">
+    <%= f.label :value12_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value12_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value12_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value13_threshold %><br />
-    <%= f.text_field :value13_threshold %>
+  <div class="form-group">
+    <%= f.label :value13_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value13_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value13_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value14_threshold %><br />
-    <%= f.text_field :value14_threshold %>
+  <div class="form-group">
+    <%= f.label :value14_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value14_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value14_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value15_threshold %><br />
-    <%= f.text_field :value15_threshold %>
+  <div class="form-group">
+    <%= f.label :value15_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value15_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value15_threshold) %>
   </div>
-  <div class="field">
-    <%= f.label :value16_threshold %><br />
-    <%= f.text_field :value16_threshold %>
+  <div class="form-group">
+    <%= f.label :value16_threshold, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value16_threshold, step: :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value16_threshold) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                probe_configurations_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>

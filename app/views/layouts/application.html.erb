@@ -11,24 +11,27 @@
 
 </head>
 <body class="<%= controller.controller_name %>">
-  <div id="banner">
-	<div style="float:left;"><a href="/"><img src="/logo-mars-cleaned-medium-150.jpg" width="33"/> monitoring</a> <%= notice %> <%= alert %> </div>
-	<div style="float:right;">
-	<% if user_signed_in? %>
-		<%= link_to('Edit account', edit_user_registration_path) %>
-		<%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
-	<% end %>
-	</div>
-	<br/>
-  </div>
-  <div id="columns">
-    <div id="side">
-      <ul id="ul1">
-		<% if (!current_user.nil?) %>
-			<li><%= link_to "Dashboard", dashboard_show_path %></li>
-			<li><%= link_to "Current status", current_status_by_location_probe_type_path %></li>
-			<li>Data views</li>
-			<ul id="ul2">
+	
+<nav class="navbar navbar-default"> <!-- navbar-fixed-top -->
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+	  <a class="navbar-brand" href="/"><img src="/logo-mars-cleaned-medium-150.png" width="33"/></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+		  
+        <!-- <li class="active"><a href="#">Dashboard <span class="sr-only">(current)</span></a></li> -->
+        
+		<li><%= link_to "Dashboard", dashboard_show_path %></li>
+		
+		<li><%= link_to "Current status", current_status_by_location_probe_type_path %></li>
+        
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Views<span class="caret"></span></a>
+          <ul class="dropdown-menu">
 	   			<% if @current_probe_id.nil? %>
 					<li><%= link_to "Indicators", probe_indicators_index_path %></li>
 		   			<li><%= link_to "Graphical view", visualize_d3_single_probe_path %></li>
@@ -38,20 +41,25 @@
 		   			<li><%= link_to "Graphical view", visualize_d3_single_probe_path(:probe_id => @current_probe_id) %></li>
 					<li><%= link_to "Textual view", visualize_text_index_path(:probe_id => @current_probe_id) %></li>
 				<%end%>
-			</ul>
-		<% end %>
+            <!--<li role="separator" class="divider"></li>-->
+          </ul>
+        </li>
+		
 		<% if (!current_user.nil?) && (current_user.role? :manager) %>
-		    <li>Manage</li>
-	      	<ul id="ul2">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage<span class="caret"></span></a>
+          <ul class="dropdown-menu">
 	       		<li><%= link_to "Probes", probes_path %></li>
 	       		<li><%= link_to "Locations",locations_path %></li>
 	       		<li><%= link_to "Users", users_path %></li>
-	       		<li>Notifications</li>
-			</ul>
+          </ul>
+        </li>
 		<% end %>
+
 		<% if (!current_user.nil?) && (current_user.role? :superadmin) %>
-	        <li>Site administration</li>
-	      	<ul id="ul2">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Site Admin<span class="caret"></span></a>
+          <ul class="dropdown-menu">
 	       		<li><%= link_to "Probe Configurations", probe_configurations_path %></li>
 	       		<li><%= link_to "Subscriptions", subscriptions_path %></li>
 	       		<li><%= link_to "Invalid messages", invalid_messages_path %></li>
@@ -60,19 +68,40 @@
 	       		<li><%= link_to "Probe Types", probe_types_path %></li>
 	       		<li><%= link_to "Value Types", value_types_path %></li>
 	       		<li><%= link_to "Customers", customers_path %></li>
-			</ul>
+          </ul>
+        </li>
 		<% end %>
-        <li>Support</li>
-      	<ul id="ul2">
-       		<li><a href="mailto:sales@marsgeneral.com">Contact us</a></li>
-       		<li>Help</li>
-		</ul>
       </ul>
-    </div>
+
+<!--
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+-->
+	  
+      <ul class="nav navbar-nav navbar-right">
+		<% if user_signed_in? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+			<li><%= link_to('Edit account', edit_user_registration_path) %></li>
+			<li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+          </ul>
+        </li>
+		<% end %>
+		
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
     <div id="main">
+	 <div><%= notice %> <%= alert %> </div>
       <%= yield %>
     </div>
-  </div>
 <!-- %= render :partial => 'layouts/google_analytics' if Rails.env == 'production' % -->
 </body>
 </html>

@@ -1,67 +1,50 @@
-<h1>Listing probe_configurations</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Rule ok</th>
-    <th>Rule warning</th>
-    <th>Rule error</th>
-    <th>Rule assumed</th>
-    <th>Heartbeat interval</th>
-    <th>Alarm interval</th>
-    <th>Value1 threshold</th>
-    <th>Value2 threshold</th>
-    <th>Value3 threshold</th>
-    <th>Value4 threshold</th>
-    <th>Value5 threshold</th>
-    <th>Value6 threshold</th>
-    <th>Value7 threshold</th>
-    <th>Value8 threshold</th>
-    <th>Value9 threshold</th>
-    <th>Value10 threshold</th>
-    <th>Value11 threshold</th>
-    <th>Value12 threshold</th>
-    <th>Value13 threshold</th>
-    <th>Value14 threshold</th>
-    <th>Value15 threshold</th>
-    <th>Value16 threshold</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @probe_configurations.each do |probe_configuration| %>
-  <tr>
-    <td><%= probe_configuration.name %></td>
-    <td><%= probe_configuration.rule_ok %></td>
-    <td><%= probe_configuration.rule_warning %></td>
-    <td><%= probe_configuration.rule_error %></td>
-    <td><%= probe_configuration.rule_assumed %></td>
-    <td><%= probe_configuration.heartbeat_interval %></td>
-    <td><%= probe_configuration.alarm_interval %></td>
-    <td><%= probe_configuration.value1_threshold %></td>
-    <td><%= probe_configuration.value2_threshold %></td>
-    <td><%= probe_configuration.value3_threshold %></td>
-    <td><%= probe_configuration.value4_threshold %></td>
-    <td><%= probe_configuration.value5_threshold %></td>
-    <td><%= probe_configuration.value6_threshold %></td>
-    <td><%= probe_configuration.value7_threshold %></td>
-    <td><%= probe_configuration.value8_threshold %></td>
-    <td><%= probe_configuration.value9_threshold %></td>
-    <td><%= probe_configuration.value10_threshold %></td>
-    <td><%= probe_configuration.value11_threshold %></td>
-    <td><%= probe_configuration.value12_threshold %></td>
-    <td><%= probe_configuration.value13_threshold %></td>
-    <td><%= probe_configuration.value14_threshold %></td>
-    <td><%= probe_configuration.value15_threshold %></td>
-    <td><%= probe_configuration.value16_threshold %></td>
-    <td><%= link_to 'Show', probe_configuration %></td>
-    <td><%= link_to 'Edit', edit_probe_configuration_path(probe_configuration) %></td>
-    <td><%= link_to 'Destroy', probe_configuration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = ProbeConfiguration -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:heartbeat_interval) %></th>
+      <th><%= model_class.human_attribute_name(:alarm_interval) %></th>
+	  <th>Rules</th>
+      <th><%= model_class.human_attribute_name(:value1_threshold) %></th>
+      <th><%= model_class.human_attribute_name(:value2_threshold) %></th>
+      <th><%= model_class.human_attribute_name(:value3_threshold) %></th>
+      <th><%= model_class.human_attribute_name(:value4_threshold) %></th>
+      <th>more thresholds</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @probe_configurations.each do |probe_configuration| %>
+      <tr>
+        <td><%= link_to probe_configuration.name, probe_configuration_path(probe_configuration) %></td>
+        <td><%= probe_configuration.heartbeat_interval %></td>
+        <td><%= probe_configuration.alarm_interval %></td>
+		<td>...</td>
+        <td><%= probe_configuration.value1_threshold %></td>
+        <td><%= probe_configuration.value2_threshold %></td>
+        <td><%= probe_configuration.value3_threshold %></td>
+        <td><%= probe_configuration.value4_threshold %></td>
+		<td>...</td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      probe_configuration_path(probe_configuration), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_probe_configuration_path(probe_configuration), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      probe_configuration_path(probe_configuration),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Probe configuration', new_probe_configuration_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_probe_configuration_path,
+            :class => 'btn btn-primary' %>

@@ -1,33 +1,55 @@
-<%= form_for(@invalid_message) do |f| %>
-  <% if @invalid_message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@invalid_message.errors.count, "error") %> prohibited this invalid_message from being saved:</h2>
+<%= form_for @invalid_message, :html => { :class => "form-horizontal invalid_message" } do |f| %>
 
-      <ul>
-      <% @invalid_message.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <% if @invalid_message.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@invalid_message.errors.count, "error") %> prohibited this invalid_message from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @invalid_message.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :read %><br />
-    <%= f.check_box :read %>
+  <div class="form-group">
+    <%= f.label :content, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :content, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:content) %>
   </div>
-  <div class="field">
-    <%= f.label :reason %><br />
-    <%= f.text_area :reason %>
+  <div class="form-group">
+    <%= f.label :reason, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :reason, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:reason) %>
   </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
+  <div class="form-group">
+    <%= f.label :read, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :read, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:read) %>
   </div>
-  <div class="field">
-    <%= f.label :source %><br />
-    <%= f.text_area :source %>
+  <div class="form-group">
+    <%= f.label :source, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :source, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:source) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                invalid_messages_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>

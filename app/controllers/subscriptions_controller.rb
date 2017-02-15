@@ -1,90 +1,59 @@
 class SubscriptionsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :set_subscription, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /subscriptions
-  # GET /subscriptions.json
   def index
     @subscriptions = Subscription.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @subscriptions }
-    end
   end
 
   # GET /subscriptions/1
-  # GET /subscriptions/1.json
   def show
-    @subscription = Subscription.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @subscription }
-    end
   end
 
   # GET /subscriptions/new
-  # GET /subscriptions/new.json
   def new
     @subscription = Subscription.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @subscription }
-    end
   end
 
   # GET /subscriptions/1/edit
   def edit
-    @subscription = Subscription.find(params[:id])
   end
 
   # POST /subscriptions
-  # POST /subscriptions.json
   def create
     @subscription = Subscription.new(subscription_params)
 
-    respond_to do |format|
-      if @subscription.save
-        format.html { redirect_to @subscription, notice: 'Subscription was successfully created.' }
-        format.json { render json: @subscription, status: :created, location: @subscription }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @subscription.errors, status: :unprocessable_entity }
-      end
+    if @subscription.save
+      redirect_to @subscription, notice: 'Subscription was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PUT /subscriptions/1
-  # PUT /subscriptions/1.json
+  # PATCH/PUT /subscriptions/1
   def update
-    @subscription = Subscription.find(params[:id])
-
-    respond_to do |format|
-      if @subscription.update_attributes(subscription_params)
-        format.html { redirect_to @subscription, notice: 'Subscription was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @subscription.errors, status: :unprocessable_entity }
-      end
+    if @subscription.update(subscription_params)
+      redirect_to @subscription, notice: 'Subscription was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /subscriptions/1
-  # DELETE /subscriptions/1.json
   def destroy
-    @subscription = Subscription.find(params[:id])
     @subscription.destroy
-
-    respond_to do |format|
-      format.html { redirect_to subscriptions_url }
-      format.json { head :no_content }
-    end
+    redirect_to subscriptions_url, notice: 'Subscription was successfully destroyed.'
   end
 
-  private 
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_subscription
+      @subscription = Subscription.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
     def subscription_params
-      params.require(:subscription).permit(:name, :include_heartbeat, :include_alarm, :include_restart, :subscriber1_id, :subscriber2_id, :subscriber3_id, :subscriber4_id, :subscriber5_id)
+      params.require(:subscription).permit(:name, :subscriber1_id, :subscriber2_id, :subscriber3_id, :subscriber3_id, :subscriber4_id, :subscriber5_id, :include_heartbeat, :include_alarm, :include_restart)
     end
 end

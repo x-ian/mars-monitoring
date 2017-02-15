@@ -1,28 +1,42 @@
-<h1>Listing probe_statuses</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Status</th>
-    <th>Assumed</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @probe_statuses.each do |probe_status| %>
-  <tr>
-    <td><%= probe_status.name %></td>
-    <td><%= probe_status.status %></td>
-    <td><%= probe_status.assumed %></td>
-    <td><%= probe_status.severity_order %></td>
-    <td><%= link_to 'Show', probe_status %></td>
-    <td><%= link_to 'Edit', edit_probe_status_path(probe_status) %></td>
-    <td><%= link_to 'Destroy', probe_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = ProbeStatus -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:assumed) %></th>
+      <th><%= model_class.human_attribute_name(:severity_order) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @probe_statuses.each do |probe_status| %>
+      <tr>
+        <td><%= link_to probe_status.id, probe_status_path(probe_status) %></td>
+        <td><%= probe_status.name %></td>
+        <td><%= probe_status.status %></td>
+        <td><%= probe_status.assumed %></td>
+        <td><%= probe_status.severity_order %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      probe_status_path(probe_status), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_probe_status_path(probe_status), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      probe_status_path(probe_status),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Probe status', new_probe_status_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_probe_status_path,
+            :class => 'btn btn-primary' %>

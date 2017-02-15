@@ -1,45 +1,111 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= form_for @user, :html => { :class => "form-horizontal user" } do |f| %>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <% if @user.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :customer_id %><br />
-	<%= f.select :customer_id, Customer.accessible_by(current_ability).collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :customer_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      	<%= f.select :customer_id, Customer.accessible_by(current_ability).collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:customer_id) %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
   </div>
-  <div class="field">
-    <%= f.label :org_unit %><br />
-    <%= f.text_field :org_unit %>
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:email) %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+  <div class="form-group">
+    <%= f.label :mobile_number, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :mobile_number, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:mobile_number) %>
   </div>
-  <div class="field">
-    <%= f.label :mobile_number %><br />
-    <%= f.text_field :mobile_number %>
+  <div class="form-group">
+    <%= f.label :role, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :role, User::ROLES.collect{|p| [p]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:role) %>
   </div>
-  <div class="field">
-    <%= f.label :role %><br />
-	<%= f.select :role, User::ROLES.collect{|p| [p]} %>
-  </div>  
-  <div class="field">
-	 <%= f.label :time_zone %></br>
-	 <%= f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s, { selected: f.object.time_zone } %>
- </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :time_zone, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.collection_select :time_zone, ActiveSupport::TimeZone.all, :name, :to_s, { selected: f.object.time_zone }, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:time_zone) %>
   </div>
+  <div class="form-group">
+    <%= f.label :org_unit, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :org_unit, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:org_unit) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :encrypted_password, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :encrypted_password, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:encrypted_password) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :current_sign_in_at, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.datetime_select :current_sign_in_at, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:current_sign_in_at) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_sign_in_at, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.datetime_select :last_sign_in_at, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:last_sign_in_at) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :current_sign_in_ip, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :current_sign_in_ip, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:current_sign_in_ip) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_sign_in_ip, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :last_sign_in_ip, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:last_sign_in_ip) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                users_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
 <% end %>

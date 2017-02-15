@@ -1,91 +1,59 @@
 class ProbeStatusesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :set_probe_status, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /probe_statuses
-  # GET /probe_statuses.json
   def index
     @probe_statuses = ProbeStatus.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @probe_statuses }
-    end
   end
 
   # GET /probe_statuses/1
-  # GET /probe_statuses/1.json
   def show
-    @probe_status = ProbeStatus.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @probe_status }
-    end
   end
 
   # GET /probe_statuses/new
-  # GET /probe_statuses/new.json
   def new
     @probe_status = ProbeStatus.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @probe_status }
-    end
   end
 
   # GET /probe_statuses/1/edit
   def edit
-    @probe_status = ProbeStatus.find(params[:id])
   end
 
   # POST /probe_statuses
-  # POST /probe_statuses.json
   def create
     @probe_status = ProbeStatus.new(probe_status_params)
 
-    respond_to do |format|
-      if @probe_status.save
-        format.html { redirect_to @probe_status, notice: 'Probe status was successfully created.' }
-        format.json { render json: @probe_status, status: :created, location: @probe_status }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @probe_status.errors, status: :unprocessable_entity }
-      end
+    if @probe_status.save
+      redirect_to @probe_status, notice: 'Probe status was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PUT /probe_statuses/1
-  # PUT /probe_statuses/1.json
+  # PATCH/PUT /probe_statuses/1
   def update
-    @probe_status = ProbeStatus.find(params[:id])
-
-    respond_to do |format|
-      if @probe_status.update_attributes(probe_status_params)
-        format.html { redirect_to @probe_status, notice: 'Probe status was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @probe_status.errors, status: :unprocessable_entity }
-      end
+    if @probe_status.update(probe_status_params)
+      redirect_to @probe_status, notice: 'Probe status was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /probe_statuses/1
-  # DELETE /probe_statuses/1.json
   def destroy
-    @probe_status = ProbeStatus.find(params[:id])
     @probe_status.destroy
-
-    respond_to do |format|
-      format.html { redirect_to probe_statuses_url }
-      format.json { head :no_content }
-    end
+    redirect_to probe_statuses_url, notice: 'Probe status was successfully destroyed.'
   end
 
-  private 
-    def probe_status_params
-      params.require(:probe_status).permit(:assumed, :name, :status, :severity_order)
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_probe_status
+      @probe_status = ProbeStatus.find(params[:id])
     end
-  
+
+    # Only allow a trusted parameter "white list" through.
+    def probe_status_params
+      params.require(:probe_status).permit(:name, :status, :assumed, :severity_order)
+    end
 end

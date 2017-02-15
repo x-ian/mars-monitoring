@@ -1,53 +1,90 @@
-<%= form_for(@subscription) do |f| %>
-  <% if @subscription.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@subscription.errors.count, "error") %> prohibited this subscription from being saved:</h2>
+<%= form_for @subscription, :html => { :class => "form-horizontal subscription" } do |f| %>
 
-      <ul>
-      <% @subscription.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <% if @subscription.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@subscription.errors.count, "error") %> prohibited this subscription from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @subscription.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
   </div>
-  <div class="field">
-    <%= f.label :subscriber1_id %><br />
-	<%= f.select :subscriber1_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true %>
+  <div class="form-group">
+    <%= f.label :subscriber1_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :subscriber1_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:subscriber1_id) %>
   </div>
-  <div class="field">
-    <%= f.label :subscriber2_id %><br />
-	<%= f.select :subscriber2_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true %>
+  <div class="form-group">
+    <%= f.label :subscriber2_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :subscriber2_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:subscriber2_id) %>
   </div>
-  <div class="field">
-    <%= f.label :subscriber3_id %><br />
-	<%= f.select :subscriber3_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true %>
+  <div class="form-group">
+    <%= f.label :subscriber3_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :subscriber3_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:subscriber3_id) %>
   </div>
-  <div class="field">
-    <%= f.label :subscriber4_id %><br />
-	<%= f.select :subscriber4_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true %>
+  <div class="form-group">
+    <%= f.label :subscriber4_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :subscriber4_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:subscriber4_id) %>
   </div>
-  <div class="field">
-    <%= f.label :subscriber5_id %><br />
-	<%= f.select :subscriber5_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true %>
+  <div class="form-group">
+    <%= f.label :subscriber5_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :subscriber5_id, User.all.collect{|p| [p.name, p.id]}, :include_blank => true, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:subscriber5_id) %>
   </div>
-  <div class="field">
-    <%= f.label :include_heartbeat %><br />
-    <%= f.check_box :include_heartbeat %>
+  <div class="form-group">
+    <%= f.label :include_heartbeat, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :include_heartbeat, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:include_heartbeat) %>
   </div>
-  <div class="field">
-    <%= f.label :include_alarm %><br />
-    <%= f.check_box :include_alarm %>
+  <div class="form-group">
+    <%= f.label :include_alarm, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :include_alarm, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:include_alarm) %>
   </div>
-  <div class="field">
-    <%= f.label :include_restart %><br />
-    <%= f.check_box :include_restart %>
+  <div class="form-group">
+    <%= f.label :include_restart, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :include_restart, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:include_restart) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                subscriptions_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>

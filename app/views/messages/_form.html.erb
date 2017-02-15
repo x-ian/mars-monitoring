@@ -1,117 +1,188 @@
-<%= form_for(@message) do |f| %>
-  <% if @message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+<%= form_for @message, :html => { :class => "form-horizontal message" } do |f| %>
 
-      <ul>
-      <% @message.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <% if @message.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @message.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :probe_id %>
-	<%= f.select :probe_id, Probe.all.collect{|p| ["#{p.name} (#{p.location.name})", p.id]} %>
+  <div class="form-group">
+    <%= f.label :probe_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :probe_id, Probe.all.collect{|p| ["#{p.name} (#{p.location.name})", p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:probe_id) %>
   </div>
-  <div class="field">
-    <%= f.label :message_type_id %>
-	<%= f.select :message_type_id, MessageType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :message_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :message_type_id, MessageType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:message_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :outgoing_message_count %>
-    <%= f.number_field :outgoing_message_count %>
+  <div class="form-group">
+    <%= f.label :device_time, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.datetime_select :device_time, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:device_time) %>
   </div>
-  <div class="field">
-    <%= f.label :restart_count %>
-    <%= f.number_field :restart_count %>
+  <div class="form-group">
+    <%= f.label :server_time, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.datetime_select :server_time, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:server_time) %>
   </div>
-  <div class="field">
-    <%= f.label :device_time %>
-    <%= f.datetime_select :device_time %>
+  <div class="form-group">
+    <%= f.label :device_uptime, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :device_uptime, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:device_uptime) %>
   </div>
-  <div class="field">
-    <%= f.label :device_uptime %>
-    <%= f.text_field :device_uptime %>
+  <div class="form-group">
+    <%= f.label :probe_enabled, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :probe_enabled, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:probe_enabled) %>
   </div>
-  <div class="field">
-    <%= f.label :value1 %>
-    <%= f.number_field :value1, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :archived, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :archived, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:archived) %>
   </div>
-  <div class="field">
-    <%= f.label :value2 %>
-    <%= f.number_field :value2, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value1, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value1, :step => :any, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value1) %>
   </div>
-  <div class="field">
-    <%= f.label :value3 %>
-    <%= f.number_field :value3, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value2, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value2, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value2) %>
   </div>
-  <div class="field">
-    <%= f.label :value4 %>
-    <%= f.number_field :value4, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value3, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value3, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value3) %>
   </div>
-  <div class="field">
-    <%= f.label :value5 %>
-    <%= f.number_field :value5, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value4, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value4, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value4) %>
   </div>
-  <div class="field">
-    <%= f.label :value6 %>
-    <%= f.number_field :value6, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value5, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value5, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value5) %>
   </div>
-  <div class="field">
-    <%= f.label :value7 %>
-    <%= f.number_field :value7, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value6, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value6, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value6) %>
   </div>
-  <div class="field">
-    <%= f.label :value8 %>
-    <%= f.number_field :value8, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value7, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value7, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value7) %>
   </div>
-  <div class="field">
-    <%= f.label :value9 %>
-    <%= f.number_field :value9, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value8, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value8, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value8) %>
   </div>
-  <div class="field">
-    <%= f.label :value10 %>
-    <%= f.number_field :value10, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value9, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value9, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value9) %>
   </div>
-  <div class="field">
-    <%= f.label :value11 %>
-    <%= f.number_field :value11, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value10, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value10, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value10) %>
   </div>
-  <div class="field">
-    <%= f.label :value12 %>
-    <%= f.number_field :value12, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value11, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value11, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value11) %>
   </div>
-  <div class="field">
-    <%= f.label :value13 %>
-    <%= f.number_field :value13, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value12, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value12, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value12) %>
   </div>
-  <div class="field">
-    <%= f.label :value14 %>
-    <%= f.number_field :value14, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value13, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value13, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value13) %>
   </div>
-  <div class="field">
-    <%= f.label :value15 %>
-    <%= f.number_field :value15, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value14, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value14, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value14) %>
   </div>
-  <div class="field">
-    <%= f.label :value16 %>
-    <%= f.number_field :value16, class: :text_field, step: :any %>
+  <div class="form-group">
+    <%= f.label :value15, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value15, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value15) %>
   </div>
-  <div class="field">
-    <%= f.label :server_time %>
-    <%= f.datetime_select :server_time %>
+  <div class="form-group">
+    <%= f.label :value16, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :value16, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value16) %>
   </div>
-  <div class="field">
-    <%= f.label :probe_enabled %>
-    <%= f.check_box :probe_enabled %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                messages_path, :class => 'btn btn-default' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :archived %>
-    <%= f.check_box :archived %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>

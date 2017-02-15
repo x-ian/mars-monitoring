@@ -1,89 +1,58 @@
 class MessageTypesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :set_message_type, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /message_types
-  # GET /message_types.json
   def index
     @message_types = MessageType.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @message_types }
-    end
   end
 
   # GET /message_types/1
-  # GET /message_types/1.json
   def show
-    @message_type = MessageType.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @message_type }
-    end
   end
 
   # GET /message_types/new
-  # GET /message_types/new.json
   def new
     @message_type = MessageType.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @message_type }
-    end
   end
 
   # GET /message_types/1/edit
   def edit
-    @message_type = MessageType.find(params[:id])
   end
 
   # POST /message_types
-  # POST /message_types.json
   def create
     @message_type = MessageType.new(message_type_params)
 
-    respond_to do |format|
-      if @message_type.save
-        format.html { redirect_to @message_type, notice: 'Message type was successfully created.' }
-        format.json { render json: @message_type, status: :created, location: @message_type }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @message_type.errors, status: :unprocessable_entity }
-      end
+    if @message_type.save
+      redirect_to @message_type, notice: 'Message type was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PUT /message_types/1
-  # PUT /message_types/1.json
+  # PATCH/PUT /message_types/1
   def update
-    @message_type = MessageType.find(params[:id])
-
-    respond_to do |format|
-      if @message_type.update_attributes(message_type_params)
-        format.html { redirect_to @message_type, notice: 'Message type was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @message_type.errors, status: :unprocessable_entity }
-      end
+    if @message_type.update(message_type_params)
+      redirect_to @message_type, notice: 'Message type was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /message_types/1
-  # DELETE /message_types/1.json
   def destroy
-    @message_type = MessageType.find(params[:id])
     @message_type.destroy
-
-    respond_to do |format|
-      format.html { redirect_to message_types_url }
-      format.json { head :no_content }
-    end
+    redirect_to message_types_url, notice: 'Message type was successfully destroyed.'
   end
 
-  private 
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_message_type
+      @message_type = MessageType.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
     def message_type_params
       params.require(:message_type).permit(:name)
     end

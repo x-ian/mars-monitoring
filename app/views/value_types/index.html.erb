@@ -1,27 +1,38 @@
-<h1>Listing value_types</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Cumulative</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @value_types.each do |value_type| %>
-  <tr>
-    <td><%= value_type.name %></td>
-    <td><%= value_type.cumulative %></td>
-    <td><%= value_type.description %></td>
-    <td><%= link_to 'Show', value_type %></td>
-    <td><%= link_to 'Edit', edit_value_type_path(value_type) %></td>
-    <td><%= link_to 'Destroy', value_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = ValueType -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:cumulative) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @value_types.each do |value_type| %>
+      <tr>
+        <td><%= link_to value_type.name, value_type_path(value_type) %></td>
+        <td><%= value_type.description %></td>
+        <td><%= value_type.cumulative %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      value_type_path(value_type), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_value_type_path(value_type), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      value_type_path(value_type),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Value type', new_value_type_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_value_type_path,
+            :class => 'btn btn-primary' %>

@@ -63,3 +63,5 @@ gem 'to_xls'
 #gem 'protected_attributes'
 
 gem 'railties'
+
+gem "twitter-bootstrap-rails"

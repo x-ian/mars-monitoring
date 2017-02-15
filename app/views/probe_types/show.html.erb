@@ -1,85 +1,59 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = ProbeType -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @probe_type.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:id) %>:</strong></dt>
+  <dd><%= @probe_type.id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @probe_type.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @probe_type.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:communication_channel_id) %>:</strong></dt>
+  <dd><%= @probe_type.communication_channel.name unless @probe_type.communication_channel.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value1_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value1_type.name unless @probe_type.value1_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value2_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value2_type.name unless @probe_type.value2_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value3_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value3_type.name unless @probe_type.value3_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value4_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value4_type.name unless @probe_type.value4_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value5_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value5_type.name unless @probe_type.value5_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value6_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value6_type.name unless @probe_type.value6_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value7_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value7_type.name unless @probe_type.value7_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value8_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value8_type.name unless @probe_type.value8_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value9_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value9_type.name unless @probe_type.value9_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value10_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value10_type.name unless @probe_type.value10_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value11_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value11_type.name unless @probe_type.value11_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value12_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value12_type.name unless @probe_type.value12_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value13_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value13_type.name unless @probe_type.value13_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value14_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value14_type.name unless @probe_type.value14_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value15_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value15_type.name unless @probe_type.value15_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value16_type_id) %>:</strong></dt>
+  <dd><%= @probe_type.value16_type.name unless @probe_type.value16_type.nil? %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:created_at) %>:</strong></dt>
+  <dd><%= @probe_type.created_at %></dd>
+</dl>
 
-<p>
-  <b>Description:</b>
-  <%= @probe_type.description %>
-</p>
-
-<p>
-  <b>Communication channel:</b>
-  <%= @probe_type.communication_channel.name unless @probe_type.communication_channel.nil? %>
-</p>
-
-<p>
-  <b>Value1 type:</b>
-  <%= @probe_type.value1_type.name unless @probe_type.value1_type.nil? %>
-</p>
-
-<p>
-  <b>Value2 type:</b>
-  <%= @probe_type.value2_type.name unless @probe_type.value2_type.nil? %></p>
-
-<p>
-  <b>Value3 type:</b>
-  <%= @probe_type.value3_type.name unless @probe_type.value3_type.nil? %></p>
-
-<p>
-  <b>Value4 type:</b>
-  <%= @probe_type.value4_type.name unless @probe_type.value4_type.nil? %></p>
-
-<p>
-  <b>Value5 type:</b>
-  <%= @probe_type.value5_type.name unless @probe_type.value5_type.nil? %></p>
-
-<p>
-  <b>Value6 type:</b>
-  <%= @probe_type.value6_type.name unless @probe_type.value6_type.nil? %></p>
-
-<p>
-  <b>Value7 type:</b>
-  <%= @probe_type.value7_type.name unless @probe_type.value7_type.nil? %></p>
-
-<p>
-  <b>Value8 type:</b>
-  <%= @probe_type.value8_type.name unless @probe_type.value8_type.nil? %></p>
-
-<p>
-  <b>Value9 type:</b>
-  <%= @probe_type.value9_type.name unless @probe_type.value9_type.nil? %></p>
-
-<p>
-  <b>Value10 type:</b>
-  <%= @probe_type.value10_type.name unless @probe_type.value10_type.nil? %></p>
-
-<p>
-  <b>Value11 type:</b>
-  <%= @probe_type.value11_type.name unless @probe_type.value11_type.nil? %></p>
-
-<p>
-  <b>Value12 type:</b>
-  <%= @probe_type.value12_type.name unless @probe_type.value12_type.nil? %></p>
-
-<p>
-  <b>Value13 type:</b>
-  <%= @probe_type.value13_type.name unless @probe_type.value13_type.nil? %></p>
-
-<p>
-  <b>Value14 type:</b>
-  <%= @probe_type.value14_type.name unless @probe_type.value14_type.nil? %></p>
-
-<p>
-  <b>Value15 type:</b>
-  <%= @probe_type.value15_type.name unless @probe_type.value15_type.nil? %></p>
-
-<p>
-  <b>Value16 type:</b>
-  <%= @probe_type.value16_type.name unless @probe_type.value16_type.nil? %></p>
-
-
-<%= link_to 'Edit', edit_probe_type_path(@probe_type) %> |
-<%= link_to 'Back', probe_types_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              probe_types_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_probe_type_path(@probe_type), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              probe_type_path(@probe_type),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

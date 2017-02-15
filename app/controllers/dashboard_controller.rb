@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def show
     @probes = Probe.accessible_by(current_ability).where('enabled = :enabled', enabled: true)

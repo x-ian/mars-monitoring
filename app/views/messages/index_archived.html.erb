@@ -1,72 +1,87 @@
-<h1>Listing messages</h1>
+<%- model_class = Message -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <div style="text-align: center;"><%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)</div>
+</div>
 
-<table>
-  <tr>
-    <th>Probe</th>
-    <th>Message type</th>
-    <th>Outgoing message count</th>
-    <th>Restart count</th>
-    <th>Device time</th>
-    <th>Device uptime</th>
-    <th>Value1</th>
-    <th>Value2</th>
-    <th>Value3</th>
-    <th>Value4</th>
-    <th>Value5</th>
-    <th>Value6</th>
-    <th>Value7</th>
-    <th>Value8</th>
-    <th>Value9</th>
-    <th>Value10</th>
-    <th>Value11</th>
-    <th>Value12</th>
-    <th>Value13</th>
-    <th>Value14</th>
-    <th>Value15</th>
-    <th>Value16</th>
-    <th>Server time</th>
-    <th>Probe enabled</th>
-    <th>Message archived</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @messages.each do |message| %>
-  <tr>
-    <td><%= message.probe.name unless message.probe.nil? %> (<%= message.probe.location.name unless message.probe.nil? %>)</td>
-    <td><%= message.message_type.name unless message.message_type.nil? %></td>
-    <td><%= message.outgoing_message_count %></td>
-    <td><%= message.restart_count %></td>
-    <td><%= message.device_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
-    <td><%= message.device_uptime %></td>
-    <td><%= message.value1 %></td>
-    <td><%= message.value2 %></td>
-    <td><%= message.value3 %></td>
-    <td><%= message.value4 %></td>
-    <td><%= message.value5 %></td>
-    <td><%= message.value6 %></td>
-    <td><%= message.value7 %></td>
-    <td><%= message.value8 %></td>
-    <td><%= message.value9 %></td>
-    <td><%= message.value10 %></td>
-    <td><%= message.value11 %></td>
-    <td><%= message.value12 %></td>
-    <td><%= message.value13 %></td>
-    <td><%= message.value14 %></td>
-    <td><%= message.value15 %></td>
-    <td><%= message.value16 %></td>
-    <td><%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
-    <td><%= message.probe_enabled %></td>
-    <td><%= message.archived %></td>
-    <td><%= link_to 'Show', message %></td>
-    <td><%= link_to 'Edit', edit_message_path(message) %></td>
-    <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:probe_id) %></th>
+      <th><%= model_class.human_attribute_name(:message_type_id) %></th>
+	    <th>Outgoing message count</th>
+	    <th>Restart count</th>
+      <th><%= model_class.human_attribute_name(:server_time) %></th>
+      <th><%= model_class.human_attribute_name(:probe_enabled) %></th>
+      <th><%= model_class.human_attribute_name(:value1) %></th>
+      <th><%= model_class.human_attribute_name(:value2) %></th>
+      <th><%= model_class.human_attribute_name(:value3) %></th>
+      <th><%= model_class.human_attribute_name(:value4) %></th>
+      <th><%= model_class.human_attribute_name(:value5) %></th>
+      <th><%= model_class.human_attribute_name(:value6) %></th>
+      <th><%= model_class.human_attribute_name(:value7) %></th>
+      <th><%= model_class.human_attribute_name(:value8) %></th>
+      <th><%= model_class.human_attribute_name(:value9) %></th>
+      <th><%= model_class.human_attribute_name(:value10) %></th>
+      <th><%= model_class.human_attribute_name(:value11) %></th>
+      <th><%= model_class.human_attribute_name(:value12) %></th>
+      <th><%= model_class.human_attribute_name(:value13) %></th>
+      <th><%= model_class.human_attribute_name(:value14) %></th>
+      <th><%= model_class.human_attribute_name(:value15) %></th>
+      <th><%= model_class.human_attribute_name(:value16) %></th>
+      <th><%= model_class.human_attribute_name(:device_time) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+	    <td><%= message.probe.name unless message.probe.nil? %> (<%= message.probe.location.name unless message.probe.nil? %>)</td>
+	    <td><%= message.message_type.name unless message.message_type.nil? %></td>
+	    <td><%= message.outgoing_message_count %></td>
+	    <td><%= message.restart_count %></td>
+	    <td><%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
+	    <td><%= message.probe_enabled %></td>
+	    <td><%= message.value1 %></td>
+	    <td><%= message.value2 %></td>
+	    <td><%= message.value3 %></td>
+	    <td><%= message.value4 %></td>
+	    <td><%= message.value5 %></td>
+	    <td><%= message.value6 %></td>
+	    <td><%= message.value7 %></td>
+	    <td><%= message.value8 %></td>
+	    <td><%= message.value9 %></td>
+	    <td><%= message.value10 %></td>
+	    <td><%= message.value11 %></td>
+	    <td><%= message.value12 %></td>
+	    <td><%= message.value13 %></td>
+	    <td><%= message.value14 %></td>
+	    <td><%= message.value15 %></td>
+	    <td><%= message.value16 %></td>
+	    <td><%= message.device_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      message_path(message), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_message_path(message), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      message_path(message),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
+<hr/>
+
+<div style="text-align: center;"><%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)</div>
 <br/>
+
 <%= current_time_zone.html_safe %>
 
-<%= link_to 'New Message', new_message_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_message_path,
+            :class => 'btn btn-primary' %>

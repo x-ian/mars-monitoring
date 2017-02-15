@@ -1,93 +1,160 @@
-<%= form_for(@probe_type) do |f| %>
-  <% if @probe_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@probe_type.errors.count, "error") %> prohibited this probe_type from being saved:</h2>
+<%= form_for @probe_type, :html => { :class => "form-horizontal probe_type" } do |f| %>
 
-      <ul>
-      <% @probe_type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <% if @probe_type.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@probe_type.errors.count, "error") %> prohibited this probe_type from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @probe_type.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :description, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:description) %>
   </div>
-  <div class="field">
-    <%= f.label :communication_channel_id %><br />
-	<%= f.select :communication_channel_id, CommunicationChannel.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :communication_channel_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :communication_channel_id, CommunicationChannel.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:communication_channel_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value1_type_id %><br />
-	<%= f.select :value1_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value1_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value1_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value1_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value2_type_id %><br />
-	<%= f.select :value2_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value2_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value2_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value2_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value3_type_id %><br />
-	<%= f.select :value3_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value3_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value3_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value3_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value4_type_id %><br />
-	<%= f.select :value4_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value4_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value4_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value4_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value5_type_id %><br />
-	<%= f.select :value5_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value5_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value5_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value5_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value6_type_id %><br />
-	<%= f.select :value6_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value6_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value6_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value6_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value7_type_id %><br />
-	<%= f.select :value7_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value7_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value7_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value7_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value8_type_id %><br />
-	<%= f.select :value8_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value8_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value8_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value8_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value9_type_id %><br />
-	<%= f.select :value9_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value9_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value9_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value9_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value10_type_id %><br />
-	<%= f.select :value10_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value10_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value10_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value10_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value11_type_id %><br />
-	<%= f.select :value11_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value11_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value11_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value11_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value12_type_id %><br />
-	<%= f.select :value12_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value12_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value12_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value12_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value13_type_id %><br />
-	<%= f.select :value13_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value13_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value13_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value13_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value14_type_id %><br />
-	<%= f.select :value14_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value14_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value14_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value14_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value15_type_id %><br />
-	<%= f.select :value15_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value15_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value15_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value15_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :value16_type_id %><br />
-	<%= f.select :value16_type_id, ValueType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :value16_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :value16_type_id, ValueType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:value16_type_id) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                probe_types_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>

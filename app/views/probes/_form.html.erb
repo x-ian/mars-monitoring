@@ -1,61 +1,97 @@
-<%= form_for(@probe) do |f| %>
-  <% if @probe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@probe.errors.count, "error") %> prohibited this probe from being saved:</h2>
+<%= form_for @probe, :html => { :class => "form-horizontal probe" } do |f| %>
 
-      <ul>
-      <% @probe.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <% if @probe.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@probe.errors.count, "error") %> prohibited this probe from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @probe.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :id %><br />
-    <%= @probe.id %>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :customer_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :customer_id, Customer.accessible_by(current_ability).collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:customer_id) %>
   </div>
-  <div class="field">
-    <%= f.label :customer_id %><br />
-	<%= f.select :customer_id, Customer.accessible_by(current_ability).collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :location_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+     <%= f.select :location_id, Location.accessible_by(current_ability).collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:location_id) %>
   </div>
-  <div class="field">
-    <%= f.label :location_id %><br />
-	<%= f.select :location_id, Location.accessible_by(current_ability).collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :location_coordinates, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :location_coordinates, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:location_coordinates) %>
   </div>
-  <div class="field">
-    <%= f.label :probe_type_id %><br />
-	<%= f.select :probe_type_id, ProbeType.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :enabled, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :enabled, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:enabled) %>
   </div>
-  <div class="field">
-    <%= f.label :probe_configuration_id %><br />
-	<%= f.select :probe_configuration_id, ProbeConfiguration.all.collect{|p| [p.name, p.id]} %>
+  <div class="form-group">
+    <%= f.label :probe_configuration_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :probe_configuration_id, ProbeConfiguration.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:probe_configuration_id) %>
   </div>
-  <div class="field">
-    <%= f.label :forward_subscription_id %><br />
-	<%= f.select :forward_subscription_id, Subscription.all.collect{|p| [p.name, p.id]}, :include_blank => true %>
+  <div class="form-group">
+    <%= f.label :probe_type_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :probe_type_id, ProbeType.all.collect{|p| [p.name, p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:probe_type_id) %>
   </div>
-  <div class="field">
-    <%= f.label :location_coordinates %><br />
-    <%= f.text_field :location_coordinates %>
+  <div class="form-group">
+    <%= f.label :cell_number, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :cell_number, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:cell_number) %>
   </div>
-  <div class="field">
-    <%= f.label :responsible_user_id %><br />
-	<%= f.select :responsible_user_id, User.all.collect{|p| [p.name, p.id] if p.customer_id == @probe.customer_id}.compact, :include_blank => true %>
+  <div class="form-group">
+    <%= f.label :forward_subscription_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :forward_subscription_id, Subscription.all.collect{|p| [p.name, p.id]}, :include_blank => true, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:forward_subscription_id) %>
   </div>
-  <div class="field">
-    <%= f.label :enabled %><br />
-    <%= f.check_box :enabled %>
+  <div class="form-group">
+    <%= f.label :responsible_user_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :responsible_user_id, User.all.collect{|p| [p.name, p.id] if p.customer_id == @probe.customer_id}.compact, :include_blank => true, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:responsible_user_id) %>
   </div>
-  <div class="field">
-    <%= f.label :cell_number %><br />
-    <%= f.text_field :cell_number %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                probes_path, :class => 'btn btn-default' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>

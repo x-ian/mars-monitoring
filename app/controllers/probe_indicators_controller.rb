@@ -1,6 +1,7 @@
 class ProbeIndicatorsController < ApplicationController
   before_filter :authenticate_user!
-  
+  before_action :authenticate_user!
+
   def index
     @probe = (params[:probe_id].blank? ? Probe.first : Probe.find(params[:probe_id]))    
     @current_probe_id = @probe.id
