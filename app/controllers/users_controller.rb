@@ -34,6 +34,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
+      # encrypt with devise the plain text pw
+      @user.encrypted_password = User.new(:password => params[:user][:password]).encrypted_password
+      @user.save
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render :edit
@@ -54,6 +57,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:customer_id, :name, :org_unit, :email, :mobile_number, :role, :time_zone)
+      params.require(:user).permit(:customer_id, :name, :org_unit, :email, :mobile_number, :role, :time_zone, :password)
     end
 end

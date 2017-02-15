@@ -65,11 +65,11 @@
     <%=f.error_span(:org_unit) %>
   </div>
   <div class="form-group">
-    <%= f.label :encrypted_password, :class => 'control-label col-lg-2' %>
+    <%= f.label :password, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :encrypted_password, :class => 'form-control' %>
+      <%= f.password_field :password, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:encrypted_password) %>
+    <%=f.error_span(:password) %>
   </div>
   <div class="form-group">
     <%= f.label :current_sign_in_at, :class => 'control-label col-lg-2' %>
