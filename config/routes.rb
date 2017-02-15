@@ -46,8 +46,6 @@ MarsMonitoring::Application.routes.draw do
 
   resources :probe_status_configurations
 
-  get "dashboard/show"
-
   get "frontpage/index"
 
   get "frontpage/passwords_new"
