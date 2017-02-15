@@ -5,11 +5,8 @@ MarsMonitoring::Application.routes.draw do
   devise_for :users
   
   get "current_status/aggregation"
-
   get "current_status/by_location"
-
   get "current_status/by_probe_type"
-
   get "current_status/by_location_probe_type"
 
   get "visualize/d3_example_lines"
@@ -25,6 +22,11 @@ MarsMonitoring::Application.routes.draw do
   get "dashboard/d3_data"
 
   get "probe_indicators/index"
+
+  get "frontpage/index"
+  get "frontpage/passwords_new"
+
+  get "messages/index_archived"
 
   resources :subscriptions
 
@@ -46,10 +48,6 @@ MarsMonitoring::Application.routes.draw do
 
   resources :probe_status_configurations
 
-  get "frontpage/index"
-
-  get "frontpage/passwords_new"
-
   resources :user_service_classifications
 
   resources :message_types
@@ -63,8 +61,6 @@ MarsMonitoring::Application.routes.draw do
   resources :locations
 
   resources :customers
-
-  get "messages/index_archived"
 
   resources :messages
 
