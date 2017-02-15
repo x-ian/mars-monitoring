@@ -58,7 +58,7 @@
 	    <td><%= message.value14 %></td>
 	    <td><%= message.value15 %></td>
 	    <td><%= message.value16 %></td>
-	    <td><%= message.device_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
+	    <td><%= message.device_time %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),
                       message_path(message), :class => 'btn btn-default btn-xs' %>
