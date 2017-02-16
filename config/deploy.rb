@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
-lock '3.3.5'
+lock '3.7.2'
 
-set :application, 'x-ian/mars-monitoring'
+set :application, 'mars-monitoring'
 set :repo_url, 'git@github.com:x-ian/mars-monitoring.git'
 
 # Default branch is :master

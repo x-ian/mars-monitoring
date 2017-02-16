@@ -5,10 +5,10 @@ class VisualizeTextController < ApplicationController
 
   def index
     @probe = (params[:probe_id].blank? ? Probe.find(1) : Probe.find(params[:probe_id]))
-    @start_date = (params[:foo].blank? || params[:foo][:start_date].blank? ? DateTime.new(2012-10-01) : DateTime.strptime(params[:foo][:start_date], "%Y-%m-%d"))
-    @end_date  = (params[:foo].blank? || params[:foo][:end_date].blank? ? Time.now : DateTime.strptime(params[:foo][:end_date], "%Y-%m-%d") + 1.day)
+    @start_date = (params[:start_date].blank? ? DateTime.new(2012-10-01) : DateTime.strptime(params[:start_date], "%Y-%m-%d"))
+    @end_date  = (params[:end_date].blank? ? Time.now : DateTime.strptime(params[:end_date], "%Y-%m-%d") + 1.day)
     # stupid workaround to make datepicker use a preset value without a proper rails model
-    @foo = OpenStruct.new(:start_date => (params[:foo].blank? || params[:foo][:start_date].blank? ? '' : params[:foo][:start_date]), :end_date => (params[:foo].blank? || params[:foo][:end_date].blank? ? '' : params[:foo][:end_date]))
+#    @foo = OpenStruct.new(:start_date => (params[:foo].blank? || params[:foo][:start_date].blank? ? '' : params[:foo][:start_date]), :end_date => (params[:foo].blank? || params[:foo][:end_date].blank? ? '' : params[:foo][:end_date]))
     
     @current_probe_id = @probe.id
     

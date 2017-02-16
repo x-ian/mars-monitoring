@@ -1,43 +1,62 @@
-<%= form_tag("/visualize_text/index", :method => "get", :html=>{:id=>'visualize_form'}) do %>
-  Probe: <%= select_tag 'probe_id', options_for_select(Probe.accessible_by(current_ability).select{|p| p.enabled?}.collect{|p| ["#{p.customer.name}: #{p.name} (#{p.location.name})", p.id] }.sort, @probe.id), :onchange => "this.form.submit();" %>
-  Start date:   
+<%- model_class = Message -%>
+<div class="page-header">
+	<h1>Visualize text</h1>
+	<form class="form-inline">
+		<%= form_tag("/visualize_text/index", :method => "get", :html=>{:id=>'visualize_form'}) do %>
+		<div class="form-group">
+				<label class="control-label">Probe</label> 
+				<%= select_tag 'probe_id', options_for_select(Probe.accessible_by(current_ability).select{|p| p.enabled?}.collect{|p| ["#{p.customer.name}: #{p.name} (#{p.location.name})", p.id] }.sort, @probe.id), :onchange => "this.form.submit();", :class => "form-control" %>
+		</div>
+		<div class="form-group">
+			<label class="control-label">From</label> 
+			<input id='start_date' name='start_date' type="date" class="form-control">
   <%# datepicker_input(:foo, :start_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
-  End date: 
+		</div>
+		<div class="form-group">
+			<label class="control-label">To</label> 
+			<input id='end-date' name='end_date' type="date" class="form-control">
   <%# datepicker_input(:foo, :end_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
-  <%= submit_tag "Refresh" %>
-<% end %> 
-
+		</div>
+		<div class="form-group">
+			<%= submit_tag "Refresh", :class => 'btn btn-primary' %>
+			<%= link_to 'Export to Excel', url_for(:format => 'xls', :params => {:probe_id => @probe.id}), :class => 'btn btn-default' %>
+		</div>
+		<% end %> 
+	</form>
 <br/>
-<%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>) <%= link_to 'Export to Excel', url_for(:format => 'xls', :params => {:probe_id => @probe.id}) %>
+  <div style="text-align: center;"><%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)</div>
+</div>
 
-<br/><br/>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	    <th>Message type</th>
+	    <%= "<th>".html_safe + @value_type1 + "</th>".html_safe if !@probe.probe_type.value1_type.nil? && @probe.probe_type.value1_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type2 + "</th>".html_safe if !@probe.probe_type.value2_type.nil? && @probe.probe_type.value2_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type3 + "</th>".html_safe if !@probe.probe_type.value3_type.nil? && @probe.probe_type.value3_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type4 + "</th>".html_safe if !@probe.probe_type.value4_type.nil? && @probe.probe_type.value4_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type5 + "</th>".html_safe if !@probe.probe_type.value5_type.nil? && @probe.probe_type.value5_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type6 + "</th>".html_safe if !@probe.probe_type.value6_type.nil? && @probe.probe_type.value6_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type7 + "</th>".html_safe if !@probe.probe_type.value7_type.nil? && @probe.probe_type.value7_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type8 + "</th>".html_safe if !@probe.probe_type.value8_type.nil? && @probe.probe_type.value8_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type9 + "</th>".html_safe if !@probe.probe_type.value9_type.nil? && @probe.probe_type.value9_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type10 + "</th>".html_safe if !@probe.probe_type.value10_type.nil? && @probe.probe_type.value10_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type11 + "</th>".html_safe if !@probe.probe_type.value11_type.nil? && @probe.probe_type.value11_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type12 + "</th>".html_safe if !@probe.probe_type.value12_type.nil? && @probe.probe_type.value12_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type13 + "</th>".html_safe if !@probe.probe_type.value13_type.nil? && @probe.probe_type.value13_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type14 + "</th>".html_safe if !@probe.probe_type.value14_type.nil? && @probe.probe_type.value14_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type15 + "</th>".html_safe if !@probe.probe_type.value15_type.nil? && @probe.probe_type.value15_type_id != ValueType::NOT_CONFIGURED%>
+	    <%= "<th>".html_safe + @value_type16 + "</th>".html_safe if !@probe.probe_type.value16_type.nil? && @probe.probe_type.value16_type_id != ValueType::NOT_CONFIGURED%>
+	    <th>Server time</th>
+	    <th># Outgoing msgs</th>
+	    <th># Restarts</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
 
-<table>
-  <tr>
-    <th>Message type</th>
-    <%= "<th>".html_safe + @value_type1 + "</th>".html_safe if !@probe.probe_type.value1_type.nil? && @probe.probe_type.value1_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type2 + "</th>".html_safe if !@probe.probe_type.value2_type.nil? && @probe.probe_type.value2_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type3 + "</th>".html_safe if !@probe.probe_type.value3_type.nil? && @probe.probe_type.value3_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type4 + "</th>".html_safe if !@probe.probe_type.value4_type.nil? && @probe.probe_type.value4_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type5 + "</th>".html_safe if !@probe.probe_type.value5_type.nil? && @probe.probe_type.value5_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type6 + "</th>".html_safe if !@probe.probe_type.value6_type.nil? && @probe.probe_type.value6_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type7 + "</th>".html_safe if !@probe.probe_type.value7_type.nil? && @probe.probe_type.value7_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type8 + "</th>".html_safe if !@probe.probe_type.value8_type.nil? && @probe.probe_type.value8_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type9 + "</th>".html_safe if !@probe.probe_type.value9_type.nil? && @probe.probe_type.value9_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type10 + "</th>".html_safe if !@probe.probe_type.value10_type.nil? && @probe.probe_type.value10_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type11 + "</th>".html_safe if !@probe.probe_type.value11_type.nil? && @probe.probe_type.value11_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type12 + "</th>".html_safe if !@probe.probe_type.value12_type.nil? && @probe.probe_type.value12_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type13 + "</th>".html_safe if !@probe.probe_type.value13_type.nil? && @probe.probe_type.value13_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type14 + "</th>".html_safe if !@probe.probe_type.value14_type.nil? && @probe.probe_type.value14_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type15 + "</th>".html_safe if !@probe.probe_type.value15_type.nil? && @probe.probe_type.value15_type_id != ValueType::NOT_CONFIGURED%>
-    <%= "<th>".html_safe + @value_type16 + "</th>".html_safe if !@probe.probe_type.value16_type.nil? && @probe.probe_type.value16_type_id != ValueType::NOT_CONFIGURED%>
-    <th>Server time</th>
-    <th># Outgoing msgs</th>
-    <th># Restarts</th>
-  </tr>
-
-<% @messages.each do |message| %>
-  <tr>
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
     <td><%= message.message_type.name unless message.message_type.nil? %></td>
     <%= "<td>".html_safe + message.value1.to_s + "</td>".html_safe if !@probe.probe_type.value1_type.nil? && @probe.probe_type.value1_type_id != ValueType::NOT_CONFIGURED%>
     <%= "<td>".html_safe + message.value2.to_s + "</td>".html_safe if !@probe.probe_type.value2_type.nil? && @probe.probe_type.value2_type_id != ValueType::NOT_CONFIGURED%>
@@ -58,21 +77,23 @@
     <td><%= message.server_time.strftime '%Y-%m-%d %H:%M:%S' %></td>
     <td><%= message.outgoing_message_count %></td>
     <td><%= message.restart_count %></td>
-	<!--
-    <td><%= link_to 'Show', message %></td>
-    <td><%= link_to 'Edit', edit_message_path(message) %></td>
-    <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	-->
+        <td>
 	<% if (!current_user.nil?) && (current_user.role? :manager) %>
-		<td><%= link_to "Delete older messages from here", {:controller => "visualize_text", :action => :delete_messages_from_here, :id => message.id }, {:method => :post} %>
+	<%= link_to "Delete older messages from here",
+	               {:controller => "visualize_text", :action => :delete_messages_from_here, :id => message.id },
+	              :method => 'post',
+	              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+	              :class => 'btn btn-danger btn-xs' %>
+	
 	<%end%>
-</td>
+       </td>
   </tr>
 <% end %>
+</tbody>
 </table>
+<hr/>
 
+<div style="text-align: center;"><%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)</div>
 <br/>
-<%= will_paginate @messages, :container => false %> (<%= page_entries_info @messages %>)
-<br/><br/>
 
 <%= current_time_zone.html_safe %>

@@ -10,6 +10,9 @@ sqlite3 db/develpment.sq3
 mysqldump --no-create-info --skip-extended-insert  --complete-insert --skip-add-locks  --compatible=ansi -u neumann marsmonitoring_production messages probe_configurations probe_types probes value_types  | sed "s/\\\'/''/g"  >/tmp/localdb.txt
 Add delete from ... before every new INSERT block
 
+* https://github.com/seyhunak/twitter-bootstrap-rails
+* https://javierdechile.wordpress.com/2013/06/06/the-next-step-after-the-scaffold/
+
 (Re) generate controller & bootstrap
 ```
 script/rails generate scaffold_controller CommunicationChannel name:text
