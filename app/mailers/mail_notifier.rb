@@ -17,7 +17,7 @@ class MailNotifier < ActionMailer::Base
         (message.probe.forward_subscription.include_restart && message.message_type.isRestart?) ||
         (message.probe.forward_subscription.include_heartbeat && message.message_type.isHeartbeat?)
         message.probe.forward_subscription.subscribers.each do |user|
-          forward(message, user).deliver
+          forward(message, user).deliver_later
         end
       end
     rescue => e

@@ -22,8 +22,9 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
-
+  #config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = false
+  
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
@@ -89,4 +90,5 @@ Rails.application.configure do
   }  
   config.action_mailer.default_url_options = { host: 'www.marsmonitoring.com' }
 
+  config.active_job.queue_adapter = :async
 end
