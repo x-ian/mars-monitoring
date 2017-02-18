@@ -8,23 +8,9 @@ class MailNotifier < ActionMailer::Base
   #
   def notify
     @greeting = "Just a test"
-    mail to: "cneumann@marsmonitoring.com"
+    mail(to: "cneumann@marsmonitoring.com") #.deliver_later
   end
 
-  def forward_to_all(message)
-    begin
-      if (message.probe.forward_subscription.include_alarm && message.message_type.isAlarm?) ||
-        (message.probe.forward_subscription.include_restart && message.message_type.isRestart?) ||
-        (message.probe.forward_subscription.include_heartbeat && message.message_type.isHeartbeat?)
-        message.probe.forward_subscription.subscribers.each do |user|
-          forward(message, user).deliver
-        end
-      end
-    rescue => e
-      logger.warn "Problem forwarding notification: #{e}"
-    end
-  end
-  
   def forward(message, user)
     @message = message
     @user = user

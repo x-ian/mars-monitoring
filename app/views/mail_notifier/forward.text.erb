@@ -7,7 +7,34 @@ Textual history: http://www.marsmonitoring.com/visualize_text/index?probe_id=<%=
 Graphical history: http://www.marsmonitoring.com/visualize/d3_single_probe?probe_id=<%= @message.probe.id %>
 
 --- snip
-<%= @message.to_yaml %>
+id: <%= @message.id %>
+message_type: <%= @message.message_type.name %>
+probe_id: <%= @message.probe_id %>
+server_time: <%= @message.server_time %>
+outgoing_message_count: <%= @message.outgoing_message_count %>
+restart_count: <%= @message.restart_count %>
+device_time: <%= @message.device_time %>
+device_uptime: <%= @message.device_uptim %>
+value1: <%= @message.value1 unless @message.value1.nil? %>
+value2: <%= @message.value2 unless @message.value2.nil? %>
+value3: <%= @message.value3 unless @message.value3.nil? %>
+value4: <%= @message.value4 unless @message.value4.nil? %>
+value5: <%= @message.value5 unless @message.value5.nil? %>
+value6: <%= @message.value6 unless @message.value6.nil? %>
+value7: <%= @message.value7 unless @message.value7.nil? %>
+value8: <%= @message.value8 unless @message.value8.nil? %>
+value9: <%= @message.value9 unless @message.value9.nil? %>
+value10: <%= @message.value10 unless @message.value10.nil? %>
+value11: <%= @message.value11 unless @message.value11.nil? %>
+value12: <%= @message.value12 unless @message.value12.nil? %>
+value13: <%= @message.value13 unless @message.value13.nil? %>
+value14: <%= @message.value14 unless @message.value14.nil? %>
+value15: <%= @message.value15 unless @message.value15.nil? %>
+value16: <%= @message.value16 unless @message.value16.nil? %>
+probe_enabled: <%= @message.probe_enabled %>
+archived: <%= @message.archived %>
+created_at: <%= @message.created_At %>
+updated_at: <%= @message.updated_at %>
 --- snap
 
 Zikomo,

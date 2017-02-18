@@ -96,7 +96,7 @@ class MessagesController < ApplicationController
     
     respond_to do |format|
       if saved
-        MailNotifier.forward_to_all(@message)
+        forward_to_all @message
         format.json { render json: @message, status: :created, location: @message }
       else
         m = InvalidMessage.new
@@ -165,7 +165,7 @@ class MessagesController < ApplicationController
 
       respond_to do |format|
         if saved
-          MailNotifier.forward_to_all(@message)
+          forward_to_all(@message)
           if @message.probe.probe_configuration.generate_alarm_from_heartbeat?
             @message.probe.probe_configuration.generate_alarm_from_heartbeat(@message)
           end
@@ -209,4 +209,20 @@ class MessagesController < ApplicationController
     def message_params
 params.require(:message).permit(:device_time, :device_uptime, :message_type_id, :outgoing_message_count, :probe_id, :restart_count, :value1, :value2, :value3, :value4, :value5, :value6, :value7, :value8, :value9, :value10, :value11, :value12, :value13, :value14, :value15, :value16, :server_time, :probe_enabled, :archived)
     end
+    
+    def forward_to_all(message)
+      begin
+        if (message.probe.forward_subscription.include_alarm && message.message_type.isAlarm?) ||
+          (message.probe.forward_subscription.include_restart && message.message_type.isRestart?) ||
+          (message.probe.forward_subscription.include_heartbeat && message.message_type.isHeartbeat?)
+          message.probe.forward_subscription.subscribers.each do |user|
+            logger.debug "forward #{user}"
+            MailNotifier.forward(message, user).deliver_later
+          end
+        end
+      rescue => e
+        logger.warn "Problem forwarding notification: #{e}"
+      end
+    end
+  
 end
