@@ -21,4 +21,9 @@ class User < ActiveRecord::Base
     self.time_zone = 'Harare'
   end
   
+  after_create :send_admin_mail
+  def send_admin_mail
+    MailNotifier.send_new_user_message(self).deliver_later
+  end
+
 end

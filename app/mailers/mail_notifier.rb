@@ -23,4 +23,8 @@ class MailNotifier < ActionMailer::Base
     mail to: user.email, subject: "Invalid message arrived", :template_name => 'invalid_message'
   end
 
+  def send_new_user_message(user)
+    mail to: "cneumann@marsmonitoring.com", subject: "New user sign up: #{user.email}"
+  end
+  
 end

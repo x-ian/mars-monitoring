@@ -216,7 +216,7 @@ params.require(:message).permit(:device_time, :device_uptime, :message_type_id, 
           (m.probe.forward_subscription.include_restart && m.message_type.isRestart?) ||
           (m.probe.forward_subscription.include_heartbeat && m.message_type.isHeartbeat?)
           m.probe.forward_subscription.subscribers.each do |user|
-            logger.debug "forward msg id #{m.id} to #{user.name}"
+            #logger.debug "forward msg id #{m.id} to #{user.name}"
             MailNotifier.forward(m, user).deliver_later
           end
         end
