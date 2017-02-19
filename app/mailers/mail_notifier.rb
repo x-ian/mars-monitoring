@@ -24,7 +24,7 @@ class MailNotifier < ActionMailer::Base
   end
 
   def send_new_user_message(user)
-    mail to: "cneumann@marsmonitoring.com", subject: "New user sign up: #{user.email}"
+    mail to: "cneumann@marsmonitoring.com", subject: "New user sign up: #{user.email}", :template_name => 'new_user_to_admin'
   end
   
 end
