@@ -1,0 +1,27 @@
+Muli bo <%= @user.name %>,
+<br/><br/>
+This is an automatic message from the probe '<%= @probe.name %>' located at '<%= @probe.location.name %>'.
+<br/><br/>
+
+The probe is now offline (without contact to marsmonitoring.com) for too long. It might still be working, but it is not sending data anymore. Either disable the probe on marsmonitoring.com or fix the probe itself.
+<br/><br/>
+
+Last contact: <%= @message.server_time %>
+<br/>
+Heartbeat interval: <%= @probe.probe_configuration.heartbeat_interval %>
+<br/><br/>
+
+Check out the whole history:
+<br/>
+Textual history: http://www.marsmonitoring.com/visualize_text/index?probe_id=<%= @probe.id %>
+<br/>
+Graphical history: http://www.marsmonitoring.com/visualize/d3_single_probe?probe_id=<%= @probe.id %>
+<br/><br/>
+
+Zikomo,<br/>
+Your marsmonitoring.com team.
+<br/><br/>
+
+--
+<br/>
+Note: Your email is configured to receive notifications from marsmonitoring.com. Check with your marsmonitoring.com project administrator if you need to unsubscribe.
