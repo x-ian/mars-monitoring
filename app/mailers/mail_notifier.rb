@@ -27,4 +27,11 @@ class MailNotifier < ActionMailer::Base
     mail to: "cneumann@marsmonitoring.com", subject: "New user sign up: #{user.email}", :template_name => 'new_user_to_admin'
   end
   
+  def probe_offline(probe, user, message)
+    @probe = probe
+    @user = user
+    @message = message
+    mail to: user.email, subject: "Probe offline for too long \'#{probe.name}\' located at \'#{probe.location.name}\'", :template_name => 'probe_offline'
+  end
+  
 end
