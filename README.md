@@ -13,6 +13,11 @@ Add delete from ... before every new INSERT block
 * https://github.com/seyhunak/twitter-bootstrap-rails
 * https://javierdechile.wordpress.com/2013/06/06/the-next-step-after-the-scaffold/
 
+Run ActiveJobs on OSX from commandline:
+```
+cd /Users/xian/projects/mars-monitoring/mars-monitoring && /usr/local/rvm/gems/ruby-2.2.6/bin/rails runner -e production CheckForOfflineProbesJob.perform_now
+```
+
 (Re) generate controller & bootstrap
 ```
 script/rails generate scaffold_controller CommunicationChannel name:text

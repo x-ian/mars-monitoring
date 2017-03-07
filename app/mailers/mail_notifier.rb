@@ -28,10 +28,12 @@ class MailNotifier < ActionMailer::Base
   end
   
   def probe_offline(probe, user, message)
-    @probe = probe
-    @user = user
-    @message = message
-    mail to: user.email, subject: "Probe offline for too long \'#{probe.name}\' located at \'#{probe.location.name}\'", :template_name => 'probe_offline'
+    if probe.enabled?
+      @probe = probe
+      @user = user
+      @message = message
+      mail to: user.email, subject: "Probe offline for too long \'#{probe.name}\' located at \'#{probe.location.name}\'", :template_name => 'probe_offline'
+    end
   end
   
 end
