@@ -13,6 +13,13 @@ Add delete from ... before every new INSERT block
 * https://github.com/seyhunak/twitter-bootstrap-rails
 * https://javierdechile.wordpress.com/2013/06/06/the-next-step-after-the-scaffold/
 
+```
+./bin/rails generate scaffold Notification id:integer reason_id:integer probe_id:integer notification_channel_id:integer to:text subject:text body:text scheduled_at:datetime sent_at:datetime
+rails g bootstrap:themed Notification
+```
+
+rails g bootstrap:themed Notifications
+
 Run ActiveJobs on OSX from commandline:
 ```
 cd /Users/xian/projects/mars-monitoring/mars-monitoring && /usr/local/rvm/gems/ruby-2.2.6/bin/rails runner -e production CheckForOfflineProbesJob.perform_now
