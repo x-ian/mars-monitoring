@@ -18,6 +18,11 @@ Run ActiveJobs on OSX from commandline:
 cd /Users/xian/projects/mars-monitoring/mars-monitoring && /usr/local/rvm/gems/ruby-2.2.6/bin/rails runner -e production CheckForOfflineProbesJob.perform_now
 ```
 
+```
+./bin/rails generate scaffold Notification reason_id:integer probe_id:integer message_id:integer invalid_message_id:integer notification_channel_id:integer to:text subject:text body:text scheduled_at:datetime sent_at:datetime
+./bin/rails g bootstrap:themed Notification
+```
+
 (Re) generate controller & bootstrap
 ```
 script/rails generate scaffold_controller CommunicationChannel name:text

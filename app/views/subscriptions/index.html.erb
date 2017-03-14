@@ -7,6 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th>Messages (HB A R)</th>
+      <th>Alarm from HB</th>
       <th><%= model_class.human_attribute_name(:subscriber1_id) %></th>
       <th><%= model_class.human_attribute_name(:subscriber2_id) %></th>
       <th><%= model_class.human_attribute_name(:subscriber3_id) %></th>
@@ -20,6 +21,7 @@
       <tr>
         <td><%= link_to subscription.name, subscription_path(subscription) %></td>
         <td><%= subscription.include_heartbeat %> <%= subscription.include_alarm %> <%= subscription.include_restart %></td>
+        <td><%= subscription.generate_alarm_from_heartbeat %></td>
 	    <td><%= subscription.subscriber1.name unless subscription.subscriber1.nil? %></td>
 	    <td><%= subscription.subscriber2.name unless subscription.subscriber2.nil? %></td>
 	    <td><%= subscription.subscriber3.name unless subscription.subscriber3.nil? %></td>

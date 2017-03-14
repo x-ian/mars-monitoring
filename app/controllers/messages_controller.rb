@@ -96,7 +96,8 @@ class MessagesController < ApplicationController
     
     respond_to do |format|
       if saved
-        forward_to_all @message
+        notifications_forward_to_all @message
+        notifications_alarm_from_heartbeat(@message)
         format.json { render json: @message, status: :created, location: @message }
       else
         m = InvalidMessage.new
@@ -165,10 +166,8 @@ class MessagesController < ApplicationController
 
       respond_to do |format|
         if saved
-          forward_to_all(@message)
-          if @message.probe.probe_configuration.generate_alarm_from_heartbeat?
-            @message.probe.probe_configuration.generate_alarm_from_heartbeat(@message)
-          end
+          notifications_forward_to_all(@message)
+          notifications_alarm_from_heartbeat(@message)
           format.json { render json: @message, status: :created, location: @message }
         else
           m = InvalidMessage.new
@@ -210,19 +209,13 @@ class MessagesController < ApplicationController
 params.require(:message).permit(:device_time, :device_uptime, :message_type_id, :outgoing_message_count, :probe_id, :restart_count, :value1, :value2, :value3, :value4, :value5, :value6, :value7, :value8, :value9, :value10, :value11, :value12, :value13, :value14, :value15, :value16, :server_time, :probe_enabled, :archived)
     end
     
-    def forward_to_all(m)
-      begin
-        if (m.probe.forward_subscription.include_alarm && m.message_type.isAlarm?) ||
-          (m.probe.forward_subscription.include_restart && m.message_type.isRestart?) ||
-          (m.probe.forward_subscription.include_heartbeat && m.message_type.isHeartbeat?)
-          m.probe.forward_subscription.subscribers.each do |user|
-            #logger.debug "forward msg id #{m.id} to #{user.name}"
-            MailNotifier.forward(m, user).deliver_later
-          end
-        end
-      rescue => e
-        logger.warn "Problem forwarding notification: #{e}"
-      end
+    def notifications_forward_to_all(m)
+      n = Notification.new(:notification_reason_id => NotificationReason::FORWARD, :probe_id => m.probe_id, :message_id => m.id, :invalid_message_id => nil, :event_id => nil, :notification_channel_id => NotificationChannel::MAIL, :scheduled_at => Time.now)
+      n.save
     end
   
+    def notifications_alarm_from_heartbeat(m)
+      n = Notification.new(:notification_reason_id => NotificationReason::ALARM, :probe_id => m.probe_id, :message_id => m.id, :invalid_message_id => nil, :event_id => nil, :notification_channel_id => NotificationChannel::MAIL, :scheduled_at => Time.now)
+      n.save
+    end
 end
