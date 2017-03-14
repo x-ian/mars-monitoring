@@ -1,5 +1,6 @@
 class Probe < ActiveRecord::Base
   has_many :messages
+  has_many :notifications
   belongs_to :probe_type
   belongs_to :customer
   belongs_to :location

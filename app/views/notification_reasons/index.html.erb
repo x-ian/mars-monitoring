@@ -1,0 +1,40 @@
+<%- model_class = NotificationReason -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:updated_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notification_reasons.each do |notification_reason| %>
+      <tr>
+        <td><%= link_to notification_reason.id, notification_reason_path(notification_reason) %></td>
+        <td><%= notification_reason.name %></td>
+        <td><%=l notification_reason.created_at %></td>
+        <td><%=l notification_reason.updated_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      notification_reason_path(notification_reason), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_notification_reason_path(notification_reason), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      notification_reason_path(notification_reason),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_notification_reason_path,
+            :class => 'btn btn-primary' %>

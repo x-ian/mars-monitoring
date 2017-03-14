@@ -1,0 +1,61 @@
+<%- model_class = Notification -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <div style="text-align: center;"><%= will_paginate @notifications, :container => false %> (<%= page_entries_info @notifications %>)</div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:notification_reason_id) %></th>
+      <th><%= model_class.human_attribute_name(:probe_id) %></th>
+      <th><%= model_class.human_attribute_name(:message_id) %></th>
+      <th><%= model_class.human_attribute_name(:invalid_message_id) %></th>
+      <th><%= model_class.human_attribute_name(:event_id) %></th>
+      <th><%= model_class.human_attribute_name(:notification_channel_id) %></th>
+      <th><%= model_class.human_attribute_name(:scheduled_at) %></th>
+      <th><%= model_class.human_attribute_name(:sent_at) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notifications.each do |notification| %>
+      <tr>
+        <td><%= link_to notification.id, notification_path(notification) %></td>
+        <td><%= notification.notification_reason.name unless notification.notification_reason.nil? %></td>
+        <td><%= notification.probe.name unless notification.probe.nil? %></td>
+        <td><%= notification.message_id %></td>
+        <td><%= notification.invalid_message_id %></td>
+        <td><%= notification.event_id %></td>
+        <td><%= notification.notification_channel.name unless notification.notification_channel.nil? %></td>
+        <td><%= notification.scheduled_at %></td>
+        <td><%= notification.sent_at %></td>
+        <td><%=l notification.created_at %></td>
+        <td><%=l notification.updated_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      notification_path(notification), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_notification_path(notification), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      notification_path(notification),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+
+<div style="text-align: center;"><%= will_paginate @notifications, :container => false %> (<%= page_entries_info @notifications %>)</div>
+<br/>
+
+<%= current_time_zone.html_safe %>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_notification_path,
+            :class => 'btn btn-primary' %>

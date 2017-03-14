@@ -2,6 +2,7 @@ class Message < ActiveRecord::Base
   has_many :events
   belongs_to :message_type
   belongs_to :probe
+  has_many :notifications
 
   before_create :set_server_time_to_now
   before_create :set_probe_enabled

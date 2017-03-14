@@ -19,6 +19,26 @@ MessageType.create! do |mt|
   mt.name = "heartbeat"
 end
 
+NotificationChannel.delete_all
+NotificationChannel.create! do |nc|
+  nc.id = 1
+  nc.name = "Mail"
+end
+
+NotificationReason.delete_all
+NotificationReason.create! do |nr|
+  nr.id = 1
+  nr.name = "Probe offline"
+end
+NotificationReason.create! do |nr|
+  nr.id = 2
+  nr.name = "Forward"
+end
+NotificationReason.create! do |nr|
+  nr.id = 3
+  nr.name = "Alarm"
+end
+
 ProbeStatus.delete_all
 ProbeStatus.create! do |ps|
   ps.id = 1
@@ -672,7 +692,7 @@ ProbeConfiguration.create! do |pc|
 end
 ProbeConfiguration.create! do |pc|
   pc.id = 9
-  pc.name = " Default Internet Speed"
+  pc.name = "Default Internet Speed"
   pc.rule_warning = ""
   pc.rule_error = ""
   pc.rule_ok = ""

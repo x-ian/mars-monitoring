@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reason_id: 1
+  probe_id: 1
+  message_id: 1
+  invalid_message_id: 1
+  event_id: 1
+  notification_channel_id: 1
+  scheduled_at: 2017-03-13 21:45:10
+  sent_at: 2017-03-13 21:45:10
+
+two:
+  reason_id: 1
+  probe_id: 1
+  message_id: 1
+  invalid_message_id: 1
+  event_id: 1
+  notification_channel_id: 1
+  scheduled_at: 2017-03-13 21:45:10
+  sent_at: 2017-03-13 21:45:10

@@ -54,6 +54,8 @@
   <dd><%= @message.value16 %></dd>
   <dt><strong><%= model_class.human_attribute_name(:created_at) %>:</strong></dt>
   <dd><%= @message.created_at %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:updated_at) %>:</strong></dt>
+  <dd><%= @message.updated_at %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

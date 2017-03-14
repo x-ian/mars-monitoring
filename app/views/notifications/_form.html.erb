@@ -1,0 +1,83 @@
+<%= form_for @notification, :html => { :class => "form-horizontal notification" } do |f| %>
+
+  <% if @notification.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@notification.errors.count, "error") %> prohibited this notification from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @notification.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :notification_reason_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :notification_reason_id, NotificationReason.all.collect{|p| ["#{p.name}", p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:notification_reason_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :probe_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :probe_id, Probe.all.collect{|p| ["#{p.name} (#{p.location.name})", p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:probe_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :message_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :message_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:message_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :invalid_message_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :invalid_message_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:invalid_message_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :event_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :event_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:event_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notification_channel_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :notification_channel_id, NotificationChannel.all.collect{|p| ["#{p.name}", p.id]}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:notification_channel_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :scheduled_at, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :scheduled_at, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:scheduled_at) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sent_at, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :sent_at, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:sent_at) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                notifications_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

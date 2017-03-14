@@ -1,5 +1,8 @@
 MarsMonitoring::Application.routes.draw do
 
+  resources :notification_reasons
+  resources :notification_channels
+  resources :notifications
 #  devise_for :users, controllers: { sessions: "users/sessions" }
 #  devise_for :users, controllers: { registrations: "users/registrations" }
   devise_for :users
