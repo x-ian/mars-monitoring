@@ -1,4 +1,4 @@
-class Message < ActiveRecord::Base
+class Message < ApplicationRecord
   has_many :events
   belongs_to :message_type
   belongs_to :probe

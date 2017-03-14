@@ -1,4 +1,4 @@
-class Probe < ActiveRecord::Base
+class Probe < ApplicationRecord
   has_many :messages
   has_many :notifications
   belongs_to :probe_type

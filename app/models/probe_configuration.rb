@@ -1,4 +1,4 @@
-class ProbeConfiguration < ActiveRecord::Base
+class ProbeConfiguration < ApplicationRecord
   has_many :probes
   
   def generate_alarm_from_heartbeat(heartbeat_message)

@@ -1,4 +1,4 @@
-class ValueType < ActiveRecord::Base
+class ValueType < ApplicationRecord
   has_many :events
   has_many :probe_types
   

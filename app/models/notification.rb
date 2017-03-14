@@ -5,6 +5,4 @@ class Notification < ApplicationRecord
   belongs_to :invalid_message
   belongs_to :event
   belongs_to :notification_channel
-  
-  
 end

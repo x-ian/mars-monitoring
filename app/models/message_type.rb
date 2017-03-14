@@ -1,4 +1,4 @@
-class MessageType < ActiveRecord::Base
+class MessageType < ApplicationRecord
   has_many :messages
   
   ALARM = 1 #EventType.exists?(1) ? EventType.find(1).id : nil
