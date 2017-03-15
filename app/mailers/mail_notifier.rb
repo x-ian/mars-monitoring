@@ -23,6 +23,12 @@ class MailNotifier < ActionMailer::Base
     mail to: user.email, subject: "ALARM message from \'#{message.probe.name}\' located at \'#{message.probe.location.name}\'", :template_name => 'forward'
   end
   
+  def restart(message, user)
+    @message = message
+    @user = user
+    mail to: user.email, subject: "RESTART message from \'#{message.probe.name}\' located at \'#{message.probe.location.name}\'", :template_name => 'forward'
+  end
+  
   def invalid_message(message, user)
     @message = message
     @user = user

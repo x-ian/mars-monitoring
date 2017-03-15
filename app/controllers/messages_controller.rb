@@ -98,6 +98,7 @@ class MessagesController < ApplicationController
       if saved
         notifications_forward_to_all @message
         notifications_alarm_from_heartbeat(@message)
+        notifications_restart_from_heartbeat(@message)
         format.json { render json: @message, status: :created, location: @message }
       else
         m = InvalidMessage.new
@@ -168,6 +169,7 @@ class MessagesController < ApplicationController
         if saved
           notifications_forward_to_all(@message)
           notifications_alarm_from_heartbeat(@message)
+          notifications_restart_from_heartbeat(@message)
           format.json { render json: @message, status: :created, location: @message }
         else
           m = InvalidMessage.new
@@ -210,12 +212,56 @@ params.require(:message).permit(:device_time, :device_uptime, :message_type_id, 
     end
     
     def notifications_forward_to_all(m)
-      n = Notification.new(:notification_reason_id => NotificationReason::FORWARD, :probe_id => m.probe_id, :message_id => m.id, :invalid_message_id => nil, :event_id => nil, :notification_channel_id => NotificationChannel::MAIL, :scheduled_at => Time.now)
-      n.save
+      if !m.probe.forward_subscription.nil? &&
+        ((m.probe.forward_subscription.include_alarm && m.message_type.isAlarm?) ||
+        (m.probe.forward_subscription.include_restart && m.message_type.isRestart?) ||
+        (m.probe.forward_subscription.include_heartbeat && m.message_type.isHeartbeat?))
+      
+        n = Notification.new(:notification_reason_id => NotificationReason::FORWARD, :probe_id => m.probe_id, :message_id => m.id, :invalid_message_id => nil, :event_id => nil, :notification_channel_id => NotificationChannel::MAIL, :scheduled_at => Time.now)
+        n.save
+      end
     end
   
     def notifications_alarm_from_heartbeat(m)
-      n = Notification.new(:notification_reason_id => NotificationReason::ALARM, :probe_id => m.probe_id, :message_id => m.id, :invalid_message_id => nil, :event_id => nil, :notification_channel_id => NotificationChannel::MAIL, :scheduled_at => Time.now)
-      n.save
+      previous_m = Message.where("probe_id = :probe_id and id < :message_id", :probe_id => m.probe_id, :message_id => m.id).last
+      if value_newly_above_threshold(m.value1, previous_m.value1, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value2, previous_m.value2, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value3, previous_m.value3, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value4, previous_m.value4, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value5, previous_m.value5, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value6, previous_m.value6, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value7, previous_m.value7, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value8, previous_m.value8, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value9, previous_m.value9, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value10, previous_m.value10, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value11, previous_m.value11, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value12, previous_m.value12, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value13, previous_m.value13, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value14, previous_m.value14, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value15, previous_m.value15, m.probe.probe_configuration.value1_threshold) ||
+        value_newly_above_threshold(m.value16, previous_m.value16, m.probe.probe_configuration.value1_threshold)
+        if !m.probe.forward_subscription.nil? &&
+          (m.probe.forward_subscription.generate_alarm_from_heartbeat && m.message_type.isHeartbeat?)
+          n = Notification.new(:notification_reason_id => NotificationReason::ALARM, :probe_id => m.probe_id, :message_id => m.id, :invalid_message_id => nil, :event_id => nil, :notification_channel_id => NotificationChannel::MAIL, :scheduled_at => Time.now)
+          n.save
+        end
+      end
     end
+
+    def value_newly_above_threshold(value, previous_value, value_threshold)
+      return !value_threshold.nil? && !value.nil? && value >= value_threshold && (previous_value.nil? || previous_value < value_threshold)
+    end
+
+    def notifications_restart_from_heartbeat(m)
+      previous_m = Message.where("probe_id = :probe_id and id < :message_id", :probe_id => m.probe_id, :message_id => m.id).last
+      if !m.restart_count.nil? && !previous_m.restart_count.nil? && m.restart_count > previous_m.restart_count
+        if !m.probe.forward_subscription.nil? &&
+          (m.probe.forward_subscription.generate_restart_from_heartbeat && m.message_type.isHeartbeat?)
+          n = Notification.new(:notification_reason_id => NotificationReason::RESTART, :probe_id => m.probe_id, :message_id => m.id, :invalid_message_id => nil, :event_id => nil, :notification_channel_id => NotificationChannel::MAIL, :scheduled_at => Time.now)
+          n.save
+        end
+      end
+    end
+
+  
 end

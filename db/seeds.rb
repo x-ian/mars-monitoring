@@ -38,6 +38,10 @@ NotificationReason.create! do |nr|
   nr.id = 3
   nr.name = "Alarm"
 end
+NotificationReason.create! do |nr|
+  nr.id = 4
+  nr.name = "Restart"
+end
 
 ProbeStatus.delete_all
 ProbeStatus.create! do |ps|

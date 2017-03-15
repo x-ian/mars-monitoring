@@ -26,6 +26,8 @@
   <dd><%= @subscription.include_restart %></dd>
   <dt><strong><%= model_class.human_attribute_name(:generate_alarm_from_heartbeat) %>:</strong></dt>
   <dd><%= @subscription.generate_alarm_from_heartbeat %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:generate_restart_from_heartbeat) %>:</strong></dt>
+  <dd><%= @subscription.generate_restart_from_heartbeat %></dd>
   <dt><strong><%= model_class.human_attribute_name(:created_at) %>:</strong></dt>
   <dd><%= @subscription.created_at %></dd>
 </dl>

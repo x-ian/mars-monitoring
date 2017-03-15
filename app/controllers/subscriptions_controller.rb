@@ -54,6 +54,6 @@ class SubscriptionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def subscription_params
-      params.require(:subscription).permit(:name, :subscriber1_id, :subscriber2_id, :subscriber3_id, :subscriber3_id, :subscriber4_id, :subscriber5_id, :include_heartbeat, :include_alarm, :include_restart, :generate_alarm_from_heartbeat)
+      params.require(:subscription).permit(:name, :subscriber1_id, :subscriber2_id, :subscriber3_id, :subscriber3_id, :subscriber4_id, :subscriber5_id, :include_heartbeat, :include_alarm, :include_restart, :generate_alarm_from_heartbeat, :generate_restart_from_heartbeat)
     end
 end

@@ -4,5 +4,6 @@ class NotificationReason < ApplicationRecord
   PROBE_OFFLINE = 1
   FORWARD = 2
   ALARM = 3
+  RESTART = 4
   
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314212926) do
+ActiveRecord::Schema.define(version: 20170315100738) do
 
   create_table "communication_channels", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -190,18 +190,19 @@ ActiveRecord::Schema.define(version: 20170314212926) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.string   "name",                          limit: 255
+    t.string   "name",                            limit: 255
     t.integer  "subscriber1_id"
     t.integer  "subscriber2_id"
     t.integer  "subscriber3_id"
     t.integer  "subscriber4_id"
     t.integer  "subscriber5_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.boolean  "include_heartbeat"
     t.boolean  "include_alarm"
     t.boolean  "include_restart"
     t.boolean  "generate_alarm_from_heartbeat"
+    t.boolean  "generate_restart_from_heartbeat"
   end
 
   create_table "users", force: :cascade do |t|
