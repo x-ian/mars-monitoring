@@ -55,6 +55,21 @@ class ProcessNotificationsJob < ApplicationJob
         n.save
       end
 
+      if n.notification_reason_id == NotificationReason::PROBE_OFFLINE
+        begin
+          n.message.probe.forward_subscription.subscribers.each do |user|
+            MailNotifier.probe_offline(n.probe, user, n.message).deliver_now
+            n.sent_at = Time.now
+          end
+        rescue => e
+          logger.warn "Problem forwarding notification: #{e}"
+          #logger.warn e.backtrace
+          n.error = e
+        end
+        n.processed = true
+        n.save
+      end
+
     end    
   end
   

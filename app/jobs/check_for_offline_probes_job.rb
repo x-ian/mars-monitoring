@@ -5,10 +5,31 @@ class CheckForOfflineProbesJob < ApplicationJob
     # Do something later
     Probe.all.each do |p| #where('id = :enabled2', enabled2: 1).each do |p|
       unless(p.probe_configuration.heartbeat_interval.nil?)
-        probe_offline(p)
+        #probe_offline(p)
+        notifications_probe_offline(p)
       end
     end
-      
+  end
+  
+  def notifications_probe_offline(probe)
+    #    logger.debug(probe)
+        heartbeats_before_warning = 10
+        last_m = Message.where('probe_id = :probe_id', probe_id: probe.id).order('server_time DESC').limit(1).last
+        unless (last_m.nil?)
+          assumed_offline_from = (last_m.server_time + (probe.probe_configuration.heartbeat_interval * heartbeats_before_warning).seconds)
+          if (Time.now > assumed_offline_from)
+            # last contact too long ago
+            # check if a notification job was already created since then
+            # if not, then create one
+            
+            if (Notification.where(:notification_reason_id => NotificationReason::PROBE_OFFLINE, :probe_id => last_m.probe_id, :message_id => last_m.id).empty?)
+              logger.warn "HIER"
+              # send message
+              n = Notification.new(:notification_reason_id => NotificationReason::PROBE_OFFLINE, :probe_id => last_m.probe_id, :message_id => last_m.id, :invalid_message_id => nil, :event_id => nil, :notification_channel_id => NotificationChannel::MAIL, :scheduled_at => Time.now)
+              n.save
+            end
+          end
+      end
   end
   
   def probe_offline(probe)
@@ -27,7 +48,7 @@ class CheckForOfflineProbesJob < ApplicationJob
         notify_users(probe, m)
         logger.debug("ALARM")
       end
-  end
+    end
   end
   
   def notify_users(probe, message)
