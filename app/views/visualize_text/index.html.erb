@@ -1,6 +1,5 @@
 <%- model_class = Message -%>
 <div class="page-header">
-	<h1>Visualize text</h1>
 	<form class="form-inline">
 		<%= form_tag("/visualize_text/index", :method => "get", :html=>{:id=>'visualize_form'}) do %>
 		<div class="form-group">
@@ -9,12 +8,12 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label">From</label> 
-			<input id='start_date' name='start_date' type="date" class="form-control">
+			<input id='start_date' name='start_date' type="date" class="form-control" value="<%= @start_date.strftime("%Y-%m-%d") %>">
   <%# datepicker_input(:foo, :start_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
 		</div>
 		<div class="form-group">
 			<label class="control-label">To</label> 
-			<input id='end-date' name='end_date' type="date" class="form-control">
+			<input id='end-date' name='end_date' type="date" class="form-control" value="<%= (@end_date - 1.day).strftime("%Y-%m-%d") %>">
   <%# datepicker_input(:foo, :end_date, :minDate => "-1M", :maxDate => "+1D", :size => 10, :dateFormat =>"yy-mm-dd" ) %>
 		</div>
 		<div class="form-group">
